@@ -1,0 +1,13 @@
+{
+  "appId": "fr.johnben.attestationcovid",
+  "appName": "attestationCV19",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/attestationCV19",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
