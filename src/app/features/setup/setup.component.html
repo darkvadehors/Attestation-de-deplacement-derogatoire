@@ -1,0 +1,62 @@
+
+<ion-header>
+  <ion-toolbar >
+    <ion-title color="primary">Réglages</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <form  [formGroup]="settings_form" (ngSubmit)="onSubmit()">
+    <ion-list-header color="secondary" >Votre identitée</ion-list-header>
+      <ion-item>
+        <ion-label>Prénom :</ion-label>
+        <ion-input formControlName = "firstname" placeholder="Jean"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Nom :</ion-label>
+        <ion-input formControlName = "lastname" placeholder="Martin"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Date de naissance :</ion-label>
+        <ion-input formControlName = "dateofbirth" type="date" placeholder="16/03/2020"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Lieu de naissance :</ion-label>
+        <ion-input formControlName = "cityofbird" placeholder="Paris"></ion-input>
+      </ion-item>
+
+      <ion-list-header color="secondary">Votre domicile :</ion-list-header>
+      <ion-item>
+        <ion-label>Adresse :</ion-label>
+        <ion-input formControlName = "adress" placeholder="55 Rue du Faubourg Saint-Honoré"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Code Postal :</ion-label>
+        <ion-input maxlength="5" formControlName = "zipcode" type="number" placeholder="75008"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ville :</ion-label>
+        <ion-input formControlName = "city" placeholder="Paris"></ion-input>
+      </ion-item>
+
+      <ion-list-header color="secondary">Réglages de l'application :</ion-list-header>
+      <ion-item>
+        <ion-label>Décalage en minutes : </ion-label>
+        <ion-input maxlength="2" formControlName = "backtime" type="number"  placeHolder="20"></ion-input>
+      </ion-item>
+
+      <div>
+        <div>
+          <ion-button  color="danger" type="reset" >Effacer</ion-button>
+          <ion-button  color="success" type="submit" >Valider</ion-button>
+        </div>
+      </div>
+    </form>
+</ion-content>
