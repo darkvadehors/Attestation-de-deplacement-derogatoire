@@ -72,8 +72,8 @@ export class StorageService implements OnInit{
       lastchoice,
     };
 
-    console.log(this.readLocal());
-    console.log(this.setting);
+    console.log('this.readLocal()',this.readLocal());
+    console.log('this.setting',this.setting);
   }
 
 }
