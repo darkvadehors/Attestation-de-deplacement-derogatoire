@@ -42,8 +42,8 @@ export class StorageService {
     }
   }
 
-  readLocal() {
-    return this._ls.readLocalStorage();
+  readLocal(data:string) {
+    return this._ls.readLocalStorage(data);
   }
 
   saveOnLine(data: any) {

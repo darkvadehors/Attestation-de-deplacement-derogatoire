@@ -15,11 +15,11 @@ export class WelcomeComponent {
 
   ionViewWillEnter() {
     console.log(this._storage.setting);
-    if (localStorage.getItem(environment.dataName) === null) {
-      console.log('pas ok');
+    if (this._storage.readLocal(environment.dataName) === null || this._storage.readLocal(environment.dataName) === undefined) {
+      console.log('pas de reglages');
       this._router.navigate(['setup']);
     } else {
-      console.log('ok');
+      console.log('reglage ok');
     }
   }
 

@@ -15,9 +15,14 @@ export class LocalstorageService {
     localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
   }
 
+<<<<<<< Updated upstream
   readLocalStorage() {
     const datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
     console.log('apres decrypt', datas);
+=======
+  readLocalStorage(data:string) {
+    const datas = JSON.parse(localStorage.getItem(data));
+>>>>>>> Stashed changes
     return datas;
   }
 
