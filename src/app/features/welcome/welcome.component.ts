@@ -15,16 +15,7 @@ export class WelcomeComponent {
   }
 
   ionViewWillEnter() {
-
-
-
-
-
-
-
     // console.log('this._storage.setting',this._storage.readLocal(environment.dataName));
-
-
 
     console.log('1 ===>',this._storage.checkLocalStorage());
     // if (this._storage.readLocal(environment.dataName).value === null || this._storage.readLocal(environment.dataName).value === undefined) {
@@ -35,13 +26,6 @@ export class WelcomeComponent {
         this._router.navigate(['setup']);
     }
   }
-
-
-
-
-
-
-
 
   launchAttestation(activity: number) {
     this._storage.setting.lastchoice = activity;

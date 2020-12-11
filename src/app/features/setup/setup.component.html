@@ -1,13 +1,10 @@
-
 <ion-header>
   <ion-toolbar >
     <ion-title color="primary">Réglages</ion-title>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content >
-
   <form  [formGroup]="settings_form" (ngSubmit)="onSubmit()">
     <ion-list-header color="secondary" >Votre identitée</ion-list-header>
       <ion-item>
@@ -22,7 +19,7 @@
 
       <ion-item>
         <ion-label>Date de naissance :</ion-label>
-        <ion-input formControlName = "dateofbirth" type="date" placeholder="16/03/2020"></ion-input>
+        <ion-input formControlName = "dateofbirth"  type="date" placeholder="16/03/2020"></ion-input>
       </ion-item>
 
       <ion-item>

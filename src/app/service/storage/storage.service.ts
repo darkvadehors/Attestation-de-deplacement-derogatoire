@@ -1,7 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Usersettings } from 'src/app/model/usersettings';
-import { environment } from 'src/environments/environment';
 import { FirebaseService } from '../firebase/firebase.service';
 import { LocalstorageService } from '../locastorage/localstorage.service';
 
@@ -11,9 +9,7 @@ import { LocalstorageService } from '../locastorage/localstorage.service';
 export class StorageService implements OnInit{
   setting: Usersettings = null;
 
-
   constructor(
-    private _router: Router,
     private _fb: FirebaseService,
     private _ls: LocalstorageService
   ) {
