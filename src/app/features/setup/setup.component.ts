@@ -28,8 +28,7 @@ export class SetupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('this.settings_form.valuet', this.settings_form.value);
-    console.log('this._storage.readLocal()',this._storage.readLocal());
+    console.log('this.settings_form.value', this.settings_form.value);
     this._storage.saveLocal(this.settings_form.value);
 
 

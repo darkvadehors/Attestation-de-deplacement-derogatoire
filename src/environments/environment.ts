@@ -12,8 +12,9 @@ export const environment = {
     messagingSenderId: '1088754635894',
     appId: '1:1088754635894:web:41a43ba7f06bbbd8243b57',
   },
-  dataName: 'covidAttestation',
+  dataName: 'AttestationCovid',
   title: 'Attestation Covid',
+  privateKey:'6UXi8JtcYtP8KH8*afFGEnDDs-E84k8rPCR2jbbwQookwUEVMsBr!s2ViZ7w2@u7'
 };
 
 /*
