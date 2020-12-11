@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usersettings } from 'src/app/model/usersettings';
 import { StorageService } from 'src/app/service/storage/storage.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-setup',
@@ -12,9 +13,9 @@ import { StorageService } from 'src/app/service/storage/storage.service';
 export class SetupComponent implements OnInit {
   settings_form: FormGroup;
   setting: Usersettings = null;
-  constructor(private _router: Router, private _storage: StorageService) {}
+  constructor(private _router: Router, private _storage: StorageService, public alertController: AlertController) {}
 
-  ngOnInit(): void {
+  ngOnInit(): any {
     this.settings_form = new FormGroup({
       firstname: new FormControl(this._storage.setting?.firstname),
       lastname: new FormControl(this._storage.setting?.lastname),
@@ -23,18 +24,33 @@ export class SetupComponent implements OnInit {
       adress: new FormControl(this._storage.setting?.adress),
       city: new FormControl(this._storage.setting?.city),
       zipcode: new FormControl(this._storage.setting?.zipcode),
-      backtime: new FormControl(this._storage.setting?.backtime),
+      backtime: new FormControl(this._storage.setting?.backtime || '20'),
     });
   }
 
   onSubmit() {
-    console.log('this.settings_form.valuet', this.settings_form.value);
-    console.log('this._storage.readLocal()',this._storage.readLocal());
+    console.log('this.settings_form.value', this.settings_form.value);
     this._storage.saveLocal(this.settings_form.value);
-
-
-
-    // this._storage.readLocal();
-    this._router.navigate(['welcome']);
+    this.confirmAlert();
   }
+
+  async confirmAlert() {
+    this.alertController.create({
+      header: 'Confirmation',
+      subHeader: 'Paramètre Enregistré',
+      message: 'Vos réglages sont enregistrer localement\n Vous pouvez créer votre attestation.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this._router.navigate(['welcome']);
+          }
+        }
+      ]
+    }).then(res => {
+      res.present();
+    });
+  }
+
+
 }

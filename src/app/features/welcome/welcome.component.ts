@@ -11,17 +11,37 @@ import { environment } from 'src/environments/environment';
 export class WelcomeComponent {
   title: string = environment.title;
 
-  constructor(private _router: Router, private _storage: StorageService) {}
+  constructor(private _router: Router, private _storage: StorageService) {
+  }
 
   ionViewWillEnter() {
-    console.log(this._storage.setting);
-    if (localStorage.getItem(environment.dataName) === null) {
-      console.log('pas ok');
-      this._router.navigate(['setup']);
-    } else {
-      console.log('ok');
+
+
+
+
+
+
+
+    // console.log('this._storage.setting',this._storage.readLocal(environment.dataName));
+
+
+
+    console.log('1 ===>',this._storage.checkLocalStorage());
+    // if (this._storage.readLocal(environment.dataName).value === null || this._storage.readLocal(environment.dataName).value === undefined) {
+      if (this._storage.checkLocalStorage() === true) {
+        console.log('reglage ok');
+      } else {
+        console.log('pas de reglages');
+        this._router.navigate(['setup']);
     }
   }
+
+
+
+
+
+
+
 
   launchAttestation(activity: number) {
     this._storage.setting.lastchoice = activity;

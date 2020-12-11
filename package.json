@@ -60,5 +60,8 @@
     "inquirer-autocomplete-prompt": "^1.0.1",
     "open": "^7.0.3",
     "@capacitor/cli": "latest"
-  }
+  },
+  "browser": {
+    "crypto": false
+}
 }
