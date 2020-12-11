@@ -17,92 +17,23 @@ export class StorageService implements OnInit{
     private _fb: FirebaseService,
     private _ls: LocalstorageService
   ) {
-
-    console.log('constructeur');
-    // Déclaratin de la Promise
-
-    //TODO promise
-     //if (this.readLocal(environment.dataName)) {
-    //   console.log('Entree dans le constructeur');
-    //   const {
-    //     firstname,
-    //     lastname,
-    //     dateofbirth,
-    //     cityofbird,
-    //     adress,
-    //     city,
-    //     zipcode,
-    //     backtime,
-    //     lastchoice,
-    //   } = this.readLocal(environment.dataName);
-
-    //   this.setting = {
-    //     firstname,
-    //     lastname,
-    //     dateofbirth,
-    //     cityofbird,
-    //     adress,
-    //     city,
-    //     zipcode,
-    //     backtime,
-    //     lastchoice,
-    //   };
-
-    // } else {
-    //   console.log('Na pas pu creer this.setting');
-    // }
     console.log('Sorti du Constructeur storage');
   }
 
-  ngOnInit() {
-
-      // const myPromise = (this.readLocal(environment.dataName));
-      // myPromise.then(localStorageData => {
-      //   console.log('Data de la promise',data);
-      //   const {
-      //         firstname,
-      //         lastname,
-      //         dateofbirth,
-      //         cityofbird,
-      //         adress,
-      //         city,
-      //         zipcode,
-      //         backtime,
-      //         lastchoice,
-      //       } = data
-      // })
-      // let myPromise = (this.readLocal(environment.dataName));
-      // if (this.readLocal(environment.dataName)) {
-      //   console.log('Entree dans le constructeur');
-      //   const {
-      //     firstname,
-      //     lastname,
-      //     dateofbirth,
-      //     cityofbird,
-      //     adress,
-      //     city,
-      //     zipcode,
-      //     backtime,
-      //     lastchoice,
-      //   } = this.readLocal(environment.dataName);
-
-      //   this.setting = {
-      //     firstname,
-      //     lastname,
-      //     dateofbirth,
-      //     cityofbird,
-      //     adress,
-      //     city,
-      //     zipcode,
-      //     backtime,
-      //     lastchoice,
-      //   };
-    }
+  ngOnInit() {}
 
   // Local
   checkLocalStorage():boolean{
-    console.log('CheckLocal');
-    return this._ls.checkLocalStorage();
+    console.log('CheckLocal',this._ls.checkLocalStorage());
+
+    if (this._ls.checkLocalStorage()){
+      console.log('construire setting');
+      this.makeSettings()
+      return this._ls.checkLocalStorage();
+    } else {
+      return this._ls.checkLocalStorage();
+    }
+
   }
 
   readLocal() {
@@ -118,6 +49,35 @@ export class StorageService implements OnInit{
   saveOnLine(data: any) {
     console.log('saveonline');
     this._fb.saveStat(data);
+  }
+
+  makeSettings (){
+    const {
+      firstname,
+      lastname,
+      dateofbirth,
+      cityofbird,
+      adress,
+      city,
+      zipcode,
+      backtime,
+      lastchoice,
+    } = this.readLocal();
+
+    this.setting = {
+      firstname,
+      lastname,
+      dateofbirth,
+      cityofbird,
+      adress,
+      city,
+      zipcode,
+      backtime,
+      lastchoice,
+    };
+
+    console.log(this.readLocal());
+    console.log(this.setting);
   }
 
 }
