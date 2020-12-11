@@ -10,13 +10,11 @@ import { CryptoService } from '../crypto/crypto.service';
 export class LocalstorageService {
   constructor(private _router: Router, private _storageMap: StorageMap, private _crypto:CryptoService) {}
 
-  checkLocalStorage(){
+  checkLocalStorage():boolean{
     if (localStorage.getItem(environment.dataName)){
-      console.log('true');
-      return 'true'
+      return true
     } else{
-      console.log('false');
-      return 'false'
+      return false
     }
   }
 

@@ -28,7 +28,7 @@ export class WelcomeComponent {
 
     console.log('1 ===>',this._storage.checkLocalStorage());
     // if (this._storage.readLocal(environment.dataName).value === null || this._storage.readLocal(environment.dataName).value === undefined) {
-      if (!this._storage.checkLocalStorage) {
+      if (this._storage.checkLocalStorage() === true) {
         console.log('reglage ok');
       } else {
         console.log('pas de reglages');

@@ -100,7 +100,7 @@ export class StorageService implements OnInit{
     }
 
   // Local
-  checkLocalStorage(){
+  checkLocalStorage():boolean{
     console.log('CheckLocal');
     return this._ls.checkLocalStorage();
   }
