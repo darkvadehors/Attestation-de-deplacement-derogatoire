@@ -10,20 +10,32 @@ import { CryptoService } from '../crypto/crypto.service';
 export class LocalstorageService {
   constructor(private _router: Router, private _storageMap: StorageMap, private _crypto:CryptoService) {}
 
+  checkLocalStorage(){
+    if (localStorage.getItem(environment.dataName)){
+      console.log('true');
+      return 'true'
+    } else{
+      console.log('false');
+      return 'false'
+    }
+  }
+
   setLocalStorage(data: any) {
     console.log('avant datacrypt',data);
     localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
   }
 
-<<<<<<< Updated upstream
-  readLocalStorage() {
-    const datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
+  readLocalStorage():any {
+    console.log('readLocalStorage entrée');
+    let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
     console.log('apres decrypt', datas);
-=======
-  readLocalStorage(data:string) {
-    const datas = JSON.parse(localStorage.getItem(data));
->>>>>>> Stashed changes
     return datas;
+
+    // if (localStorage.getItem(environment.dataName)){
+    // } else {
+    //   console.log('readLocalStorage pas de données');
+    // }
+
   }
 
   deleteCurrentUser() {
