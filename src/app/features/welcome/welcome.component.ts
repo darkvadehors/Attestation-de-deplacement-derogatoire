@@ -32,7 +32,7 @@ export class WelcomeComponent {
         console.log('reglage ok');
       } else {
         console.log('pas de reglages');
-        // this._router.navigate(['setup']);
+        this._router.navigate(['setup']);
     }
   }
 

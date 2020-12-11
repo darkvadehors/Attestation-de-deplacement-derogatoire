@@ -28,7 +28,6 @@ import { SetupComponent } from './features/setup/setup.component';
 import { WelcomeComponent } from './features/welcome/welcome.component';
 import { AttestationComponent } from './features/attestation/attestation.component';
 import { StorageService } from './service/storage/storage.service';
-import { AlertComponent } from './features/setup/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +37,6 @@ import { AlertComponent } from './features/setup/alert/alert.component';
     WelcomeComponent,
     ActivityPipe,
     BacktimePipe,
-    AlertComponent,
   ],
   imports: [
     BrowserModule,
