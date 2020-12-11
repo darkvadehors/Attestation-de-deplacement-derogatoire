@@ -5,6 +5,7 @@ import { Usersettings } from 'src/app/model/usersettings';
 import { StorageService } from 'src/app/service/storage/storage.service';
 import { AlertController } from '@ionic/angular';
 
+//FIXME Probleme de chargement des variables
 @Component({
   selector: 'app-setup',
   templateUrl: './setup.component.html',
