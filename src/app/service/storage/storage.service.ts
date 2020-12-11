@@ -51,6 +51,7 @@ export class StorageService {
   }
 
   saveLocal(data: any) {
+    console.log('Data storage.service',data);
     this._ls.setLocalStorage(data);
   }
 }

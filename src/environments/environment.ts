@@ -14,6 +14,7 @@ export const environment = {
   },
   dataName: 'covidAttestation',
   title: 'Attestation Covid',
+  privateKey:'6UXi8JtcYtP8KH8*afFGEnDDs-E84k8rPCR2jbbwQookwUEVMsBr!s2ViZ7w2@u7'
 };
 
 /*

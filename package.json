@@ -26,7 +26,6 @@
     "@ionic/pwa-elements": "^3.0.1",
     "@ngx-pwa/local-storage": "^11.0.1",
     "@techiediaries/ngx-qrcode": "^9.1.0",
-    "aes256": "^1.0.4",
     "angularx-qrcode": "^10.0.11",
     "crypto-js": "^4.0.0",
     "firebase": "^8.1.2",
@@ -61,5 +60,8 @@
     "inquirer-autocomplete-prompt": "^1.0.1",
     "open": "^7.0.3",
     "@capacitor/cli": "latest"
-  }
+  },
+  "browser": {
+    "crypto": false
+}
 }
