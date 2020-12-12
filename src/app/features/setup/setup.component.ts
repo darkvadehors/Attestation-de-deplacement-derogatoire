@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usersettings } from 'src/app/model/usersettings';
 import { StorageService } from 'src/app/service/storage/storage.service';
@@ -12,34 +12,63 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./setup.component.scss'],
 })
 export class SetupComponent implements OnInit {
-  settings_form: FormGroup;
+  validations_form: FormGroup;
   setting: Usersettings = null;
-  constructor(private _router: Router, private _storage: StorageService, public alertController: AlertController) {}
+
+  constructor(private _router: Router, private _storage: StorageService, public alertController: AlertController, public formBuilder: FormBuilder) {}
 
   ngOnInit(): any {
-    this.settings_form = new FormGroup({
-      firstname: new FormControl(this._storage.setting?.firstname),
-      lastname: new FormControl(this._storage.setting?.lastname),
-      dateofbirth: new FormControl(this._storage.setting?.dateofbirth),
-      cityofbird: new FormControl(this._storage.setting?.cityofbird),
-      adress: new FormControl(this._storage.setting?.adress),
-      city: new FormControl(this._storage.setting?.city),
-      zipcode: new FormControl(this._storage.setting?.zipcode),
-      backtime: new FormControl(this._storage.setting?.backtime || '20'),
+    let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+    this.validations_form = this.formBuilder.group({
+      firstname: new FormControl(this._storage.setting?.firstname,  Validators.required),
+      lastname: new FormControl(this._storage.setting?.lastname,  Validators.required),
+      dateofbirth: new FormControl(this._storage.setting?.dateofbirth,  Validators.required),
+      cityofbird: new FormControl(this._storage.setting?.cityofbird,  Validators.required),
+      adress: new FormControl(this._storage.setting?.adress,  Validators.required),
+      city: new FormControl(this._storage.setting?.city,  Validators.required),
+      zipcode: new FormControl(this._storage.setting?.zipcode,  Validators.compose([
+        Validators.pattern(zipCodeRegex),
+        Validators.required
+      ])),
+      backtime: new FormControl(this._storage.setting?.backtime || '20',  Validators.required),
     });
   }
 
-  onSubmit() {
-    console.log('this.settings_form.value', this.settings_form.value);
-    this._storage.saveLocal(this.settings_form.value);
-    this.confirmAlert();
-  }
+  validation_messages = {
+    'firstname': [
+      { type: 'required', message: 'Le prénom est obligatoire.' }
+    ],
+    'lastname': [
+      { type: 'required', message: 'Le nomn de famille  est obligatoire.' }
+    ],
+    'dateofbirth': [
+      { type: 'required', message: 'La date de naissance est obligatoire.' },
+      { type: 'pattern', message: 'Merci de rentrer une date de naissance valide' }
+    ],
+    'cityofbird': [
+      { type: 'required', message: 'La ville de naissance est obligatoire.' },
+    ],
+    'adress': [
+      { type: 'required', message: 'L\'adresse est obligatoire.' },
+    ],
+    'zipcode': [
+      { type: 'required', message: 'Le code postale est obligatoire.' },
+      { type: 'pattern', message: 'Merci de rentrer un code postale valide' }
+    ],
+    'city': [
+      { type: 'required', message: 'La ville est obligatoire' }
+    ],
+    'backtime': [
+      { type: 'required', message: 'Le nombres de minutes à soutraire est obligatoire' }
+    ],
+  };
+
 
   async confirmAlert() {
     this.alertController.create({
       header: 'Confirmation',
-      subHeader: 'Paramètre Enregistré',
-      message: 'Vos réglages sont enregistrer localement\n Vous pouvez créer votre attestation.',
+      subHeader: 'Paramètres Enregistrés',
+      message: 'Vos réglages sont enregistrés localement.\nVous pouvez créer votre attestation.',
       buttons: [
         {
           text: 'Ok',
@@ -53,5 +82,9 @@ export class SetupComponent implements OnInit {
     });
   }
 
-
+onSubmit() {
+    console.log('this.validations_form.value', this.validations_form.value);
+    this._storage.saveLocal(this.validations_form.value);
+    this.confirmAlert();
+  }
 }
