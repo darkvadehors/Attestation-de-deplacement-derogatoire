@@ -16,22 +16,22 @@ export class SetupComponent implements OnInit {
   validations_form: FormGroup;
   setting: Usersettings = null;
 
-  constructor(private _router: Router, private _storage: StorageService, public alertController: AlertController, public formBuilder: FormBuilder) {}
+  constructor(private _varGlobal:VariableService,private _router: Router, private _storage: StorageService, public alertController: AlertController, public formBuilder: FormBuilder) {}
 
   ngOnInit(): any {
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
     this.validations_form = this.formBuilder.group({
-      firstname: new FormControl(this._storage.setting?.firstname,  Validators.required),
-      lastname: new FormControl(this._storage.setting?.lastname,  Validators.required),
-      dateofbirth: new FormControl(this._storage.setting?.dateofbirth,  Validators.required),
-      cityofbird: new FormControl(this._storage.setting?.cityofbird,  Validators.required),
-      adress: new FormControl(this._storage.setting?.adress,  Validators.required),
-      city: new FormControl(this._storage.setting?.city,  Validators.required),
-      zipcode: new FormControl(this._storage.setting?.zipcode,  Validators.compose([
+      firstname: new FormControl(this._varGlobal.setting?.firstname,  Validators.required),
+      lastname: new FormControl(this._varGlobal.setting?.lastname,  Validators.required),
+      dateofbirth: new FormControl(this._varGlobal.setting?.dateofbirth,  Validators.required),
+      cityofbird: new FormControl(this._varGlobal.setting?.cityofbird,  Validators.required),
+      adress: new FormControl(this._varGlobal.setting?.adress,  Validators.required),
+      city: new FormControl(this._varGlobal.setting?.city,  Validators.required),
+      zipcode: new FormControl(this._varGlobal.setting?.zipcode,  Validators.compose([
         Validators.pattern(zipCodeRegex),
         Validators.required
       ])),
-      backtime: new FormControl(this._storage.setting?.backtime || '20',  Validators.required),
+      backtime: new FormControl(this._varGlobal.setting?.backtime || '20',  Validators.required),
     });
   }
 
@@ -69,7 +69,7 @@ export class SetupComponent implements OnInit {
     this.alertController.create({
       header: 'Confirmation',
       subHeader: 'Paramètres Enregistrés',
-      message: 'Vos réglages sont enregistrés localement.\nVous pouvez créer votre attestation.',
+      message: 'Vos réglages sont enregistrés localement. Vous pouvez créer votre attestation.',
       buttons: [
         {
           text: 'Ok',

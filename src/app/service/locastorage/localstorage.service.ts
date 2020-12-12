@@ -12,8 +12,8 @@ export class LocalstorageService {
 
   setLocalStorage(data: any) {
     console.log('avant datacrypt',data);
-    // localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
-    localStorage.setItem(environment.dataName,(JSON.stringify(data)));
+    localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
+    // localStorage.setItem(environment.dataName,(JSON.stringify(data)));
   }
 
   readLocalStorage():any {
@@ -21,8 +21,8 @@ export class LocalstorageService {
 
     //control si il y a une key dans le storage
     if (localStorage.getItem(environment.dataName)) {
-      // let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
-      let datas = (JSON.parse(localStorage.getItem(environment.dataName)));
+      let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
+      // let datas = (JSON.parse(localStorage.getItem(environment.dataName)));
       console.log('apres decrypt', datas);
       return datas;
     } else {
