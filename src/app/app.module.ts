@@ -12,8 +12,6 @@ import { QRCodeModule } from 'angularx-qrcode';
 // Ionic
 import { IonicModule } from '@ionic/angular';
 
-// Aes256
-
 //Firebase
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
