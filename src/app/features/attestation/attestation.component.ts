@@ -1,4 +1,5 @@
 //TODO faire un pdfng build --prod --baseHref ./
+//FIXME Redirection sur welcom si pas de donnée
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from 'src/app/service/storage/storage.service';
