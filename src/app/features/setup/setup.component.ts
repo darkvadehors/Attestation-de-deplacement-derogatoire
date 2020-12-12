@@ -44,7 +44,7 @@ export class SetupComponent implements OnInit {
     this.alertController.create({
       header: 'Confirmation',
       subHeader: 'Paramètre Enregistré',
-      message: 'Vos réglages sont enregistrer localement\n Vous pouvez créer votre attestation.',
+      message: 'Vos réglages sont enregistrer localement. Vous pouvez créer votre attestation.',
       buttons: [
         {
           text: 'Ok',
@@ -57,6 +57,4 @@ export class SetupComponent implements OnInit {
       res.present();
     });
   }
-
-
 }

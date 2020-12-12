@@ -1,11 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
+
+import { Usersettings } from 'src/app/model/usersettings';
+
 import { FirebaseService } from '../firebase/firebase.service';
 import { LocalstorageService } from '../locastorage/localstorage.service';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class StorageService{
+
 
   constructor(
     private _fb: FirebaseService,
