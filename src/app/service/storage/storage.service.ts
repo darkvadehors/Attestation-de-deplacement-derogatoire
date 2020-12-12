@@ -1,40 +1,20 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Usersettings } from 'src/app/model/usersettings';
-import { environment } from 'src/environments/environment';
 import { FirebaseService } from '../firebase/firebase.service';
 import { LocalstorageService } from '../locastorage/localstorage.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StorageService implements OnInit{
-  setting: Usersettings = null;
-
+export class StorageService{
 
   constructor(
-    private _router: Router,
     private _fb: FirebaseService,
     private _ls: LocalstorageService
   ) {
     console.log('Sorti du Constructeur storage');
   }
 
-  ngOnInit() {}
-
   // Local
-  checkLocalStorage():boolean{
-    console.log('CheckLocal',this._ls.checkLocalStorage());
-
-    if (this._ls.checkLocalStorage()){
-      console.log('construire setting');
-      this.makeSettings()
-      return this._ls.checkLocalStorage();
-    } else {
-      return this._ls.checkLocalStorage();
-    }
-
-  }
 
   readLocal() {
     console.log('readlocal');
@@ -50,35 +30,4 @@ export class StorageService implements OnInit{
     console.log('saveonline');
     this._fb.saveStat(data);
   }
-
-  makeSettings (){
-    const {
-      firstname,
-      lastname,
-      dateofbirth,
-      cityofbird,
-      adress,
-      city,
-      zipcode,
-      backtime,
-      lastchoice,
-    } = this.readLocal();
-
-    this.setting = {
-      firstname,
-      lastname,
-      dateofbirth,
-      cityofbird,
-      adress,
-      city,
-      zipcode,
-      backtime,
-      lastchoice,
-    };
-
-    console.log(this.readLocal());
-    console.log(this.setting);
-  }
-
 }
-

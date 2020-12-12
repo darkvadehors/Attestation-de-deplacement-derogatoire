@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from 'src/app/service/storage/storage.service';
+import { VariableService } from 'src/app/service/variable/variable.service';
 import { ActivityPipe } from 'src/app/shared/pipe/activity/activity.pipe';
 import { BacktimePipe } from 'src/app/shared/pipe/time/backtime.pipe';
 import { environment } from 'src/environments/environment';
@@ -27,16 +28,15 @@ export class AttestationComponent {
   qrCode: string = null;
 
   constructor(
-    private _router: Router,
+    public varGlobal:VariableService,
     public storage: StorageService,
+    private _router: Router,
     private _Activatedroute: ActivatedRoute,
     private _backTimePipe: BacktimePipe,
     private _activityPipe: ActivityPipe
   ) {}
 
   async ionViewWillEnter() {
-    console.log('this.setting.backtime', this.storage.setting.backtime);
-    console.log('test', this.storage.setting.adress);
     // Récupère le QueryParametre activity
     this._Activatedroute.queryParamMap.subscribe((params) => {
       this.params = +params.get('activity') || 0;
@@ -44,19 +44,17 @@ export class AttestationComponent {
 
     //Modifie l'heure de création avec un parametre BackTime
     this.backtimeColon = this._backTimePipe.transform(
-      this.storage.setting.backtime,
+      this.varGlobal.setting.backtime,
       true
     );
     this.backtimeH = this._backTimePipe.transform(
-      this.storage.setting.backtime,
+      this.varGlobal.setting.backtime,
       false
     );
 
-    console.log('this.params', this.params);
     // converti le numéro de l'activity en mot
     this.activity = this._activityPipe.transform(this.params);
 
-    console.log('this.activity', this.activity);
     // assign a qrCode
     this.qrCode =
       'Cree le : ' +
@@ -65,20 +63,20 @@ export class AttestationComponent {
       this.backtimeH +
       // identification
       ';\nNom : ' +
-      this.storage.setting.lastname +
+      this.varGlobal.setting.lastname +
       ';\nPrenom: ' +
-      this.storage.setting.firstname +
+      this.varGlobal.setting.firstname +
       ';\nNaissance: ' +
-      this.storage.setting.dateofbirth +
+      this.varGlobal.setting.dateofbirth +
       ' a ' +
-      this.storage.setting.cityofbird +
+      this.varGlobal.setting.cityofbird +
       // Personnal Adress
       ';\nAdresse: ' +
-      this.storage.setting.adress +
+      this.varGlobal.setting.adress +
       ' ' +
-      this.storage.setting.zipcode +
+      this.varGlobal.setting.zipcode +
       ' ' +
-      this.storage.setting.city +
+      this.varGlobal.setting.city +
       ' ' +
       // Exit time
       ';\nSortie: ' +

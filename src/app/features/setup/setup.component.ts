@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Usersettings } from 'src/app/model/usersettings';
 import { StorageService } from 'src/app/service/storage/storage.service';
 import { AlertController } from '@ionic/angular';
+import { VariableService } from 'src/app/service/variable/variable.service';
 
 //FIXME Probleme de chargement des variables
 @Component({
@@ -14,18 +15,22 @@ import { AlertController } from '@ionic/angular';
 export class SetupComponent implements OnInit {
   settings_form: FormGroup;
   setting: Usersettings = null;
-  constructor(private _router: Router, private _storage: StorageService, public alertController: AlertController) {}
+  constructor(
+    public alertController: AlertController,
+    private _varGlobal:VariableService,
+    private _router: Router,
+    private _storage: StorageService, ) {}
 
   ngOnInit(): any {
     this.settings_form = new FormGroup({
-      firstname: new FormControl(this._storage.setting?.firstname),
-      lastname: new FormControl(this._storage.setting?.lastname),
-      dateofbirth: new FormControl(this._storage.setting?.dateofbirth),
-      cityofbird: new FormControl(this._storage.setting?.cityofbird),
-      adress: new FormControl(this._storage.setting?.adress),
-      city: new FormControl(this._storage.setting?.city),
-      zipcode: new FormControl(this._storage.setting?.zipcode),
-      backtime: new FormControl(this._storage.setting?.backtime || '20'),
+      firstname: new FormControl(this._varGlobal.setting.firstname),
+      lastname: new FormControl(this._varGlobal.setting?.lastname),
+      dateofbirth: new FormControl(this._varGlobal.setting?.dateofbirth),
+      cityofbird: new FormControl(this._varGlobal.setting?.cityofbird),
+      adress: new FormControl(this._varGlobal.setting?.adress),
+      city: new FormControl(this._varGlobal.setting?.city),
+      zipcode: new FormControl(this._varGlobal.setting?.zipcode),
+      backtime: new FormControl(this._varGlobal.setting?.backtime || '20'),
     });
   }
 

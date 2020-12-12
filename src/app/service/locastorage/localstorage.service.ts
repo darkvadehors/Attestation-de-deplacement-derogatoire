@@ -10,36 +10,25 @@ import { CryptoService } from '../crypto/crypto.service';
 export class LocalstorageService {
   constructor(private _router: Router, private _storageMap: StorageMap, private _crypto:CryptoService) {}
 
-  checkLocalStorage():boolean{
-    if (localStorage.getItem(environment.dataName)){
-      return true
-    } else{
-      return false
-    }
-  }
-
   setLocalStorage(data: any) {
     console.log('avant datacrypt',data);
-    localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
+    // localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
+    localStorage.setItem(environment.dataName,(JSON.stringify(data)));
   }
 
   readLocalStorage():any {
-    console.log('readLocalStorage entrée');
-    let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
-    console.log('apres decrypt', datas);
-    return datas;
+    console.log('readLocalStorage entrée',localStorage.getItem(environment.dataName));
 
-    // if (localStorage.getItem(environment.dataName)){
-    // } else {
-    //   console.log('readLocalStorage pas de données');
-    // }
+    //control si il y a une key dans le storage
+    if (localStorage.getItem(environment.dataName)) {
+      // let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
+      let datas = (JSON.parse(localStorage.getItem(environment.dataName)));
+      console.log('apres decrypt', datas);
+      return datas;
+    } else {
+      console.log('pas de storage');
+      return null;
+    }
 
-  }
-
-  deleteCurrentUser() {
-    // localStorage.removeItem(environment.dataName);
-
-    this._storageMap.delete(environment.dataName).subscribe(() => {});
-    this._router.navigate(['setup']);
   }
 }

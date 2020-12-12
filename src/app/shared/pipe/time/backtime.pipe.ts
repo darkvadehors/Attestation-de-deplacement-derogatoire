@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class BacktimePipe implements PipeTransform {
   transform(time: number, format?: boolean): string {
     let backTime: string = null;
+
     // Millisecond per minutes => mpm
     const mpm = 60000;
 
