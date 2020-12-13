@@ -30,6 +30,7 @@
     "crypto-js": "^4.0.0",
     "firebase": "^8.1.2",
     "google-libphonenumber": "^3.2.15",
+    "pdfmake": "^0.1.68",
     "rxjs": "~6.6.0",
     "serve": "^11.3.2",
     "tslib": "^2.0.0",
