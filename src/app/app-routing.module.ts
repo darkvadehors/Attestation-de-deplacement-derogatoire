@@ -17,8 +17,9 @@ const routes: Routes = [
     path: 'attestation',
     component: AttestationComponent,
   },
-  { path: '', redirectTo: '/welcome', pathMatch: 'prefix' }, // redirect to `first-component`
-  { path: '**', component: WelcomeComponent }, // Wildcard route for a 404 page
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' }, // redirect to `first-component`
+  // { path: '**', component: WelcomeComponent }, // Wildcard route for a 404 page
+  { path: '**', redirectTo: 'welcome', pathMatch: 'full' }, // Wildcard route for a 404 page
 ];
 
 @NgModule({

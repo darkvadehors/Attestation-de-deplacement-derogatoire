@@ -26,6 +26,7 @@ import { SetupComponent } from './features/setup/setup.component';
 import { WelcomeComponent } from './features/welcome/welcome.component';
 import { AttestationComponent } from './features/attestation/attestation.component';
 import { StorageService } from './service/storage/storage.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { StorageService } from './service/storage/storage.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
   ],
-  providers: [StorageService, BacktimePipe, ActivityPipe],
+  providers: [ StorageService, BacktimePipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
