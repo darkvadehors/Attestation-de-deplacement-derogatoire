@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AttestationComponent } from 'src/app/features/attestation/attestation.component';
-import { SetupComponent } from 'src/app/features/setup/setup.component';
-import { WelcomeComponent } from 'src/app/features/welcome/welcome.component';
+import { AttestationComponent } from 'src/app/features/attestation/attestation/attestation.component';
+import { SetupComponent } from 'src/app/features/setup/containers/setup/setup.component';
+import { WelcomeComponent } from 'src/app/features/welcome/containers/welcome/welcome.component';
 
 const routes: Routes = [
   {

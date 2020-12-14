@@ -22,9 +22,9 @@ import { BacktimePipe } from './shared/pipe/time/backtime.pipe';
 
 //Component
 import { AppComponent } from './app.component';
-import { SetupComponent } from './features/setup/setup.component';
-import { WelcomeComponent } from './features/welcome/welcome.component';
-import { AttestationComponent } from './features/attestation/attestation.component';
+import { SetupComponent } from './features/setup/containers/setup/setup.component';
+import { WelcomeComponent } from './features/welcome/containers/welcome/welcome.component';
+import { AttestationComponent } from './features/attestation/attestation/attestation.component';
 import { StorageService } from './service/storage/storage.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
