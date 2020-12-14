@@ -1,6 +1,6 @@
 //TODO faire un pdfng build --prod --baseHref ./
 //FIXME Redirection sur welcom si pas de donnée
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from 'src/app/service/storage/storage.service';
 import { VariableService } from 'src/app/service/variable/variable.service';
@@ -26,7 +26,7 @@ export class AttestationComponent {
   pageNum: number = null;
 
   // QRCode
-  qrCode: string = null;
+  qrCodeData: string = null;
 
   constructor(
     public varGlobal:VariableService,
@@ -57,7 +57,7 @@ export class AttestationComponent {
     this.activity = this._activityPipe.transform(this.params);
 
     // assign a qrCode
-    this.qrCode =
+    this.qrCodeData =
       'Cree le : ' +
       this.todaydate +
       ' a ' +

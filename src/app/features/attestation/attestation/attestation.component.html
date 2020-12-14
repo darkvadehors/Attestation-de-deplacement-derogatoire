@@ -50,8 +50,8 @@
 
 
 
-            <div *ngIf="qrCode != null">
-              <qrcode [qrdata]="qrCode" [width]="150" [elementType]="'svg'" [allowEmptyString]="true" [errorCorrectionLevel]="'H'" class="ion-text-end qrcodebottum"></qrcode>
+            <div *ngIf="qrCodeData != null">
+              <qrcode [qrdata]="qrCodeData" [width]="150" [elementType]="'svg'" [allowEmptyString]="true" [errorCorrectionLevel]="'H'" class="ion-text-end qrcodebottum"></qrcode>
 
             </div>
 
@@ -59,16 +59,14 @@
 
           <div class="espace">
 
-            <div *ngIf="qrCode != null">
-              <qrcode [qrdata]="qrCode" [width]="300" [elementType]="'svg'" [allowEmptyString]="true" [errorCorrectionLevel]="'H'" class="ion-text-start qrcodebottum"></qrcode>
+            <div *ngIf="qrCodeData != null">
+              <qrcode [qrdata]="qrCodeData" [width]="300" [elementType]="'svg'" [allowEmptyString]="true" [errorCorrectionLevel]="'H'" class="ion-text-start qrcodebottum"></qrcode>
             </div>
 
           </div>
 
         </ion-content>
-        <ion-footer class="ion-text-center" (click)="refresh()">
-          <ion-button fill="clear"  >Retour</ion-button>
-        </ion-footer>
+
 </ion-app>
 
 
