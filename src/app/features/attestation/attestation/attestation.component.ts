@@ -26,7 +26,7 @@ export class AttestationComponent {
   pageNum: number = null;
 
   // QRCode
-  qrCode: string = null;
+  qrCodeData: string = null;
 
   constructor(
     public varGlobal:VariableService,
@@ -57,7 +57,7 @@ export class AttestationComponent {
     this.activity = this._activityPipe.transform(this.params);
 
     // assign a qrCode
-    this.qrCode =
+    this.qrCodeData =
       'Cree le : ' +
       this.todaydate +
       ' a ' +

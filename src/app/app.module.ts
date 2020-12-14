@@ -4,12 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 
-// ReactiveFormss
-
-
-//QRCode
-import { QRCodeModule } from 'angularx-qrcode';
-
 // Ionic
 import { IonicModule } from '@ionic/angular';
 
@@ -35,7 +29,6 @@ import { StorageService } from './service/storage/storage.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    QRCodeModule,
     IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
