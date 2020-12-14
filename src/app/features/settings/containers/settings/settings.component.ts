@@ -8,30 +8,31 @@ import { VariableService } from 'src/app/service/variable/variable.service';
 
 //FIXME Probleme de chargement des variables
 @Component({
-  selector: 'app-setup',
-  templateUrl: './setup.component.html',
-  styleUrls: ['./setup.component.scss'],
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: [ './settings.component.scss' ],
 })
-export class SetupComponent implements OnInit {
+export class SettingsComponent implements OnInit {
   validations_form: FormGroup;
   setting: Usersettings = null;
+  save: boolean = false;
 
-  constructor(private _varGlobal:VariableService,private _router: Router, private _storage: StorageService, public alertController: AlertController, public formBuilder: FormBuilder) {}
+  constructor(private _varGlobal: VariableService, private _router: Router, private _storage: StorageService, public alertController: AlertController, public formBuilder: FormBuilder) { }
 
   ngOnInit(): any {
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
     this.validations_form = this.formBuilder.group({
-      firstname: new FormControl(this._varGlobal.setting?.firstname,  Validators.required),
-      lastname: new FormControl(this._varGlobal.setting?.lastname,  Validators.required),
-      dateofbirth: new FormControl(this._varGlobal.setting?.dateofbirth,  Validators.required),
-      cityofbird: new FormControl(this._varGlobal.setting?.cityofbird,  Validators.required),
-      adress: new FormControl(this._varGlobal.setting?.adress,  Validators.required),
-      city: new FormControl(this._varGlobal.setting?.city,  Validators.required),
-      zipcode: new FormControl(this._varGlobal.setting?.zipcode,  Validators.compose([
+      firstname: new FormControl(this._varGlobal.setting?.firstname, Validators.required),
+      lastname: new FormControl(this._varGlobal.setting?.lastname, Validators.required),
+      dateofbirth: new FormControl(this._varGlobal.setting?.dateofbirth, Validators.required),
+      cityofbird: new FormControl(this._varGlobal.setting?.cityofbird, Validators.required),
+      adress: new FormControl(this._varGlobal.setting?.adress, Validators.required),
+      city: new FormControl(this._varGlobal.setting?.city, Validators.required),
+      zipcode: new FormControl(this._varGlobal.setting?.zipcode, Validators.compose([
         Validators.pattern(zipCodeRegex),
         Validators.required
       ])),
-      backtime: new FormControl(this._varGlobal.setting?.backtime || '20',  Validators.required),
+      backtime: new FormControl(this._varGlobal.setting?.backtime || '20', Validators.required),
     });
   }
 
@@ -74,7 +75,7 @@ export class SetupComponent implements OnInit {
         {
           text: 'Ok',
           handler: () => {
-            this._router.navigate(['welcome']);
+            this._router.navigate([ 'welcome' ]);
           }
         }
       ]
@@ -83,9 +84,19 @@ export class SetupComponent implements OnInit {
     });
   }
 
-onSubmit() {
+  onSubmit() {
+
     console.log('this.validations_form.value', this.validations_form.value);
+    this.save = true;
     this._storage.saveLocal(this.validations_form.value);
     this.confirmAlert();
+  }
+
+  ionViewWillLeave() {
+    console.log('save in ', this.save);
+    if (!this.save) {
+      console.log('save out ', this.save);
+      this._storage.saveLocal(this.validations_form.value);
+    }
   }
 }
