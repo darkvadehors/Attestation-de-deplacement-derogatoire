@@ -9,7 +9,7 @@ const routes: Routes = [
         component: TabsComponent,
         children: [
             {
-                path: 'welcome',
+                path: '',
                 loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule)
             },
             {
