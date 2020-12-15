@@ -1,24 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AttestationComponent } from 'src/app/features/attestation/attestation.component';
-import { SetupComponent } from 'src/app/features/setup/setup.component';
-import { WelcomeComponent } from 'src/app/features/welcome/welcome.component';
 
 const routes: Routes = [
   {
-    path: 'welcome',
-    component: WelcomeComponent,
+    path: '',
+    loadChildren: () => import('./features/tabs/tabs.modules').then(m => m.TabsModule)
   },
   {
-    path: 'setup',
-    component: SetupComponent,
+    path: 'intro',
+    loadChildren: () => import('./features/slides/slides.modules').then(m => m.SlidesModule)
   },
-  {
-    path: 'attestation',
-    component: AttestationComponent,
-  },
-  { path: '', redirectTo: '/welcome', pathMatch: 'prefix' }, // redirect to `first-component`
-  { path: '**', component: WelcomeComponent }, // Wildcard route for a 404 page
+  // { path: '**', component: WelcomeComponent }, // Wildcard route for a 404 page
+  { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route for a 404 page
 ];
 
 @NgModule({

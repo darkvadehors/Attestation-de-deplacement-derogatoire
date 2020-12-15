@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/service/storage/storage.service';
 import { VariableService } from 'src/app/service/variable/variable.service';
@@ -21,7 +21,4 @@ export class WelcomeComponent {
     this._router.navigate(['attestation'], { queryParams: { activity } });
   }
 
-  editSettings() {
-    this._router.navigate(['setup']);
-  }
 }
