@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "attestationcovid19",
   "projects": {
-    "attestationcovid": {
+    "attestationcovid19": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
