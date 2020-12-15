@@ -1,4 +1,4 @@
-<ion-content [scrollEvents]="true" >
+<ion-content scrollY=true >
   <h1>Bonjour.</h1>
   <p>Cette application est un exercice de programmation.</p>
    <p>Afin de montrer les possibilités du JavaScript, il est développé avec Angular, ionic.</p>
@@ -16,9 +16,10 @@
     <p>2 qui prennent soins de vous.</p>
 
     <p>Si vous valider cette case vous en assumez les risques et sanctions.</p>
+    <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
       <ion-item>
-        <ion-label>Je suis d'accord</ion-label>
-        <ion-input formControlName = "terms"  type="checkbox" placeholder="16/03/2020"></ion-input>
+        <ion-label color="primary">I accept terms and conditions</ion-label>
+        <ion-checkbox color="primary" formControlName="terms"></ion-checkbox>
       </ion-item>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.terms">
@@ -27,19 +28,19 @@
           </div>
         </ng-container>
       </div>
-
-
-
-
+      <ion-button color="primary" class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">Submit data</ion-button>
+    </form>
 </ion-content >
 <ion-tabs >
     <ion-tab-bar slot="bottom" >
-      <ion-tab-button tab="welcome" [disabled]="!validations_form.valid">
+      <!-- <ion-tab-button tab="welcome" [disabled]="!validations_form.valid"> -->
+      <ion-tab-button tab="welcome">
         <ion-icon name="home"></ion-icon>
         <ion-label>Accueil</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="reglages" [disabled]="!validations_form.valid">
+      <!-- <ion-tab-button tab="reglages" [disabled]="!validations_form.valid"> -->
+      <ion-tab-button tab="reglages">
         <ion-icon name="settings-outline"></ion-icon>
         <ion-label>Réglages</ion-label>
       </ion-tab-button>

@@ -12,19 +12,21 @@ export class TabsComponent implements OnInit {
 
     constructor(public formBuilder: FormBuilder) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.validations_form = this.formBuilder.group({
-            terms: new FormControl(true, Validators.pattern('true')),
-            stat: new FormControl('', Validators.required)
+            terms: new FormControl(false, Validators.requiredTrue),
         })
     }
     validation_messages = {
         'terms': [
-            { type: 'required', message: 'La ville est obligatoire' }
+            { type: 'required', message: 'Valider pour poursuivre!' }
         ],
         'stat': [
-            { type: 'required', message: 'Le nombres de minutes à soutraire est obligatoire' }
+            { type: 'required', message: 'Il faut vous décider !' }
         ],
     };
 
+    onSubmit(values): any {
+        console.log(values);
+    }
 }

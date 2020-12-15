@@ -20,6 +20,6 @@ export class TabsModule {
 
     constructor(public loading: LoadingService) { }
     ionViewWillEnter() {
-        this.loading.presentLoading();
+        // this.loading.presentLoading();
     }
 }
