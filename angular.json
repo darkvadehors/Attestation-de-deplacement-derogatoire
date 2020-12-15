@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "attestation",
+  "newProjectRoot": "attestationcovid19",
   "projects": {
-    "attestationCV19": {
+    "attestationcovid": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/attestation",
+            "outputPath": "dist/attestationcovid19",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,7 +30,8 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss",
@@ -93,25 +94,27 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "attestationCV19:build"
+            "browserTarget": "attestationcovid19:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "attestationCV19:build:production"
+              "browserTarget": "attestationcovid19:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "attestationCV19:build"
+            "browserTarget": "attestationcovid19:build"
           }
         },
         "test": {
@@ -123,7 +126,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -148,35 +152,35 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "attestationCV19:serve"
+            "devServerTarget": "attestationcovid19:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "attestationCV19:serve:production"
+              "devServerTarget": "attestationcovid19:serve:production"
             }
           }
         },
         "ionic-cordova-serve": {
           "builder": "@ionic/angular-toolkit:cordova-serve",
           "options": {
-            "cordovaBuildTarget": "attestationCV19:ionic-cordova-build",
-            "devServerTarget": "attestationCV19:serve"
+            "cordovaBuildTarget": "attestationcovid19:ionic-cordova-build",
+            "devServerTarget": "attestationcovid19:serve"
           },
           "configurations": {
             "production": {
-              "cordovaBuildTarget": "attestationCV19:ionic-cordova-build:production",
-              "devServerTarget": "attestationCV19:serve:production"
+              "cordovaBuildTarget": "attestationcovid19:ionic-cordova-build:production",
+              "devServerTarget": "attestationcovid19:serve:production"
             }
           }
         },
         "ionic-cordova-build": {
           "builder": "@ionic/angular-toolkit:cordova-build",
           "options": {
-            "browserTarget": "attestationCV19:build"
+            "browserTarget": "attestationcovid19:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "attestationCV19:build:production"
+              "browserTarget": "attestationcovid19:build:production"
             }
           }
         },
@@ -187,5 +191,5 @@
       }
     }
   },
-  "defaultProject": "attestation"
+  "defaultProject": "attestationcovid19"
 }
