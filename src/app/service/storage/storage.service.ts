@@ -1,7 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
-
-import { Usersettings } from 'src/app/model/usersettings';
-
+import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
 import { LocalstorageService } from '../locastorage/localstorage.service';
 
@@ -10,6 +7,7 @@ import { LocalstorageService } from '../locastorage/localstorage.service';
 })
 
 export class StorageService{
+
 
 
   constructor(

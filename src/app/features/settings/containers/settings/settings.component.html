@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title color="primary">Réglages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <form  [formGroup]="validations_form" (ngSubmit)="onSubmit()">
+    <ion-list-header color="secondary" >Votre identitée</ion-list-header>
+
+    <ion-item>
+      <ion-label>Prénom :</ion-label>
+      <ion-input formControlName = "firstname" placeholder="Jean"></ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.firstname">
+        <div class="error-message" *ngIf="validations_form.get('firstname').hasError(validation.type) && (validations_form.get('firstname').dirty || validations_form.get('firstname').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+
+      <ion-item>
+        <ion-label>Nom :</ion-label>
+        <ion-input formControlName = "lastname" placeholder="Martin"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.lastname">
+          <div class="error-message" *ngIf="validations_form.get('lastname').hasError(validation.type) && (validations_form.get('lastname').dirty || validations_form.get('lastname').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label>Date de naissance :</ion-label>
+        <ion-input formControlName = "dateofbirth"  type="date" placeholder="16/03/2020"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.dateofbirth">
+          <div class="error-message" *ngIf="validations_form.get('dateofbirth').hasError(validation.type) && (validations_form.get('dateofbirth').dirty || validations_form.get('dateofbirth').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label>Lieu de naissance :</ion-label>
+        <ion-input formControlName = "cityofbird" placeholder="Paris"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.cityofbird">
+          <div class="error-message" *ngIf="validations_form.get('cityofbird').hasError(validation.type) && (validations_form.get('cityofbird').dirty || validations_form.get('cityofbird').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-list-header color="secondary">Votre domicile :</ion-list-header>
+      <ion-item>
+        <ion-label>Adresse :</ion-label>
+        <ion-input formControlName = "adress" placeholder="55 Rue du Faubourg Saint-Honoré"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.adress">
+          <div class="error-message" *ngIf="validations_form.get('adress').hasError(validation.type) && (validations_form.get('adress').dirty || validations_form.get('adress').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label>Code Postal :</ion-label>
+        <ion-input maxlength="5" formControlName = "zipcode" type="number" placeholder="75008"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.zipcode">
+          <div class="error-message" *ngIf="validations_form.get('zipcode').hasError(validation.type) && (validations_form.get('zipcode').dirty || validations_form.get('zipcode').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label>Ville :</ion-label>
+        <ion-input formControlName = "city" placeholder="Paris"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.city">
+          <div class="error-message" *ngIf="validations_form.get('city').hasError(validation.type) && (validations_form.get('city').dirty || validations_form.get('city').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-list-header color="secondary">Réglages de l'application :</ion-list-header>
+      <ion-item>
+        <ion-label>Décalage en minutes : </ion-label>
+        <ion-input maxlength="2" formControlName = "backtime" type="number"  placeHolder="20"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.backtime">
+          <div class="error-message" *ngIf="validations_form.get('backtime').hasError(validation.type) && (validations_form.get('backtime').dirty || validations_form.get('backtime').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <div>
+        <div>
+          <ion-grid>
+
+            <ion-row>
+              <ion-col class="ion-align-self-center" size-md>
+                <ion-button  color="danger" type="reset" expand="block">Reinitialiser</ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button class="submit-btn" color="success" type="submit" expand="block" size-md [disabled]="!validations_form.valid">Valider</ion-button>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </form>
+</ion-content>
