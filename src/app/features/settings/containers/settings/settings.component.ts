@@ -88,15 +88,16 @@ export class SettingsComponent implements OnInit {
 
     console.log('this.validations_form.value', this.validations_form.value);
     this.save = true;
-    this._storage.saveLocal(this.validations_form.value);
+    this._storage.saveLocal('user', this.validations_form.value);
     this.confirmAlert();
   }
 
+  //TODO verifier si toujours utilise ?
   ionViewWillLeave() {
     console.log('save in ', this.save);
-    if (!this.save) {
+    if (!this.save && this._storage.readLocal('user')) {
       console.log('save out ', this.save);
-      this._storage.saveLocal(this.validations_form.value);
+      this._storage.saveLocal('user', this.validations_form.value);
     }
   }
 }

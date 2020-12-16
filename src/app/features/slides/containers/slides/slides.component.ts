@@ -105,7 +105,6 @@ export class SlidesComponent implements OnInit {
   }
 
   start() {
-    console.log('Tutu');
-    this._router.navigate([ ' ' ]);
+    this._router.navigate([ 'settings' ]);
   }
 }

@@ -39,3 +39,5 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+//TODO supprimer pdfmake ligne 34 du package.json

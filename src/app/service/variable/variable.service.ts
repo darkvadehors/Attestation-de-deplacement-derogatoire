@@ -13,10 +13,11 @@ export class VariableService {
 
   constructor(private _storage:StorageService, private _router: Router) {
 
-    console.log('construc');
+    console.log('Variable.service');
 
     // on test si il y a une donnée dans le localstorage et on la charge
-    if (this._storage.readLocal()) {
+    if (this._storage.readLocal('user')) {
+
       const {
       firstname,
       lastname,
@@ -27,7 +28,7 @@ export class VariableService {
       zipcode,
       backtime,
       lastchoice,
-      } = this._storage.readLocal();
+      } = this._storage.readLocal('user');
 
       this.setting = {
         firstname,
@@ -41,9 +42,14 @@ export class VariableService {
         lastchoice,
       };
 
+      console.log('variable storage ok');
+
     } else {
+
+      console.log('variable storage pas ok => GO settings');
+
       // sinon on va la creer
-      this._router.navigate(['setup']);
+      this._router.navigate([ 'settings' ]);
     }
 
   }

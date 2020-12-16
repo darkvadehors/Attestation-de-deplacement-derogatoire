@@ -1,3 +1,4 @@
+/*
 {"firstname":"Johnny","lastname":"Ben el hadj","dateofbirth":"01/12/1976","cityofbird":"Ambilly","adress":"225 Route de la maladière","city":"perrignier","zypcode":74550,"backtime":"20"}
 
 
@@ -38,3 +39,12 @@
         </ng-container>
       </div>
 </ion-content >
+
+
+
+let dateOfBird = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'short');
+    console.log(this._varGlobal.setting.dateofbirth);
+    console.log(dateOfBird);
+
+
+this.dateOB = this.datePipe.transform(this._varGlobal.setting.dateofbirth, "dd/mm/yyyy")
