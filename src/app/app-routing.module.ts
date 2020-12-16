@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { IntroGuard } from './guards/intro.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./features/tabs/tabs.modules').then(m => m.TabsModule)
-  },
-  {
-    path: 'settings',
-    loadChildren: () => import('./features/settings/settings.modules').then(m => m.SettingsModule)
+    loadChildren: () => import('./features/tabs/tabs.modules').then(m => m.TabsModule),
+    canActivate: [ IntroGuard ]
   },
   {
     path: 'intro',
-    loadChildren: () => import('./features/slides/slides.modules').then(m => m.SlidesModule)
+    loadChildren: () => import('./features/slides/slides.modules').then(m => m.SlidesModule),
   },
-  // { path: '**', component: WelcomeComponent }, // Wildcard route for a 404 page
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route for a 404 page
 ];
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/service/storage/storage.service';
 
 @Component({
   selector: 'app-slides',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SlidesComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _storage: StorageService) { }
 
   ngOnInit(): any {
 
@@ -105,6 +106,7 @@ export class SlidesComponent implements OnInit {
   }
 
   start() {
+    this._storage.saveLocal('userfs', '1')
     this._router.navigate([ 'settings' ]);
   }
 }

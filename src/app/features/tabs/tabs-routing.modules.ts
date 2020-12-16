@@ -5,7 +5,7 @@ import { TabsComponent } from './containers/tabs/tabs.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'tabs', // redirectTo: 'welcome', pathMatch: 'full',
         component: TabsComponent,
         children: [
             {
@@ -13,7 +13,7 @@ const routes: Routes = [
                 loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule)
             },
             {
-                path: 'reglages',
+                path: 'settings',
                 loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule)
             },
             {
@@ -22,6 +22,12 @@ const routes: Routes = [
             }
         ]
     },
+    {
+        path: '',
+        redirectTo: 'tabs/welcome',
+        pathMatch: 'prefix'
+    }
+
 
 ];
 

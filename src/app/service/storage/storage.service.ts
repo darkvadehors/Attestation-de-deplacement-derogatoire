@@ -23,12 +23,13 @@ export class StorageService{
     console.log('readlocal', datakey);
     return this._ls.readLocalStorage(datakey);
   }
-  saveLocal(datakey: string, data: any) {
+  saveLocal(datakey: string, data: string) {
     console.log('Data storage.service', datakey, data);
     this._ls.setLocalStorage(datakey, data);
   }
 
   // Online
+  //TODO passer le type en string
   saveOnLine(data: any) {
     console.log('saveonline');
     this._fb.saveStat(data);

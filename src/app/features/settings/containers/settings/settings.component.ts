@@ -21,6 +21,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): any {
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+
     this.validations_form = this.formBuilder.group({
       firstname: new FormControl(this._varGlobal.setting?.firstname, Validators.required),
       lastname: new FormControl(this._varGlobal.setting?.lastname, Validators.required),
@@ -33,6 +34,10 @@ export class SettingsComponent implements OnInit {
         Validators.required
       ])),
       backtime: new FormControl(this._varGlobal.setting?.backtime || '20', Validators.required),
+      stat: new FormControl(true, Validators.compose([
+        Validators.pattern('true'),
+        Validators.requiredTrue
+      ]))
     });
   }
 
