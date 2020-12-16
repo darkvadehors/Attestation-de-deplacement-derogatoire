@@ -22,7 +22,7 @@ export class AttestationComponent {
   backtimeH: string = null;
 
   // transfert de parametres
-  params: number | string = null;
+  params: number = null;
   activity: string = null;
   pageNum: number = null;
 
@@ -58,6 +58,7 @@ export class AttestationComponent {
     // converti le numéro de l'activity en mot
     this.activity = this._activityPipe.transform(this.params);
 
+    console.log('this.params', this.params);
     // assign a qrCode
     this.qrCodeData =
       'Cree le : ' +
@@ -91,7 +92,7 @@ export class AttestationComponent {
   }
 
   generatePdf() {
-    this._pdfService.generatePdf();
+    this._pdfService.generatePdf(this.qrCodeData);
   }
 
   refresh() {

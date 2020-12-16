@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PdfmakeService } from './pdfmake.service';
+import { PdfmakeService } from './demo/pdfmake.servicePDF-LIB';
 
 describe('PdfmakeService', () => {
   let service: PdfmakeService;
