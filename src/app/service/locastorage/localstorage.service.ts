@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { StorageMap } from '@ngx-pwa/local-storage';
-import { environment } from 'src/environments/environment';
 import { CryptoService } from '../crypto/crypto.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalstorageService {
-  constructor(private _router: Router, private _storageMap: StorageMap, private _crypto:CryptoService) {}
+  key: string = null;
 
-  setLocalStorage(data: any) {
-    console.log('avant datacrypt',data);
-    localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
-    // localStorage.setItem(environment.dataName,(JSON.stringify(data)));
-  }
+  constructor(private _crypto: CryptoService) { }
 
-  readLocalStorage():any {
-    console.log('readLocalStorage entrée',localStorage.getItem(environment.dataName));
+  readLocalStorage(datakey: string): any {
 
-    //control si il y a une key dans le storage
-    if (localStorage.getItem(environment.dataName)) {
-      let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
-      // let datas = (JSON.parse(localStorage.getItem(environment.dataName)));
+    console.log("readlocalStoarge datakey", datakey);
+    switch (datakey) {
+      case 'user':
+        this.key = 'ac'; //Attestation Covid
+        break;
+      case 'userfl':
+        this.key = 'fl' // First Launch
+    }
+    console.log(this.key);
+    console.log('readLocalStorage entrée', localStorage.getItem(this.key));
+
+    //control si il y a une this.key dans le storage
+    if (localStorage.getItem(this.key)) {
+      let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(this.key)));
+      // let datas = (JSON.parse(localStorage.getItem(this.key)));
       console.log('apres decrypt', datas);
       return datas;
     } else {
@@ -31,4 +34,19 @@ export class LocalstorageService {
     }
 
   }
+
+  setLocalStorage(datakey: string, data: string) {
+
+    switch (datakey) {
+      case 'user':
+        this.key = 'ac';
+        break;
+      case 'userfl':
+        this.key = 'fl'
+    }
+    console.log('avant datacrypt', data);
+    localStorage.setItem(this.key, this._crypto.encrypt(JSON.stringify(data)));
+    // localStorage.setItem(this.key,(JSON.stringify(data)));
+  }
+
 }

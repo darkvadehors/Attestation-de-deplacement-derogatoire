@@ -1,3 +1,8 @@
+/*
+Storage.service prend  deux parametres pour el local storage:
+ * data => pour les données
+ * datakey => pour la clé de variable
+*/
 import { Injectable } from '@angular/core';
 import { FirebaseService } from '../firebase/firebase.service';
 import { LocalstorageService } from '../locastorage/localstorage.service';
@@ -8,24 +13,19 @@ import { LocalstorageService } from '../locastorage/localstorage.service';
 
 export class StorageService{
 
-
-
   constructor(
     private _fb: FirebaseService,
     private _ls: LocalstorageService
-  ) {
-    console.log('Sorti du Constructeur storage');
-  }
+  ) { }
 
   // Local
-
-  readLocal() {
-    console.log('readlocal');
-    return this._ls.readLocalStorage();
+  readLocal(datakey: string) {
+    console.log('readlocal', datakey);
+    return this._ls.readLocalStorage(datakey);
   }
-  saveLocal(data: any) {
-    console.log('Data storage.service',data);
-    this._ls.setLocalStorage(data);
+  saveLocal(datakey: string, data: any) {
+    console.log('Data storage.service', datakey, data);
+    this._ls.setLocalStorage(datakey, data);
   }
 
   // Online

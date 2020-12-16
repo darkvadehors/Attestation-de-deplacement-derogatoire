@@ -2,6 +2,7 @@
 //FIXME Redirection sur welcom si pas de donnée
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PdfmakeService } from 'src/app/service/pdfmake/pdfmake.service';
 import { StorageService } from 'src/app/service/storage/storage.service';
 import { VariableService } from 'src/app/service/variable/variable.service';
 import { ActivityPipe } from 'src/app/shared/pipe/activity/activity.pipe';
@@ -21,7 +22,7 @@ export class AttestationComponent {
   backtimeH: string = null;
 
   // transfert de parametres
-  params: number | string = null;
+  params: number = null;
   activity: string = null;
   pageNum: number = null;
 
@@ -34,7 +35,8 @@ export class AttestationComponent {
     private _router: Router,
     private _Activatedroute: ActivatedRoute,
     private _backTimePipe: BacktimePipe,
-    private _activityPipe: ActivityPipe
+    private _activityPipe: ActivityPipe,
+    private _pdfService: PdfmakeService
   ) {}
 
   async ionViewWillEnter() {
@@ -56,6 +58,7 @@ export class AttestationComponent {
     // converti le numéro de l'activity en mot
     this.activity = this._activityPipe.transform(this.params);
 
+    console.log('this.params', this.params);
     // assign a qrCode
     this.qrCodeData =
       'Cree le : ' +
@@ -86,6 +89,10 @@ export class AttestationComponent {
       this.backtimeColon +
       ';\nMotifs: ' +
       this.activity;
+  }
+
+  generatePdf() {
+    this._pdfService.generatePdf(this.qrCodeData);
   }
 
   refresh() {

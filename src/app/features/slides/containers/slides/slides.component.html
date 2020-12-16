@@ -1,0 +1,37 @@
+TUTU
+<ion-header translucent>
+    <ion-toolbar color="danger">
+      <ion-title>Slides</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen class="ion-padding" scroll-y="false" color="success">
+    <ion-slides>
+
+      <ion-slide>
+        <h2>Bienvenue sur <b>Attestation Covid-19</b></h2>
+        <img src="assets/images/intro/img-intro2.png"/>
+        <p>Une attestation simple comme la libertée</p>
+      </ion-slide>
+
+      <ion-slide>
+        <h2>Etape 1</h2>
+        <img src="assets/images/intro/img-intro1.png"/>
+        <p><b>Remplire</b> ces informations.</p>
+      </ion-slide>
+
+      <ion-slide>
+        <h2>Voila c'est fini !</h2>
+        <img src="assets/images/intro/img-intro2.png"/>
+        <p><b>Votre Attestation</b> est déjà prête. Il suffit de cliquer sur activité pour pouvoir la présenter.</p>
+      </ion-slide>
+
+
+      <ion-slide>
+        <img src="assets/images/logoRf.png"/>
+        <h2>Près pour la liberté ?</h2>
+        <ion-button fill="clear" (click)="start()"  >Continuer <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      </ion-slide>
+
+    </ion-slides>
+  </ion-content>

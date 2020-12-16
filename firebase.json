@@ -1,8 +1,8 @@
 {
   "hosting": [
     {
-      "target": "attestationCV19",
-      "public": "dist/attestationCV19",
+      "target": "attestationcovid19",
+      "public": "dist/attestationcovid19",
       "ignore": [
         "**/.*"
       ],

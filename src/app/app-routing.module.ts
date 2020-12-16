@@ -6,6 +6,14 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./features/tabs/tabs.modules').then(m => m.TabsModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./features/settings/settings.modules').then(m => m.SettingsModule)
+  },
+  {
+    path: 'intro',
+    loadChildren: () => import('./features/slides/slides.modules').then(m => m.SlidesModule)
+  },
   // { path: '**', component: WelcomeComponent }, // Wildcard route for a 404 page
   { path: '**', redirectTo: '', pathMatch: 'full' }, // Wildcard route for a 404 page
 ];

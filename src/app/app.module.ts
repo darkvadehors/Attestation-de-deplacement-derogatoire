@@ -18,6 +18,7 @@ import { BacktimePipe } from './shared/pipe/time/backtime.pipe';
 //Component
 import { AppComponent } from './app.component';
 import { StorageService } from './service/storage/storage.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -32,8 +33,11 @@ import { StorageService } from './service/storage/storage.service';
     IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [ StorageService, BacktimePipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+//TODO supprimer pdfmake ligne 34 du package.json

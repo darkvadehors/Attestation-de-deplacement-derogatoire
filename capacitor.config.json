@@ -1,9 +1,9 @@
 {
-  "appId": "fr.johnben.attestationcovid",
-  "appName": "attestationCV19",
+  "appId": "fr.johnben.attestationcovid19",
+  "appName": "attestationcovid19",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "dist/attestationCV19",
+  "webDir": "dist/attestationcovid19",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
