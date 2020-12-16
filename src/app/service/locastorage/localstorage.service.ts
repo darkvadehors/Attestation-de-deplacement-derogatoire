@@ -1,28 +1,39 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { StorageMap } from '@ngx-pwa/local-storage';
+import { Injectable, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CryptoService } from '../crypto/crypto.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalstorageService {
-  constructor(private _router: Router, private _storageMap: StorageMap, private _crypto:CryptoService) {}
+export class LocalstorageService implements OnInit {
+  key: string
 
-  setLocalStorage(data: any) {
+  constructor(private _crypto: CryptoService) { }
+
+  ngOnInit() {
+
+  }
+  setLocalStorage(data: string, datakey: string) {
+
+    switch (datakey) {
+      case 'user':
+        this.key = 'ac';
+        break;
+      case 'userfl':
+        this.key = 'fl'
+    }
     console.log('avant datacrypt',data);
-    localStorage.setItem(environment.dataName,this._crypto.encrypt(JSON.stringify(data)));
-    // localStorage.setItem(environment.dataName,(JSON.stringify(data)));
+    localStorage.setItem(this.key, this._crypto.encrypt(JSON.stringify(data)));
+    // localStorage.setItem(this.key,(JSON.stringify(data)));
   }
 
-  readLocalStorage():any {
-    console.log('readLocalStorage entrée',localStorage.getItem(environment.dataName));
+  readLocalStorage(datakey: string): any {
+    console.log('readLocalStorage entrée', localStorage.getItem(datakey));
 
-    //control si il y a une key dans le storage
-    if (localStorage.getItem(environment.dataName)) {
-      let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(environment.dataName)));
-      // let datas = (JSON.parse(localStorage.getItem(environment.dataName)));
+    //control si il y a une this.key dans le storage
+    if (localStorage.getItem(datakey)) {
+      let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(datakey)));
+      // let datas = (JSON.parse(localStorage.getItem(this.key)));
       console.log('apres decrypt', datas);
       return datas;
     } else {
