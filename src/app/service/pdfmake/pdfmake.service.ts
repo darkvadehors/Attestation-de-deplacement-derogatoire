@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { VariableService } from '../variable/variable.service';
+//TODO Voir pour installer pdf-lib al aplace de pdfmake
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 

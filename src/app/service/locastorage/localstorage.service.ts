@@ -16,8 +16,8 @@ export class LocalstorageService {
       case 'user':
         this.key = 'ac'; //Attestation Covid
         break;
-      case 'userfl':
-        this.key = 'fl' // First Launch
+      case 'userfs':
+        this.key = 'fs' // First Start
     }
     console.log(this.key);
     console.log('readLocalStorage entrée', localStorage.getItem(this.key));
@@ -41,8 +41,8 @@ export class LocalstorageService {
       case 'user':
         this.key = 'ac';
         break;
-      case 'userfl':
-        this.key = 'fl'
+      case 'userfs': // user first Start
+        this.key = 'fs'
     }
     console.log('avant datacrypt', data);
     localStorage.setItem(this.key, this._crypto.encrypt(JSON.stringify(data)));
