@@ -8,8 +8,6 @@ import { LocalstorageService } from '../locastorage/localstorage.service';
 
 export class StorageService{
 
-
-
   constructor(
     private _fb: FirebaseService,
     private _ls: LocalstorageService
@@ -18,14 +16,13 @@ export class StorageService{
   }
 
   // Local
-
   readLocal() {
     console.log('readlocal');
     return this._ls.readLocalStorage();
   }
-  saveLocal(data: any) {
+  saveLocal(data: any, key: string) {
     console.log('Data storage.service',data);
-    this._ls.setLocalStorage(data);
+    this._ls.setLocalStorage(data, key);
   }
 
   // Online
