@@ -2,7 +2,7 @@
   "theme_color": "#4a90e2",
   "background_color": "#ffffff",
   "display": "standalone",
-  "scope": "/",
+  "scope": "./",
   "start_url": "./",
   "app_name": "Attestation Covid 19",
   "short_name": "attestationcovid19",

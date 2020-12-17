@@ -12,11 +12,11 @@ export class IntroGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    console.log('true');
-    if (Boolean(this._storage.readLocal('userfs'))) {
+    if (this._storage.readLocal('fs')) {
+      // console.log('guard true fs existe');
       return true;
     } else {
-      console.log('false');
+      // console.log('guard false');
       this._router.navigateByUrl('intro');
       return false
     }

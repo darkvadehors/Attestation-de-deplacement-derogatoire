@@ -16,6 +16,7 @@ import { environment } from '../../../../../environments/environment';
   styleUrls: ['./attestation.component.scss'],
 })
 export class AttestationComponent {
+
   title: string = environment.title;
 
   todaydate: any = new Date().toLocaleDateString();
@@ -59,7 +60,7 @@ export class AttestationComponent {
     // converti le numéro de l'activity en mot
     this.activity = this._activityPipe.transform(this.params);
 
-    console.log('this.params', this.params);
+    // console.log('this.params', this.params);
     // assign a qrCode
     this.qrCodeData =
       'Cree le : ' +

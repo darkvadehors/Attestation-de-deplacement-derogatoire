@@ -43,8 +43,8 @@
 
 
 let dateOfBird = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'short');
-    console.log(this._varGlobal.setting.dateofbirth);
-    console.log(dateOfBird);
+    // console.log(this._varGlobal.setting.dateofbirth);
+    // console.log(dateOfBird);
 
 
 this.dateOB = this.datePipe.transform(this._varGlobal.setting.dateofbirth, "dd/mm/yyyy")

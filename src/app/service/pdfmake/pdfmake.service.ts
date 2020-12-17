@@ -14,7 +14,6 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 export class PdfmakeService {
   pdfMake: any;
   resume: any;
-  dateOB: string;
 
   constructor(private _varGlobal: VariableService) { }
 
@@ -33,8 +32,7 @@ export class PdfmakeService {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
 
-    console.log(this._varGlobal.setting.dateofbirth);
-    console.log(this.dateOB);
+    // console.log(this._varGlobal.setting.dateofbirth);
     const documentDefinition = this.getDocumentDefinition(qrcode);
     await this.loadPdfMaker();
     this.pdfMake.createPdf(documentDefinition).open();
@@ -44,7 +42,7 @@ export class PdfmakeService {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
 
-    console.log(this._varGlobal.setting.dateofbirth);
+    // console.log(this._varGlobal.setting.dateofbirth);
 
 
     return {

@@ -18,7 +18,7 @@ defineCustomElements(window);
 
 const serviceWorker = './app/service/worker/worker.service.ts'
 if (navigator.serviceWorker) {
-  console.log('serviceWorker OK');
+  // console.log('serviceWorker OK');
   navigator.serviceWorker.register(serviceWorker)
     .then()
     .catch(err => console.log(err));

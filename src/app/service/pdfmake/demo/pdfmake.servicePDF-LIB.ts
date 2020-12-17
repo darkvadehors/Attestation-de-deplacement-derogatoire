@@ -69,7 +69,7 @@
 //     // drawText(`${this._varGlobal.setting.dateofbirth} à ${this._varGlobal.setting.cityofbird}`, 173, 601)
 //     // drawText(this._varGlobal.setting.adress, 198, 577)
 //     // drawText(`${this._varGlobal.setting.zipcode} ${this._varGlobal.setting.city}`, 50, 557)
-//     // console.log('params', params);
+    // console.log('params', params);
 //     // switch (params) {
 //     //   case 1:
 //     //     drawText('x', 76.5, 526, 20)

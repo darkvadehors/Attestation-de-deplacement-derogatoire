@@ -29,9 +29,9 @@ const routes: Routes = [
     {
         path: '',
         redirectTo: 'tabs/welcome',
-        pathMatch: 'prefix'
+        pathMatch: 'full'
     }
-
+//FIXME verifier prefix ou full
 
 ];
 

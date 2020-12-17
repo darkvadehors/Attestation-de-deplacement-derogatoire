@@ -25,12 +25,17 @@ export class SettingsComponent implements OnInit {
     this.validations_form = this.formBuilder.group({
       firstname: new FormControl(this._varGlobal.setting?.firstname, Validators.required),
       lastname: new FormControl(this._varGlobal.setting?.lastname, Validators.required),
-      dateofbirth: new FormControl(this._varGlobal.setting?.dateofbirth, Validators.required),
+      dateofbirth: new FormControl(this._varGlobal.setting?.dateofbirth, Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.minLength(4),
+      ])),
       cityofbird: new FormControl(this._varGlobal.setting?.cityofbird, Validators.required),
       adress: new FormControl(this._varGlobal.setting?.adress, Validators.required),
       city: new FormControl(this._varGlobal.setting?.city, Validators.required),
       zipcode: new FormControl(this._varGlobal.setting?.zipcode, Validators.compose([
         Validators.pattern(zipCodeRegex),
+        Validators.maxLength(6),
         Validators.required
       ])),
       backtime: new FormControl(this._varGlobal.setting?.backtime || '20', Validators.required),
@@ -80,7 +85,8 @@ export class SettingsComponent implements OnInit {
         {
           text: 'Ok',
           handler: () => {
-            this._router.navigate([ 'welcome' ]);
+            this._varGlobal.ionViewWillEnter();
+            this._router.navigate([ '' ]);
           }
         }
       ]
@@ -91,18 +97,19 @@ export class SettingsComponent implements OnInit {
 
   onSubmit() {
 
-    console.log('this.validations_form.value', this.validations_form.value);
+    // console.log('this.validations_form.value', this.validations_form.value);
+    this._storage.saveLocal('ac', this.validations_form.value);
+    this._varGlobal.ionViewWillEnter();
     this.save = true;
-    this._storage.saveLocal('user', this.validations_form.value);
     this.confirmAlert();
   }
 
   //TODO verifier si toujours utilise ?
   ionViewWillLeave() {
-    console.log('save in ', this.save);
-    if (!this.save && this._storage.readLocal('user')) {
-      console.log('save out ', this.save);
-      this._storage.saveLocal('user', this.validations_form.value);
+    // console.log('save in ', this.save);
+    if (!this.save && this._storage.readLocal('ac')) {
+      // console.log('save out ', this.save);
+      this._storage.saveLocal('ac', this.validations_form.value);
     }
   }
 }

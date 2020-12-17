@@ -10,7 +10,7 @@ export class MapComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('map is work');
+    // console.log('map is work');
   }
 
 }

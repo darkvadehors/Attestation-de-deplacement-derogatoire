@@ -16,7 +16,9 @@ export class WelcomeComponent {
   }
 
   launchAttestation(activity: number) {
-    this._varGlobal.setting.lastchoice = activity;
+    console.log('activite welcom => ', activity);
+    console.log('varG welcome ====>', this._varGlobal.setting);
+    // this._varGlobal.setting.lastchoice = activity;
     this._storage.saveOnLine(activity);
     this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
   }
