@@ -6,6 +6,5 @@ import { Injectable } from '@angular/core';
 export class WorkerService {
 
   constructor() {
-    console.log('tutu');
   }
 }
