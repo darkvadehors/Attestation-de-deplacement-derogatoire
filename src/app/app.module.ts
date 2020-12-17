@@ -2,7 +2,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 
 // Ionic
 import { IonicModule } from '@ionic/angular';
@@ -19,6 +19,7 @@ import { BacktimePipe } from './shared/pipe/time/backtime.pipe';
 import { AppComponent } from './app.component';
 import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MapComponent } from './features/map/containers/map/map.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AppComponent,
     ActivityPipe,
     BacktimePipe,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

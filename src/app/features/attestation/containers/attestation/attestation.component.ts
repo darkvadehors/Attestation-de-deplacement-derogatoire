@@ -2,12 +2,13 @@
 //FIXME Redirection sur welcom si pas de donnée
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PdfmakeService } from 'src/app/service/pdfmake/pdfmake.service';
-import { StorageService } from 'src/app/service/storage/storage.service';
-import { VariableService } from 'src/app/service/variable/variable.service';
-import { ActivityPipe } from 'src/app/shared/pipe/activity/activity.pipe';
-import { BacktimePipe } from 'src/app/shared/pipe/time/backtime.pipe';
-import { environment } from 'src/environments/environment';
+
+import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
+import { StorageService } from '../../../../service/storage/storage.service';
+import { VariableService } from '../../../../service/variable/variable.service';
+import { ActivityPipe } from '../../../../shared/pipe/activity/activity.pipe';
+import { BacktimePipe } from '../../../../shared/pipe/time/backtime.pipe';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-attestation',

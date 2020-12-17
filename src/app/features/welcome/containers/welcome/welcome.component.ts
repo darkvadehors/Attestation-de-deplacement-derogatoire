@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/service/storage/storage.service';
-import { VariableService } from 'src/app/service/variable/variable.service';
-import { environment } from 'src/environments/environment';
+import { StorageService } from '../../../../service/storage/storage.service';
+import { VariableService } from '../../../../service/variable/variable.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-welcome',

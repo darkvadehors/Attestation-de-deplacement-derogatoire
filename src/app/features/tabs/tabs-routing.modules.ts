@@ -13,6 +13,10 @@ const routes: Routes = [
                 loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule)
             },
             {
+                path: 'map',
+                loadChildren: () => import('../map/map.modules').then(m => m.MapModule)
+            },
+            {
                 path: 'settings',
                 loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule)
             },
