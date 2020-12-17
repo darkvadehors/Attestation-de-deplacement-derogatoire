@@ -373,17 +373,4 @@ FodyWeavers.xsd
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 */environments/*
-icons/app_settings_alt-24px.svg
-icons/app_settings_alt-black-18dp.zip
-icons/check_box_outline_blank-black-18dp.svg
-icons/check_box_outline_blank-black-18dp.zip
-icons/check_box-black-18dp.svg
-icons/check_box-black-18dp.zip
-icons/location_searching-black-18dp.svg
-icons/location_searching-black-18dp.zip
-icons/map-black-18dp.svg
-icons/map-black-18dp.zip
-icons/settings-24px.svg
-icons/settings-black-18dp.zip
-icons/map-black-18dp/1x/baseline_map_black_18dp.png
-icons/map-black-18dp/2x/baseline_map_black_18dp.png
+icons/*

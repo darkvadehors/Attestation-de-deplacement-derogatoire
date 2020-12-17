@@ -13,8 +13,8 @@ const routes: Routes = [
                 loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule)
             },
             {
-                path: 'Carte',
-                loadChildren: () => import('../map/map/map.component').then(m => m.MapModule)
+                path: 'map',
+                loadChildren: () => import('../map/map.modules').then(m => m.MapModule)
             },
             {
                 path: 'settings',

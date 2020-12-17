@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { MapRoutingModule } from './map-routing.modules';
 //QRCode
 import { QRCodeModule } from 'angularx-qrcode';
-import { MapComponent } from './map/map.component';
+import { MapComponent } from './containers/map/map.component';
 
 @NgModule({
     declarations: [ MapComponent ],
