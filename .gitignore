@@ -373,3 +373,4 @@ FodyWeavers.xsd
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 */environments/*
+icons/*
