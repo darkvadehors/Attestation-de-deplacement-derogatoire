@@ -19,7 +19,6 @@ import { BacktimePipe } from './shared/pipe/time/backtime.pipe';
 import { AppComponent } from './app.component';
 import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { MapComponent } from './features/map/containers/map/map.component';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { MapComponent } from './features/map/containers/map/map.component';
     AppComponent,
     ActivityPipe,
     BacktimePipe,
-    MapComponent,
   ],
   imports: [
     BrowserModule,

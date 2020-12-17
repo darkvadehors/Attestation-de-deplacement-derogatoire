@@ -24,8 +24,8 @@ export class PdfmakeService {
       const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
       // this.pdfMake = pdfMakeModule;
       // this.pdfMake.vfs = pdfFontsModule.pdfMake.vfs;
-      this.pdfMake = pdfMakeModule.default;
-      this.pdfMake.vfs = pdfFontsModule.default.pdfMake.vfs;
+      this.pdfMake = (pdfMakeModule as any).default;
+      this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
   }
 

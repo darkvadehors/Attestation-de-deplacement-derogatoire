@@ -4,8 +4,6 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [
-      "googlemaps",
-      "pdfmake"
     ]
   },
   "files": [
