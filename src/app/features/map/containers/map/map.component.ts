@@ -21,7 +21,9 @@ export class MapComponent implements OnInit {
   // Fonction d'initialisation du composant.
   async ngOnInit() {
     this._varGlobal.loadVar();
+
     const coordinates = await Geolocation.getCurrentPosition();
+
     this.coords = coordinates.coords;
     // Déclaration de la carte avec les coordonnées du centre et le niveau de zoom.
     const myfrugalmap = L.map('frugalmap').setView([ this.coords.latitude, this.coords.longitude ], 18);
