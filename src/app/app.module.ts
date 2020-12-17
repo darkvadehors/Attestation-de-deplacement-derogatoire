@@ -2,7 +2,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 
 // Ionic
 import { IonicModule } from '@ionic/angular';
