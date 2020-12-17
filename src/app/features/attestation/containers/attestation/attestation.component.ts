@@ -39,9 +39,16 @@ export class AttestationComponent {
     private _backTimePipe: BacktimePipe,
     private _activityPipe: ActivityPipe,
     private _pdfService: PdfmakeService
-  ) {}
+  ) {
+    this.varGlobal.loadVar();
+    console.log('varglo', this.varGlobal.setting);
+  }
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
+    // on recharg ela var viriable au cas ou
+    this.varGlobal.loadVar();
+    console.log('varglo', this.varGlobal.setting);
+
     // Récupère le QueryParametre activity
     this._Activatedroute.queryParamMap.subscribe((params) => {
       this.params = +params.get('activity') || 0;

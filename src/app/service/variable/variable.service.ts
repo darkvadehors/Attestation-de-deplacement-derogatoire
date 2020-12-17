@@ -11,15 +11,13 @@ export class VariableService {
 
   setting:Usersettings;
 
-  constructor(private _storage:StorageService, private _router: Router) {
-  }
+  constructor(private _storage: StorageService, private _router: Router) { }
 
   async ionViewWillEnter() {
+    this.loadVar()
+  }
 
-
-
-
-
+  loadVar() {
     console.log('Variable.service entree======> ', this.setting);
 
     // on test si il y a une donnée dans le localstorage et on la charge
@@ -35,7 +33,7 @@ export class VariableService {
       zipcode,
       backtime,
       lastchoice,
-      } = await this._storage.readLocal('ac');
+      } = this._storage.readLocal('ac');
 
       this.setting = {
         firstname,
@@ -58,7 +56,6 @@ export class VariableService {
       // sinon on va la creer
       this._router.navigate([ 'tabs/settings' ]);
     }
-
   }
 
 }

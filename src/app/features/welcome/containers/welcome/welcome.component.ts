@@ -12,14 +12,12 @@ import { environment } from '../../../../../environments/environment';
 export class WelcomeComponent {
   title: string = environment.title;
 
-  constructor(private _router: Router, private _storage: StorageService,private _varGlobal:VariableService) {
+  constructor(private _router: Router, private _storage: StorageService) {
   }
 
   launchAttestation(activity: number) {
-    console.log('activite welcom => ', activity);
-    console.log('varG welcome ====>', this._varGlobal.setting);
-    // this._varGlobal.setting.lastchoice = activity;
     this._storage.saveOnLine(activity);
+    // on passe l'activitée en queryParams
     this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
   }
 
