@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { MapRoutingModule } from './map-routing.modules';
-//QRCode
-import { QRCodeModule } from 'angularx-qrcode';
 import { MapComponent } from './containers/map/map.component';
+import { AgmCoreModule } from '@agm/core';
+import { environment } from '../../../environments/environment';
 
 @NgModule({
     declarations: [ MapComponent ],
@@ -12,7 +12,9 @@ import { MapComponent } from './containers/map/map.component';
         CommonModule,
         MapRoutingModule,
         IonicModule,
-        QRCodeModule
+        AgmCoreModule.forRoot({
+            apiKey: environment.firebaseConfig.apiKey
+        })
     ]
 })
 export class MapModule { }

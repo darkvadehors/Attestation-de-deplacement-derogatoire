@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usersettings } from 'src/app/model/usersettings';
+import { Usersettings } from '../../model/usersettings';
 import { StorageService } from '../storage/storage.service';
 
 @Injectable({

@@ -15,7 +15,6 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('map is work');
-
   }
 
 }
