@@ -1,7 +1,7 @@
 import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { MapComponent } from './containers/map/map.component';
 
 const routes: Routes = [

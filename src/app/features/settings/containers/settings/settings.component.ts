@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Usersettings } from 'src/app/model/usersettings';
-import { StorageService } from 'src/app/service/storage/storage.service';
 import { AlertController } from '@ionic/angular';
-import { VariableService } from 'src/app/service/variable/variable.service';
+import { Usersettings } from '../../../../model/usersettings';
+import { StorageService } from '../../../../service/storage/storage.service';
+import { VariableService } from '../../../../service/variable/variable.service';
 
 //FIXME Probleme de chargement des variables
 @Component({
