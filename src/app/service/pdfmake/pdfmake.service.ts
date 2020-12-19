@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { DatePipe } from '@angular/common';
 import { VariableService } from '../variable/variable.service';
 //TODO Voir pour installer pdf-lib al aplace de pdfmake
 import * as pdfMake from 'pdfmake/build/pdfmake';
@@ -14,8 +14,14 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 export class PdfmakeService {
   pdfMake: any;
   resume: any;
+  dateofbirth: string;
 
-  constructor(private _varGlobal: VariableService) { }
+  constructor(private _varGlobal: VariableService, private _datepipe: DatePipe) {
+    //FIXME remetre dateofbird du locastorage
+    this.dateofbirth = _datepipe.transform(Date.now(), 'dd/mm/yyyy')
+    console.log(this.dateofbirth);
+
+  }
 
   async loadPdfMaker() {
     if (!this.pdfMake) {
@@ -70,7 +76,7 @@ export class PdfmakeService {
           margin: [ 20, 0, 20, 20 ]
         },
         {
-          text: 'Né(e) le : ' + this._varGlobal.setting.dateofbirth + '              à ' + this._varGlobal.setting.cityofbird,
+          text: 'Né(e) le : ' + this.dateofbirth + '              à ' + this._varGlobal.setting.cityofbird,
           bold: false,
           fontSize: 10,
           alignment: 'left',

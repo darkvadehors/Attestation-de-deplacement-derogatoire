@@ -1,4 +1,4 @@
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
@@ -35,7 +35,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [ StorageService, BacktimePipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
+  providers: [ StorageService, DatePipe, BacktimePipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
