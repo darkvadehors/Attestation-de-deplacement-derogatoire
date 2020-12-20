@@ -7,7 +7,7 @@ import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
 import { ActivityPipe } from '../../../../shared/pipe/activity/activity.pipe';
-import { BacktimePipe } from '../../../../shared/pipe/time/backtime.pipe';
+import { TimeBackPipe } from '../../../../shared/pipe/time/timeback.pipe';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
@@ -20,8 +20,8 @@ export class AttestationComponent {
   title: string = environment.title;
 
   todaydate: any = new Date().toLocaleDateString();
-  backtimeColon: string = null;
-  backtimeH: string = null;
+  timebackColon: string = null;
+  timebackH: string = null;
 
   // transfert de parametres
   params: number = null;
@@ -36,7 +36,7 @@ export class AttestationComponent {
     public storage: StorageService,
     private _router: Router,
     private _Activatedroute: ActivatedRoute,
-    private _backTimePipe: BacktimePipe,
+    private _timeBackPipe: TimeBackPipe,
     private _activityPipe: ActivityPipe,
     private _pdfService: PdfmakeService
   ) {
@@ -54,26 +54,26 @@ export class AttestationComponent {
       this.params = +params.get('activity') || 0;
     });
 
-    //Modifie l'heure de création avec un parametre BackTime
-    this.backtimeColon = this._backTimePipe.transform(
-      this.varGlobal.setting.backtime,
+    //Modifie l'heure de création avec un parametre Timeback
+    this.timebackColon = this._timeBackPipe.transform(
+      this.varGlobal.setting.timeback,
       true
     );
-    this.backtimeH = this._backTimePipe.transform(
-      this.varGlobal.setting.backtime,
+    this.timebackH = this._timeBackPipe.transform(
+      this.varGlobal.setting.timeback,
       false
     );
 
     // converti le numéro de l'activity en mot
     this.activity = this._activityPipe.transform(this.params);
 
-    // console.log('this.params', this.params);
+    console.log('this.params', this.params);
     // assign a qrCode
     this.qrCodeData =
       'Cree le : ' +
       this.todaydate +
       ' a ' +
-      this.backtimeH +
+    this.timebackH +
       // identification
       ';\nNom : ' +
       this.varGlobal.setting.lastname +
@@ -95,7 +95,7 @@ export class AttestationComponent {
       ';\nSortie: ' +
       this.todaydate +
       ' a ' +
-      this.backtimeColon +
+    this.timebackColon +
       ';\nMotifs: ' +
       this.activity;
   }

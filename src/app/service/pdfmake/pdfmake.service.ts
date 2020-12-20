@@ -4,6 +4,7 @@ import { VariableService } from '../variable/variable.service';
 //TODO Voir pour installer pdf-lib al aplace de pdfmake
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TimefrPipe } from '../../shared/pipe/time/timefr.pipe';
 
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
@@ -16,11 +17,22 @@ export class PdfmakeService {
   resume: any;
   dateofbirth: string;
 
-  constructor(private _varGlobal: VariableService, private _datepipe: DatePipe) {
-    //FIXME remetre dateofbird du locastorage
-    this.dateofbirth = _datepipe.transform(Date.now(), 'dd/mm/yyyy')
-    console.log(this.dateofbirth);
+  constructor(private _varGlobal: VariableService, private _datepipe: DatePipe) { }
 
+  async generatePdf(qrcode: string) {
+
+    //FIXME remetre dateofbird du locastorage
+    console.log('this._varGlobal.setting.dateofbirth', this._varGlobal.setting.dateofbirth);
+    this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
+    console.log('dateofbird', this.dateofbirth);
+
+    sessionStorage.setItem('resume', JSON.stringify(this.resume));
+
+
+    console.log(this._varGlobal.setting.dateofbirth);
+    const documentDefinition = this.getDocumentDefinition(qrcode);
+    await this.loadPdfMaker();
+    this.pdfMake.createPdf(documentDefinition).open();
   }
 
   async loadPdfMaker() {
@@ -34,21 +46,12 @@ export class PdfmakeService {
     }
   }
 
-  async generatePdf(qrcode: string) {
-    sessionStorage.setItem('resume', JSON.stringify(this.resume));
-
-
-    // console.log(this._varGlobal.setting.dateofbirth);
-    const documentDefinition = this.getDocumentDefinition(qrcode);
-    await this.loadPdfMaker();
-    this.pdfMake.createPdf(documentDefinition).open();
-  }
 
   getDocumentDefinition(qrcode: string) {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
 
-    // console.log(this._varGlobal.setting.dateofbirth);
+    console.log(this._varGlobal.setting.dateofbirth);
 
 
     return {

@@ -99,11 +99,11 @@
       <ion-list-header color="secondary">Réglages de l'application :</ion-list-header>
       <ion-item>
         <ion-label>Décalage en minutes : </ion-label>
-        <ion-input maxlength="2" formControlName = "backtime" type="number"  placeHolder="20"></ion-input>
+        <ion-input maxlength="2" formControlName = "timeback" type="number"  placeHolder="20"></ion-input>
       </ion-item>
       <div class="validation-errors">
-        <ng-container *ngFor="let validation of validation_messages.backtime">
-          <div class="error-message" *ngIf="validations_form.get('backtime').hasError(validation.type) && (validations_form.get('backtime').dirty || validations_form.get('backtime').touched)">
+        <ng-container *ngFor="let validation of validation_messages.timeback">
+          <div class="error-message" *ngIf="validations_form.get('timeback').hasError(validation.type) && (validations_form.get('timeback').dirty || validations_form.get('timeback').touched)">
             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
           </div>
         </ng-container>

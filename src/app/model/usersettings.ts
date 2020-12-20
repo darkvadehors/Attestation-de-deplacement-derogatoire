@@ -6,6 +6,6 @@ export interface Usersettings {
   adress: string;
   city: string;
   zipcode: number;
-  backtime: number;
+  timeback: number;
   lastchoice?: number;
 }

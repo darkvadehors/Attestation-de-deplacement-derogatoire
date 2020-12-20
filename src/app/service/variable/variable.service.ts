@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usersettings } from '../../model/usersettings';
 import { StorageService } from '../storage/storage.service';
-
+//FIXME LEs variable  ne passes plus voir pour faire un observable ou changer l'appel
 @Injectable({
   providedIn: 'root'
 })
@@ -11,9 +11,13 @@ export class VariableService {
 
   setting:Usersettings;
 
-  constructor(private _storage: StorageService, private _router: Router) { }
+  constructor(private _storage: StorageService, private _router: Router) {
+    console.log('constructeru variable Service');
+    this.loadVar()
+  }
 
   async ionViewWillEnter() {
+    console.log('ionviewWilenter variable Service');
     this.loadVar()
   }
 
@@ -31,7 +35,7 @@ export class VariableService {
       adress,
       city,
       zipcode,
-      backtime,
+        timeback,
       lastchoice,
       } = this._storage.readLocal('ac');
 
@@ -43,7 +47,7 @@ export class VariableService {
         adress,
         city,
         zipcode,
-        backtime,
+        timeback,
         lastchoice,
       };
 

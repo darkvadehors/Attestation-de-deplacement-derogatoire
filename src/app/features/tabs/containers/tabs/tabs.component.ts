@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VariableService } from '../../../../service/variable/variable.service';
 
 @Component({
     selector: 'app-tabs',

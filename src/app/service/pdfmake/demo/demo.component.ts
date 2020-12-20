@@ -270,11 +270,11 @@ export class AppComponent {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-            // console.log(reader.result);
+            console.log(reader.result);
             this.resume.profilePic = reader.result as string;
         };
         reader.onerror = (error) => {
-            // console.log('Error: ', error);
+            console.log('Error: ', error);
         };
     }
 

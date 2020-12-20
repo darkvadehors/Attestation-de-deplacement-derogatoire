@@ -38,7 +38,7 @@ export class SettingsComponent implements OnInit {
         Validators.maxLength(6),
         Validators.required
       ])),
-      backtime: new FormControl(this._varGlobal.setting?.backtime || '20', Validators.required),
+      timeback: new FormControl(this._varGlobal.setting?.timeback || '20', Validators.required),
       stat: new FormControl(true, Validators.compose([
         Validators.pattern('true'),
         Validators.requiredTrue
@@ -70,7 +70,7 @@ export class SettingsComponent implements OnInit {
     'city': [
       { type: 'required', message: 'La ville est obligatoire' }
     ],
-    'backtime': [
+    'timeback': [
       { type: 'required', message: 'Le nombres de minutes à soutraire est obligatoire' }
     ],
   };
@@ -97,7 +97,7 @@ export class SettingsComponent implements OnInit {
 
   onSubmit() {
 
-    // console.log('this.validations_form.value', this.validations_form.value);
+    console.log('this.validations_form.value', this.validations_form.value);
     this._storage.saveLocal('ac', this.validations_form.value);
     this._varGlobal.ionViewWillEnter();
     this.save = true;
@@ -106,9 +106,9 @@ export class SettingsComponent implements OnInit {
 
   //TODO verifier si toujours utilise ?
   ionViewWillLeave() {
-    // console.log('save in ', this.save);
+    console.log('save in ', this.save);
     if (!this.save && this._storage.readLocal('ac')) {
-      // console.log('save out ', this.save);
+      console.log('save out ', this.save);
       this._storage.saveLocal('ac', this.validations_form.value);
     }
   }
