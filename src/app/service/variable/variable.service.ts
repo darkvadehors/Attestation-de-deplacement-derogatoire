@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usersettings } from '../../model/usersettings';
 import { StorageService } from '../storage/storage.service';
-//FIXME LEs variable  ne passes plus voir pour faire un observable ou changer l'appel
+//FIXME LEs variable  ne passes plus
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,7 @@ export class VariableService {
   setting:Usersettings;
 
   constructor(private _storage: StorageService, private _router: Router) {
-    console.log('constructeru variable Service');
+    console.log('constructeur variable Service');
     this.loadVar()
   }
 

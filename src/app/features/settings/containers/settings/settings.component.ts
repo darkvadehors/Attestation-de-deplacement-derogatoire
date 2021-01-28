@@ -5,7 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
-
+//FIXME mettre une variable dans le localstorage pour confirme que les variable sont bien rentrée
 //FIXME Probleme de chargement des variables
 @Component({
   selector: 'app-settings',
@@ -85,6 +85,7 @@ export class SettingsComponent implements OnInit {
         {
           text: 'Ok',
           handler: () => {
+            this._storage.saveLocal('setok', '1');
             this._varGlobal.ionViewWillEnter();
             this._router.navigate([ '' ]);
           }

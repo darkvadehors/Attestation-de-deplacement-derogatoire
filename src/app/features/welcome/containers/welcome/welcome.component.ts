@@ -12,7 +12,13 @@ import { environment } from '../../../../../environments/environment';
 export class WelcomeComponent {
   title: string = environment.title;
 
-  constructor(private _router: Router, private _storage: StorageService) {
+  constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService) { }
+
+  ionViewDidLoad() {
+    if (!this._storage.readLocal('setok')) {
+      //TODO Ajouter class display:none
+      this._router.navigate([ 'tabs/settings' ])
+    }
   }
 
   launchAttestation(activity: number) {
