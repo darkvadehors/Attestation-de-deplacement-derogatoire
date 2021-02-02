@@ -1,5 +1,5 @@
 //TODO faire un pdfng build --prod --baseHref ./
-//FIXME Redirection sur welcom si pas de donnée
+//FIXME Redirection sur welcome si pas de donnée
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -67,7 +67,7 @@ export class AttestationComponent {
     // converti le numéro de l'activity en mot
     this.activity = this._activityPipe.transform(this.params);
 
-    console.log('this.params', this.params);
+    // console.log('this.params', this.params);
     // assign a qrCode
     this.qrCodeData =
       'Cree le : ' +

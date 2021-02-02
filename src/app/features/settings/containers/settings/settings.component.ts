@@ -5,7 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
-//FIXME mettre une variable dans le localstorage pour confirme que les variable sont bien rentrée
+//FIXME mettre une variable dans le localstorage pour confirme que les variables sont bien rentrées
 //FIXME Probleme de chargement des variables
 @Component({
   selector: 'app-settings',
@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
   setting: Usersettings = null;
   save: boolean = false;
 
-  constructor(private _varGlobal: VariableService, private _router: Router, private _storage: StorageService, public alertController: AlertController, public formBuilder: FormBuilder) { }
+  constructor(private _varGlobal: VariableService, private _router: Router, private _storage: StorageService, public alertCtl: AlertController, public formBuilder: FormBuilder) { }
 
   ngOnInit(): any {
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
@@ -45,6 +45,11 @@ export class SettingsComponent implements OnInit {
       ]))
     });
   }
+
+  ionViewWillEnter() {
+    document.querySelector(".welcome").setAttribute("disabled", "")
+    document.querySelector(".map").setAttribute("disabled", "")
+  };
 
   validation_messages = {
     'firstname': [
@@ -75,9 +80,30 @@ export class SettingsComponent implements OnInit {
     ],
   };
 
+  onSubmit() {
+
+    console.log('this.validations_form.value', this.validations_form.value);
+    this._storage.saveLocal('ac', this.validations_form.value);
+
+    console.log('1');
+
+    this._varGlobal.ionViewWillEnter();
+
+    console.log('2');
+
+    // this.save = true;
+
+    console.log('3');
+
+    this.confirmAlert();
+  }
 
   async confirmAlert() {
-    this.alertController.create({
+
+    console.log('4');
+
+    const confirm = await this.alertCtl.create({
+
       header: 'Confirmation',
       subHeader: 'Paramètres Enregistrés',
       message: 'Vos réglages sont enregistrés localement. Vous pouvez créer votre attestation.',
@@ -85,32 +111,37 @@ export class SettingsComponent implements OnInit {
         {
           text: 'Ok',
           handler: () => {
+
+            console.log('5');
+
             this._storage.saveLocal('setok', '1');
-            this._varGlobal.ionViewWillEnter();
+
+            console.log('6');
+
+            // this._varGlobal.ionViewWillEnter();
+
+            console.log('7');
+
             this._router.navigate([ '' ]);
+
           }
         }
       ]
-    }).then(res => {
-      res.present();
     });
-  }
-
-  onSubmit() {
-
-    console.log('this.validations_form.value', this.validations_form.value);
-    this._storage.saveLocal('ac', this.validations_form.value);
-    this._varGlobal.ionViewWillEnter();
-    this.save = true;
-    this.confirmAlert();
+    await confirm.present();
   }
 
   //TODO verifier si toujours utilise ?
   ionViewWillLeave() {
     console.log('save in ', this.save);
-    if (!this.save && this._storage.readLocal('ac')) {
-      console.log('save out ', this.save);
-      this._storage.saveLocal('ac', this.validations_form.value);
-    }
+
+    //FIXME voir => renderer2 pour supprimer queryselector
+    document.querySelector(".welcome").setAttribute("disabled", "false")
+    document.querySelector(".map").setAttribute("disabled", "false")
+
+    // if (!this.save && this._storage.readLocal('ac')) {
+    //   console.log('save out ', this.save);
+    //   this._storage.saveLocal('ac', this.validations_form.value);
+    // }
   }
 }

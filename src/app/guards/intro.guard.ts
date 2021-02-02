@@ -14,10 +14,10 @@ export class IntroGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
     // intro => First Start
     if (this._storage.readLocal('intro')) {
-      console.log('guard true intro existe');
+      // console.log('guard true intro existe');
       return true;
     } else {
-      console.log('guard false');
+      // console.log('guard false');
       this._router.navigateByUrl('intro');
       return false
     }

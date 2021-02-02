@@ -12,21 +12,21 @@ export class VariableService {
   setting:Usersettings;
 
   constructor(private _storage: StorageService, private _router: Router) {
-    console.log('constructeur variable Service');
+    // console.log('constructeur variable Service');
     this.loadVar()
   }
 
   async ionViewWillEnter() {
-    console.log('ionviewWilenter variable Service');
+    // console.log('ionviewWilenter variable Service');
     this.loadVar()
   }
 
   loadVar() {
-    console.log('Variable.service entree======> ', this.setting);
+    // console.log('Variable.service entree======> ', this.setting);
 
     // on test si il y a une donnée dans le localstorage et on la charge
     if (this._storage.readLocal('ac')) {
-      console.log('contenu du ls = >', this._storage.readLocal('ac'));
+      // console.log('contenu du ls = >', this._storage.readLocal('ac'));
       const {
       firstname,
       lastname,
@@ -51,11 +51,11 @@ export class VariableService {
         lastchoice,
       };
 
-      console.log('Variable.service sortie ======> ', this.setting);
+      // console.log('Variable.service sortie ======> ', this.setting);
 
     } else {
 
-      console.log('variable storage pas ok => GO settings');
+      // console.log('variable storage pas ok => GO settings');
 
       // sinon on va la creer
       this._router.navigate([ 'tabs/settings' ]);

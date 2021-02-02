@@ -11,26 +11,26 @@ export class LocalstorageService {
 
   readLocalStorage(datakey: string): any {
 
-    console.log('readLocalStorage entrée', localStorage.getItem(datakey));
+    // console.log('readLocalStorage entrée', localStorage.getItem(datakey));
 
     //control si il y a une datakey dans le storage
     if (localStorage.getItem(datakey)) {
       let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(datakey)));
       // let datas = (JSON.parse(localStorage.getItem(datakey)));
-      console.log('apres decrypt', datas);
+      // console.log('apres decrypt', datas);
       return datas;
     } else {
-      console.log('pas de storage');
+      // console.log('pas de storage');
       return null;
     }
 
   }
 
   setLocalStorage(datakey: string, data: string) {
-    console.log('avant datacrypt', data);
+    // console.log('avant datacrypt', data);
     localStorage.setItem(datakey, this._crypto.encrypt(JSON.stringify(data)));
-    console.log('apres cryptage', this._crypto.encrypt(JSON.stringify(data)));
-    // localStorage.setItem(this.key,(JSON.stringify(data)));
+    // console.log('apres cryptage', this._crypto.encrypt(JSON.stringify(data)));
+    // localStorage.setItem(this.key, (JSON.stringify(data)));
   }
 
 }

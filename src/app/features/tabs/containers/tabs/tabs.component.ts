@@ -14,8 +14,6 @@ export class TabsComponent {
     ionViewWillEnter() {
         if (!this._storage.readLocal('setok')) {
             this._router.navigate([ 'tabs/settings' ])
-            console.log('================== coucou ==================');
         }
-        console.log('================== cucu ==================');
     }
 }
