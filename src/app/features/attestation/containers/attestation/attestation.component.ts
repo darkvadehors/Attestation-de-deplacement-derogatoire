@@ -41,13 +41,10 @@ export class AttestationComponent {
     private _pdfService: PdfmakeService
   ) {
     this.varGlobal.loadVar();
-    console.log('varglo', this.varGlobal.setting);
+    console.log('varglo constructeur', this.varGlobal.setting);
   }
 
   ionViewWillEnter() {
-    // on recharg ela var viriable au cas ou
-    this.varGlobal.loadVar();
-    console.log('varglo', this.varGlobal.setting);
 
     // Récupère le QueryParametre activity
     this._Activatedroute.queryParamMap.subscribe((params) => {

@@ -99,37 +99,48 @@ export class SettingsComponent implements OnInit {
   }
 
   async confirmAlert() {
-
-    console.log('4');
-
-    const confirm = await this.alertCtl.create({
-
-      header: 'Confirmation',
-      subHeader: 'Paramètres Enregistrés',
-      message: 'Vos réglages sont enregistrés localement. Vous pouvez créer votre attestation.',
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-
-            console.log('5');
-
-            this._storage.saveLocal('setok', '1');
-
-            console.log('6');
-
-            // this._varGlobal.ionViewWillEnter();
-
-            console.log('7');
-
-            this._router.navigate([ '' ]);
-
-          }
-        }
-      ]
+    const alert = await this.alertCtl.create({
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: [ 'OK' ]
     });
-    await confirm.present();
+
+    await alert.present();
   }
+
+  // async confirmAlert() {
+
+  //   console.log('4');
+
+  //   const confirm = await this.alertCtl.create({
+
+  //     header: 'Confirmation',
+  //     subHeader: 'Paramètres Enregistrés',
+  //     message: 'Vos réglages sont enregistrés localement. Vous pouvez créer votre attestation.',
+  //     buttons: [
+  //       {
+  //         text: 'Ok',
+  //         handler: () => {
+
+  //           console.log('5');
+
+  //           this._storage.saveLocal('setok', '1');
+
+  //           console.log('6');
+
+  //           // this._varGlobal.ionViewWillEnter();
+
+  //           console.log('7');
+
+  //           this._router.navigate([ '' ]);
+
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   await confirm.present();
+  //}
 
   //TODO verifier si toujours utilise ?
   ionViewWillLeave() {
@@ -139,9 +150,5 @@ export class SettingsComponent implements OnInit {
     document.querySelector(".welcome").setAttribute("disabled", "false")
     document.querySelector(".map").setAttribute("disabled", "false")
 
-    // if (!this.save && this._storage.readLocal('ac')) {
-    //   console.log('save out ', this.save);
-    //   this._storage.saveLocal('ac', this.validations_form.value);
-    // }
   }
 }
