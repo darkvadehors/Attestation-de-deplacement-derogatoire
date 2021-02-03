@@ -46,7 +46,9 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
+    console.log('on désactive les tabs');
+
     document.querySelector(".welcome").setAttribute("disabled", "")
     document.querySelector(".map").setAttribute("disabled", "")
   };
@@ -83,68 +85,56 @@ export class SettingsComponent implements OnInit {
   onSubmit() {
 
     console.log('this.validations_form.value', this.validations_form.value);
+
     this._storage.saveLocal('ac', this.validations_form.value);
 
     console.log('1');
 
-    this._varGlobal.ionViewWillEnter();
-
-    console.log('2');
-
-    // this.save = true;
-
-    console.log('3');
-
     this.confirmAlert();
   }
 
+
   async confirmAlert() {
-    const alert = await this.alertCtl.create({
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
-      buttons: [ 'OK' ]
-    });
 
-    await alert.present();
+    console.log('2');
+
+    const confirm = await this.alertCtl.create({
+
+      header: 'Confirmation',
+      subHeader: 'Paramètres Enregistrés',
+      message: 'Vos réglages sont enregistrés localement. Vous pouvez créer votre attestation.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+
+            console.log('3');
+
+            this._storage.saveLocal('setok', '1');
+
+            console.log('4');
+
+            this._router.navigate([ '' ]);
+
+          }
+        }
+      ]
+    })
+    // .then(confirm => {
+    //   console.log('Present alert 1');
+    //   confirm.present()
+    // }
+    //);
+
+    console.log('lance l alerte ');
+    await confirm.present();
+    console.log('alerte lancé ');
+
   }
-
-  // async confirmAlert() {
-
-  //   console.log('4');
-
-  //   const confirm = await this.alertCtl.create({
-
-  //     header: 'Confirmation',
-  //     subHeader: 'Paramètres Enregistrés',
-  //     message: 'Vos réglages sont enregistrés localement. Vous pouvez créer votre attestation.',
-  //     buttons: [
-  //       {
-  //         text: 'Ok',
-  //         handler: () => {
-
-  //           console.log('5');
-
-  //           this._storage.saveLocal('setok', '1');
-
-  //           console.log('6');
-
-  //           // this._varGlobal.ionViewWillEnter();
-
-  //           console.log('7');
-
-  //           this._router.navigate([ '' ]);
-
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   await confirm.present();
-  //}
 
   //TODO verifier si toujours utilise ?
   ionViewWillLeave() {
-    console.log('save in ', this.save);
+    console.log('avant de sortir on reactive les tabs');
 
     //FIXME voir => renderer2 pour supprimer queryselector
     document.querySelector(".welcome").setAttribute("disabled", "false")

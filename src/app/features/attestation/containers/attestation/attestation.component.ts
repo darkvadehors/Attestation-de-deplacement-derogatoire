@@ -100,9 +100,4 @@ export class AttestationComponent {
   generatePdf() {
     this._pdfService.generatePdf(this.qrCodeData);
   }
-
-  refresh() {
-    this.params = null;
-    this._router.navigate(['welcome']);
-  }
 }
