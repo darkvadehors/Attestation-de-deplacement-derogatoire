@@ -2,7 +2,6 @@ import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/co
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { exit } from 'process';
 import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
@@ -30,6 +29,9 @@ export class SettingsComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this._varGlobal.loadVar();
+    console.log('settings', this._varGlobal.setting);
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
 
     this.validations_form = this.formBuilder.group({

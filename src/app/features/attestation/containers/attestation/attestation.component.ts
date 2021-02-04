@@ -93,10 +93,14 @@ export class AttestationComponent {
     this.timebackColon +
       ';\nMotifs: ' +
       this.activity;
+
   }
 
+  ionViewDidEnter() {
+    this._pdfService.generatePdf(this.activity);
+  }
   generatePdf() {
-    this._pdfService.generatePdf(this.qrCodeData);
+    this._pdfService.generatePdf(this.activity);
     // this._pdfService.generatePdf();
   }
 }

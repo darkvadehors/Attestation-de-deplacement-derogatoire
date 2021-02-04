@@ -22,6 +22,7 @@ import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VariableService } from './service/variable/variable.service';
 import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
+import { DayfrPipe } from './shared/pipe/dayfr/dayfr.pipe';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     ActivityPipe,
     TimeBackPipe,
     TimefrPipe,
+    DayfrPipe,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     FileSaverModule,
   ],
-  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
+  providers: [ VariableService, StorageService, DatePipe, DayfrPipe, TimeBackPipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
