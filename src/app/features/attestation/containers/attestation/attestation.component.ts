@@ -34,18 +34,16 @@ export class AttestationComponent {
   constructor(
     public varGlobal:VariableService,
     public storage: StorageService,
-    private _router: Router,
     private _Activatedroute: ActivatedRoute,
     private _timeBackPipe: TimeBackPipe,
     private _activityPipe: ActivityPipe,
     private _pdfService: PdfmakeService
   ) {
     this.varGlobal.loadVar();
-    console.log('varglo constructeur', this.varGlobal.setting);
   }
 
   ionViewWillEnter() {
-
+    console.log('varglo ionwillenter', this.varGlobal.setting);
     // Récupère le QueryParametre activity
     this._Activatedroute.queryParamMap.subscribe((params) => {
       this.params = +params.get('activity') || 0;

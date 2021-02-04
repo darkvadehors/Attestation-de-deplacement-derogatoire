@@ -14,15 +14,17 @@ export class WelcomeComponent {
 
   constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService) { }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+
     if (!this._storage.readLocal('setok')) {
-      //TODO Ajouter class display:none
       this._router.navigate([ 'tabs/settings' ])
     }
   }
 
   launchAttestation(activity: number) {
+
     this._storage.saveOnLine(activity);
+
     // on passe l'activitée en queryParams
     this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
   }
