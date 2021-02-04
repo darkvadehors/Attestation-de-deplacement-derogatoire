@@ -78,9 +78,9 @@ export class AttestationComponent {
       this.varGlobal.setting.dateofbirth +
       ' a ' +
       this.varGlobal.setting.cityofbird +
-      // Personnal Adress
-      ';\nAdresse: ' +
-      this.varGlobal.setting.adress +
+    // Personnal address
+    ';\nadresse: ' +
+    this.varGlobal.setting.address +
       ' ' +
       this.varGlobal.setting.zipcode +
       ' ' +
@@ -97,5 +97,6 @@ export class AttestationComponent {
 
   generatePdf() {
     this._pdfService.generatePdf(this.qrCodeData);
+    // this._pdfService.generatePdf();
   }
 }

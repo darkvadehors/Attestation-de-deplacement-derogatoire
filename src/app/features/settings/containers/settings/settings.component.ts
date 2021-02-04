@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
         Validators.minLength(4),
       ])),
       cityofbird: new FormControl(this._varGlobal.setting?.cityofbird, Validators.required),
-      adress: new FormControl(this._varGlobal.setting?.adress, Validators.required),
+      address: new FormControl(this._varGlobal.setting?.address, Validators.required),
       city: new FormControl(this._varGlobal.setting?.city, Validators.required),
       zipcode: new FormControl(this._varGlobal.setting?.zipcode, Validators.compose([
         Validators.pattern(zipCodeRegex),
@@ -84,7 +84,7 @@ export class SettingsComponent implements OnInit {
     'cityofbird': [
       { type: 'required', message: 'La ville de naissance est obligatoire.' },
     ],
-    'adress': [
+    'address': [
       { type: 'required', message: 'L\'adresse est obligatoire.' },
     ],
     'zipcode': [

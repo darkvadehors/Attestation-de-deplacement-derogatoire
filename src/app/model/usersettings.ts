@@ -3,7 +3,7 @@ export interface Usersettings {
   lastname: string;
   dateofbirth: Date;
   cityofbird: string;
-  adress: string;
+  address: string;
   city: string;
   zipcode: number;
   timeback: number;

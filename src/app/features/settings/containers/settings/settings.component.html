@@ -65,8 +65,8 @@
         <ion-input formControlName = "adress" placeholder="55 Rue du Faubourg Saint-Honoré"></ion-input>
       </ion-item>
       <div class="validation-errors">
-        <ng-container *ngFor="let validation of validation_messages.adress">
-          <div class="error-message" *ngIf="validations_form.get('adress').hasError(validation.type) && (validations_form.get('adress').dirty || validations_form.get('adress').touched)">
+        <ng-container *ngFor="let validation of validation_messages.address">
+          <div class="error-message" *ngIf="validations_form.get('address').hasError(validation.type) && (validations_form.get('address').dirty || validations_form.get('address').touched)">
             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
           </div>
         </ng-container>

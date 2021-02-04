@@ -1,127 +1,45 @@
 import { Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { VariableService } from '../variable/variable.service';
-//TODO Voir pour installer pdf-lib al aplace de pdfmake
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { TimefrPipe } from '../../shared/pipe/time/timefr.pipe';
-
-
-(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
-
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { FileSaverService } from 'ngx-filesaver';
 @Injectable({
   providedIn: 'root'
 })
-export class PdfmakeService {
-  pdfMake: any;
-  resume: any;
-  dateofbirth: string;
 
-  constructor(private _varGlobal: VariableService, private _datepipe: DatePipe) { }
+export class PdfmakeService {
+
+  constructor(private _varGlobal: VariableService, private _FileSaverService: FileSaverService) { }
 
   async generatePdf(qrcode: string) {
 
-    //FIXME remetre dateofbird du locastorage
-    // console.log('this._varGlobal.setting.dateofbirth', this._varGlobal.setting.dateofbirth);
-    this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
-    // console.log('dateofbird', this.dateofbirth);
+    // Create a new PDFDocument
+    const pdfDoc = await PDFDocument.create()
 
-    sessionStorage.setItem('resume', JSON.stringify(this.resume));
+    // Embed the Times Roman font
+    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
 
+    // Add a blank page to the document
+    const page = pdfDoc.addPage()
 
-    // console.log(this._varGlobal.setting.dateofbirth);
-    const documentDefinition = this.getDocumentDefinition(qrcode);
-    await this.loadPdfMaker();
-    this.pdfMake.createPdf(documentDefinition).open();
-  }
+    // Get the width and height of the page
+    const { width, height } = page.getSize()
 
-  async loadPdfMaker() {
-    if (!this.pdfMake) {
-      const pdfMakeModule = await import('pdfmake/build/pdfmake');
-      const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
-      // this.pdfMake = pdfMakeModule;
-      // this.pdfMake.vfs = pdfFontsModule.pdfMake.vfs;
-      this.pdfMake = (pdfMakeModule as any).default;
-      this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
-    }
-  }
+    // Draw a string of text toward the top of the page
+    const fontSize = 30
+    page.drawText(qrcode, {
+      x: 50,
+      y: height - 4 * fontSize,
+      size: fontSize,
+      font: timesRomanFont,
+      color: rgb(0, 0.53, 0.71),
+    })
 
+    // Serialize the PDFDocument to bytes (a Uint8Array)
+    const pdfBytes = await pdfDoc.save()
 
-  getDocumentDefinition(qrcode: string) {
-    sessionStorage.setItem('resume', JSON.stringify(this.resume));
-
-
-    // console.log(this._varGlobal.setting.dateofbirth);
+    const blob = new Blob([ pdfBytes ], { type: 'application/pdf' });
+    window.open(window.URL.createObjectURL(blob));
 
 
-    return {
-
-      content: [
-        {
-          text: 'ATTESTATION DE DÉPLACEMENT DÉROGATOIRE',
-          bold: true,
-          fontSize: 15,
-          alignment: 'center',
-          margin: [ 0, 0, 0, 20 ]
-        },
-        {
-          text: 'En application du décret no 2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire',
-          bold: false,
-          fontSize: 10,
-          alignment: 'center',
-          margin: [ 20, 0, 20, 20 ]
-        },
-        {
-          text: 'Mme/M. : ' + this._varGlobal.setting.firstname + ' ' + this._varGlobal.setting.lastname,
-          bold: false,
-          fontSize: 10,
-          alignment: 'left',
-          margin: [ 20, 0, 20, 20 ]
-        },
-        {
-          text: 'Né(e) le : ' + this.dateofbirth + '              à ' + this._varGlobal.setting.cityofbird,
-          bold: false,
-          fontSize: 10,
-          alignment: 'left',
-          margin: [ 20, 0, 20, 20 ]
-        },
-        {
-          text: 'Demeurant  : ' + this._varGlobal.setting.adress + ' ' + this._varGlobal.setting.zipcode + ' ' + this._varGlobal.setting.city,
-          bold: false,
-          fontSize: 10,
-          alignment: 'left',
-          margin: [ 20, 0, 20, 20 ]
-        },
-        {
-          text: `certifie que mon déplacement est lié au motif suivant(cocher la case) autorisé par le décret no 2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire :`,
-          bold: false,
-          fontSize: 10,
-          alignment: 'left',
-          margin: [ 20, 0, 20, 0 ]
-        },
-        {
-          text: `Note:Les personnes souhaitant bénéficier de l’une de ces exceptions doivent se munir s’il y a lieu, lors de leurs déplacements hors de leur domicile, d’un document leur permettant de justifier que le déplacement considéré entre dans le champ de l’une de ces exception`,
-          bold: false,
-          fontSize: 6,
-          alignment: 'left',
-          margin: [ 20, 5, 20, 5 ]
-        },
-        {
-          text: `1. Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation ; déplacements professionnels ne pouvant être différés;déplacements pour un concours ou un examen;Note: A utiliser par les travailleurs non-salariés, lorsqu’ils ne peuvent disposer d’un justificatif de déplacement établi par leur employeur.`,
-          bold: false,
-          fontSize: 10,
-          alignment: 'left',
-          margin: [ 20, 20, 20, 20 ]
-        },
-
-
-
-        // colored QR
-        {
-          qr: qrcode, alignment: 'left',
-          margin: [ 20, 20, 20, 20 ], fit: '250'
-        },
-      ]
-    }
   }
 }

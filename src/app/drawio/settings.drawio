@@ -73,7 +73,7 @@
                 <mxCell id="34" value="Label" style="text;fontSize=10;verticalAlign=middle;align=center;spacingTop=2;" vertex="1" parent="33">
                     <mxGeometry x="55" width="54" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="35" value="adresse" style="text;fontColor=#0080f0;fontSize=10;verticalAlign=middle;align=left;spacingTop=2;spacingRight=4;" vertex="1" parent="33">
+                <mxCell id="35" value="addresse" style="text;fontColor=#0080f0;fontSize=10;verticalAlign=middle;align=left;spacingTop=2;spacingRight=4;" vertex="1" parent="33">
                     <mxGeometry width="55" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="36" value="" style="shape=rect;fillColor=#F6F6F8;strokeColor=none;" vertex="1" parent="1">

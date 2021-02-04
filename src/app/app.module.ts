@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
+import { FileSaverModule } from 'ngx-filesaver';
 
 // Ionic
 import { IonicModule } from '@ionic/angular';
@@ -37,6 +38,7 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FileSaverModule,
   ],
   providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
