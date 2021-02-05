@@ -60,6 +60,22 @@ export class PdfmakeService {
     const pdfDoc = await PDFDocument.load(existingPdfBytes)
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
 
+    // set pdf metadata
+    pdfDoc.setTitle('COVID-19 - Déclaration de déplacement')
+    pdfDoc.setSubject('Attestation de déplacement dérogatoire')
+    pdfDoc.setKeywords([
+      'covid19',
+      'covid-19',
+      'attestation',
+      'déclaration',
+      'déplacement',
+      'officielle',
+      'gouvernement',
+    ])
+    pdfDoc.setProducer('DNUM/SDIT')
+    pdfDoc.setCreator('')
+    pdfDoc.setAuthor("Ministère de l'intérieur")
+
     const pages = pdfDoc.getPages()
     const firstPage = pages[ 0 ]
     const { width, height } = firstPage.getSize()
