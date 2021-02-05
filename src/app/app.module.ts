@@ -1,3 +1,4 @@
+import { AttestationComponent } from './features/attestation/containers/attestation/attestation.component';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,6 @@ import { AppComponent } from './app.component';
 import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VariableService } from './service/variable/variable.service';
-import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
 
 
 @NgModule({
@@ -28,7 +28,6 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     AppComponent,
     ActivityPipe,
     TimeBackPipe,
-    TimefrPipe,
   ],
   imports: [
     BrowserModule,
@@ -38,9 +37,7 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
+  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, AttestationComponent, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
-
-//TODO supprimer pdfmake ligne 34 du package.json
+export class AppModule { }

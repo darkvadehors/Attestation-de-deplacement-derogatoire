@@ -38,11 +38,10 @@ export class AttestationComponent {
     private _timeBackPipe: TimeBackPipe,
     private _activityPipe: ActivityPipe,
     private _pdfService: PdfmakeService
-  ) {
-    this.varGlobal.loadVar();
-  }
+  ) { }
 
-  ionViewWillEnter() {
+  generate(activity: number) {
+    console.log('generate');
     console.log('varglo ionwillenter', this.varGlobal.setting);
     // Récupère le QueryParametre activity
     this._Activatedroute.queryParamMap.subscribe((params) => {
@@ -96,6 +95,6 @@ export class AttestationComponent {
   }
 
   generatePdf() {
-    this._pdfService.generatePdf(this.qrCodeData);
+    // this._pdfService.generatePdf(this.qrCodeData);
   }
 }

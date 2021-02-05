@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
-import { VariableService } from '../../../../service/variable/variable.service';
 import { environment } from '../../../../../environments/environment';
+import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
 
 @Component({
   selector: 'app-welcome',
@@ -12,7 +12,7 @@ import { environment } from '../../../../../environments/environment';
 export class WelcomeComponent {
   title: string = environment.title;
 
-  constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService) { }
+  constructor(private _router: Router, private _storage: StorageService, private _pdfmake: PdfmakeService) { }
 
   ionViewWillEnter() {
 
@@ -25,8 +25,11 @@ export class WelcomeComponent {
 
     this._storage.saveOnLine(activity);
 
-    // on passe l'activitée en queryParams
-    this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
+    //creation du pdf
+    this._pdfmake.generatePdf(activity);
+
+    // // on passe l'activitée en queryParams
+    // this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
   }
 
 }
