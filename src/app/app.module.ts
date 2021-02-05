@@ -1,3 +1,4 @@
+import { AttestationComponent } from './features/attestation/containers/attestation/attestation.component';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,7 @@ import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VariableService } from './service/variable/variable.service';
 import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
+import { DayfrPipe } from './shared/pipe/dayfr/dayfr.pipe';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     ActivityPipe,
     TimeBackPipe,
     TimefrPipe,
+    DayfrPipe,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
+  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, AttestationComponent, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

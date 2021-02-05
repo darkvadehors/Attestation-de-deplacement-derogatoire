@@ -1,3 +1,4 @@
+import { AttestationComponent } from './../../../attestation/containers/attestation/attestation.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
@@ -12,7 +13,7 @@ import { environment } from '../../../../../environments/environment';
 export class WelcomeComponent {
   title: string = environment.title;
 
-  constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService) { }
+  constructor(private _router: Router, private _storage: StorageService, private _attestation: AttestationComponent) { }
 
   ionViewWillEnter() {
 
@@ -25,8 +26,11 @@ export class WelcomeComponent {
 
     this._storage.saveOnLine(activity);
 
-    // on passe l'activitée en queryParams
-    this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
+    //creatino du pdf
+    this._attestation.generatePdf();
+
+    // // on passe l'activitée en queryParams
+    // this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
   }
 
 }

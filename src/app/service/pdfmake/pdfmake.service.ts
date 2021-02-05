@@ -5,7 +5,10 @@ import { VariableService } from '../variable/variable.service';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TimefrPipe } from '../../shared/pipe/time/timefr.pipe';
-
+import { StorageService } from '../storage/storage.service';
+import { TimeBackPipe } from '../../shared/pipe/time/timeback.pipe';
+import { DayfrPipe } from '../../shared/pipe/dayfr/dayfr.pipe';
+import { ActivityPipe } from '../../shared/pipe/activity/activity.pipe';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -17,11 +20,42 @@ export class PdfmakeService {
   resume: any;
   dateofbirth: string;
 
+  // title: string = environment.title;
+  todaydate: any = new Date().toLocaleDateString();
+  dayfr: any = null;
+  timebackColon: string = null;
+  timebackH: string = null;
+
+  // transfert de parametres
+  params: number | string = null;
+  pageNum: number = null;
+
+  // QRCode
+  qrCodeData: string = null;
+  static generatePdf: any;
+
+
   constructor(private _varGlobal: VariableService, private _datepipe: DatePipe) { }
 
   async generatePdf(qrcode: string) {
 
-    //FIXME remetre dateofbird du locastorage
+
+
+    //Modifie l'heure de création avec un parametre Timeback
+    this.timebackColon = this._timeBackPipe.transform(
+      this._varGlobal.setting.timeback,
+      true
+    );
+    this.timebackH = this._timeBackPipe.transform(
+      this._varGlobal.setting.timeback,
+      false
+    );
+
+    // modifie la date de fr
+    this.dayfr = this._dayfr.transform(
+      this._varGlobal.setting.dateofbirth
+    )
+
     // console.log('this._varGlobal.setting.dateofbirth', this._varGlobal.setting.dateofbirth);
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
     // console.log('dateofbird', this.dateofbirth);
