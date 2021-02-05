@@ -8,6 +8,7 @@ import { ActivityPipe } from '../../shared/pipe/activity/activity.pipe';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import { PdfLibService } from './../pdf-lib/pdf-lib.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class PdfmakeService {
     private _datepipe: DatePipe,
     private _timeBackPipe: TimeBackPipe,
     private _activityPipe: ActivityPipe,
+    private _pdflib: PdfLibService,
   ) { }
 
   async generatePdf(activity: number) {
@@ -52,7 +54,6 @@ export class PdfmakeService {
       this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
   }
-
 
   documentDefinition(qrcode: string) {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
@@ -295,8 +296,6 @@ export class PdfmakeService {
     }
   }
 
-
-
   qrCode(activity: number) {
     // converti le numéro de l'activity en mot
     const activityName = this._activityPipe.transform(activity);
@@ -336,6 +335,6 @@ export class PdfmakeService {
   async exportPdf(activity: number) {
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
     await this.loadPdfMaker();
-    this.pdfMake.createPdf(documentDefinition).open();
+    this._pdflib.modifyPdf(this.pdfMake.createPdf(documentDefinition));
   }
 }
