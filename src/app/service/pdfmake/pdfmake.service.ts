@@ -1,38 +1,29 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { VariableService } from '../variable/variable.service';
-//TODO Voir pour installer pdf-lib al aplace de pdfmake
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { TimefrPipe } from '../../shared/pipe/time/timefr.pipe';
-import { StorageService } from '../storage/storage.service';
+//Pipe
 import { TimeBackPipe } from '../../shared/pipe/time/timeback.pipe';
 import { DayfrPipe } from '../../shared/pipe/dayfr/dayfr.pipe';
 import { ActivityPipe } from '../../shared/pipe/activity/activity.pipe';
-
+//PDF
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import * as pdfMake from 'pdfmake/build/pdfmake';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
   providedIn: 'root'
 })
 export class PdfmakeService {
-  pdfMake: any;
-  resume: any;
-  dateofbirth: string;
-
-  // title: string = environment.title;
+  pdfMake: any = null;
+  resume: any = null;
+  dateofbirth: string = null;
   todaydate: any = new Date().toLocaleDateString();
   dayfr: any = null;
   timebackColon: string = null;
   timebackH: string = null;
 
-  // transfert de parametres
-  pageNum: number = null;
-
   // QRCode
   qrCodeData: string = null;
-  static generatePdf: any;
-
 
   constructor(
     private _varGlobal: VariableService,
@@ -44,6 +35,8 @@ export class PdfmakeService {
 
   async generatePdf(activity: number) {
 
+    console.log('Activity', activity);
+
     //Modifie l'heure de création avec un parametre Timeback
     this.timebackColon = this._timeBackPipe.transform(
       this._varGlobal.setting.timeback,
@@ -54,21 +47,12 @@ export class PdfmakeService {
       false
     );
 
-    //vérifie l'heure
-    console.log('Heure', this.timebackColon);
-    console.log('Heure', this.timebackH);
-
-
     // modifie la date de fr
     this.dayfr = this._dayfr.transform(
       this._varGlobal.setting.dateofbirth
     )
-    // verifier la DatePipe
-    console.log('date', this.dayfr);
 
-    console.log('this._varGlobal.setting.dateofbirth', this._varGlobal.setting.dateofbirth);
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
-    console.log('dateofbird', this.dateofbirth);
 
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
@@ -96,12 +80,7 @@ export class PdfmakeService {
   getDocumentDefinition(qrcode: string) {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
-
-    // console.log(this._varGlobal.setting.dateofbirth);
-
-
     return {
-
       content: [
         {
           text: 'ATTESTATION DE DÉPLACEMENT DÉROGATOIRE DURANT LES HORAIRES DU COUVRE-FEU ',
@@ -295,17 +274,18 @@ export class PdfmakeService {
         {
           text: [
             'le : ',
-            { text: this.dayfr, fontSize: 11, },
+            { text: this.todaydate, fontSize: 11, },
             { text: '                                             à : ' },
             { text: this.timebackColon, fontSize: 11 },
           ],
-          bold: false,
           fontSize: 10.6,
           alignment: 'left',
           margin: [ 20, 5, 20, 0 ]
         },
         {
           text: '(Date et heure de début de sortie à mentionner obligatoirement)',
+          fontSize: 10.6,
+          alignment: 'left',
           margin: [ 20, 5, 0, 20 ]
         },
         {
@@ -313,14 +293,22 @@ export class PdfmakeService {
           margin: [ 0, 0, 20, 0 ], fit: '100'
         },
         {
-          text: `  Les personnes souhaitant bénéficier de l’une de ces exceptions doivent se munir s’il y a lieu, lors de leurs déplacements hors de leur domicile, d’un document leur permettant de justifier que le déplacement considéré entre dans le champ de l’une de ces exceptions.`,
-          bold: false,
-          fontSize: 8.5,
-          alignment: 'left',
-          margin: [ 40, 10, 20, 0 ]
+          columns: [
+            {
+              width: 20,
+              text: [
+                { text: '1', fontSize: 5 }
+              ]
+            },
+            {
+              width: '*',
+              text: `Les personnes souhaitant bénéficier de l’une de ces exceptions doivent se munir s’il y a lieu, lors de leurs déplacements hors de leur domicile, d’un document leur permettant de justifier que le déplacement considéré entre dans le champ de l’une de ces exceptions.`,
+              fontSize: 8.5,
+              alignment: 'justify',
+            }
+          ],
+          margin: [ 20, 15, 40, 0 ]
         },
-
-
         // colored QR
         {
           qr: qrcode, alignment: 'left',
@@ -364,7 +352,8 @@ export class PdfmakeService {
       ' a ' +
       this.timebackColon +
       ';\nMotifs: ' +
-      activityName;
+      activityName +
+      ';';
   }
 
   async exportPdf(activity: number) {
