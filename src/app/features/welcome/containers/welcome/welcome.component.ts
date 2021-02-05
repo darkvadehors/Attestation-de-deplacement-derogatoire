@@ -25,8 +25,6 @@ export class WelcomeComponent {
 
     this._storage.saveOnLine(activity);
 
-    console.log('Activity', activity);
-
     this._pdf.generatePdf(activity)
   }
 

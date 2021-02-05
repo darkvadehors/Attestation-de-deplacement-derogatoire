@@ -27,7 +27,6 @@ export class TimeBackPipe implements PipeTransform {
     } else {
       timeBack = pastH + 'h' + pastM;
     }
-    console.log('Pipe Timeback', timeBack);
     return timeBack;
   }
 }
