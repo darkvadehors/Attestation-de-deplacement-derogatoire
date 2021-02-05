@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._varGlobal.loadVar();
+    // this._varGlobal.loadVar();
     console.log('settings', this._varGlobal.setting);
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
 
@@ -56,14 +56,6 @@ export class SettingsComponent implements OnInit {
         Validators.requiredTrue
       ]))
     });
-  }
-
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-  }
-
-  ionViewWillEnter(): void {
-    console.log('ionViewWilLEnter')
   }
 
   ionViewDidEnter(): void {

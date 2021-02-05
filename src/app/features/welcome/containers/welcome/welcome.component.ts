@@ -16,8 +16,6 @@ export class WelcomeComponent {
   constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService, private _pdf: PdfmakeService) { }
 
   ionViewWillEnter() {
-
-    this._varGlobal.loadVar();
     if (!this._storage.readLocal('setok')) {
       this._router.navigate([ 'tabs/settings' ])
     }

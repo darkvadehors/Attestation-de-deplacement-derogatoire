@@ -1,7 +1,7 @@
 import { Injectable, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { VariableService } from '../variable/variable.service';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
-import { FileSaverService } from 'ngx-filesaver';
+// import { FileSaverService } from 'ngx-filesaver';
 import { StorageService } from '../storage/storage.service';
 import { TimeBackPipe } from '../../shared/pipe/time/timeback.pipe';
 import { DayfrPipe } from './../../shared/pipe/dayfr/dayfr.pipe';
@@ -32,7 +32,7 @@ export class PdfmakeService {
     private _timeBackPipe: TimeBackPipe,
     private _dayfr: DayfrPipe,
     private _activityPipe: ActivityPipe,
-    private _FileSaverService: FileSaverService
+    // private _FileSaverService: FileSaverService
   ) { }
 
   async generatePdf(activity: any) {
@@ -67,7 +67,6 @@ export class PdfmakeService {
     const drawText = (text: any, x: number, y: number, size = 11) => {
       firstPage.drawText(text, { x, y, size, font })
     }
-
 
     // Sortie
     // drawText(`${this._varGlobal.setting.firstname} ${this._varGlobal.setting.lastname}`, 95, 702)
@@ -105,12 +104,10 @@ export class PdfmakeService {
     //     drawText('x', 45, 226, 20)
     //     break;
     // }
+
+
     //  Couvre Feux
-
-
     drawText(`${this._varGlobal.setting.firstname} ${this._varGlobal.setting.lastname}`, 119, 665);
-    //FIXME remettre en français
-
     drawText(this.dayfr, 119, 645);
     drawText(this._varGlobal.setting.cityofbird || '', 312, 645);
     drawText(`${this._varGlobal.setting.address} ${this._varGlobal.setting.zipcode} ${this._varGlobal.setting.city}`, 133, 625);
@@ -180,6 +177,10 @@ export class PdfmakeService {
       this.timebackColon +
       ';\nMotifs: ' +
       activity;
+
+
+
+
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDoc.save()
