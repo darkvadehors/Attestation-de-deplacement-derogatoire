@@ -35,9 +35,9 @@ export class PdfmakeService {
   static generatePdf: any;
 
 
-  constructor(private _varGlobal: VariableService, private _datepipe: DatePipe) { }
+  constructor(private _varGlobal: VariableService, private _datepipe: DatePipe, private _timeBackPipe: TimeBackPipe, private _dayfr: DayfrPipe) { }
 
-  async generatePdf(qrcode: string) {
+  async generatePdf(activity: number) {
 
 
 
