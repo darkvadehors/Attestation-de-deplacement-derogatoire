@@ -40,6 +40,4 @@ import { VariableService } from './service/variable/variable.service';
   providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, AttestationComponent, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
-
-//TODO supprimer pdfmake ligne 34 du package.json
+export class AppModule { }
