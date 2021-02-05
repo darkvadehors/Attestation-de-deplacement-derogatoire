@@ -8,25 +8,46 @@ export class PdfLibService {
 
   constructor() { }
 
-  async modifyPdf(pdf: string) {
-    const url = pdf;
-    console.log('PDF', url);
-    const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+  async modifyPdf(pdf: any, activity: number) {
 
-    const pdfDoc = await PDFDocument.load(existingPdfBytes)
+    const pdfDoc = await PDFDocument.load(pdf)
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+    const pages = pdfDoc.getPages()
+
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
 
-    const pages = pdfDoc.getPages()
     const firstPage = pages[ 0 ]
     const { width, height } = firstPage.getSize()
-    firstPage.drawText('This text was added with JavaScript!', {
-      x: 5,
-      y: height / 2 + 300,
-      size: 50,
-      font: helveticaFont,
-      color: rgb(0.95, 0.1, 0.1),
-      rotate: degrees(-45),
-    })
+
+    const drawText = (text: any, x: number, y: number, size = 11) => {
+      firstPage.drawText(text, { x, y, size, font })
+    }
+    switch (activity) {
+      case 1:
+        drawText('x', 63, 558, 13)
+        break
+      case 2:
+        drawText('x', 63, 506, 12)
+        break
+      case 3:
+        drawText('x', 63, 454, 12)
+        break
+      case 4:
+        drawText('x', 63, 415, 12)
+        break
+      case 5:
+        drawText('x', 63, 392, 12)
+        break
+      case 6:
+        drawText('x', 63, 367, 12)
+        break
+      case 7:
+        drawText('x', 63, 329, 12)
+        break
+      case 8:
+        drawText('x', 63, 291, 12)
+        break;
+    }
 
     const pdfBytes = await pdfDoc.save()
     //export file

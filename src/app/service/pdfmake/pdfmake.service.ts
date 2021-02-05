@@ -21,6 +21,10 @@ export class PdfmakeService {
   timebackColon: string = null;
   timebackH: string = null;
 
+
+
+
+
   // QRCode
   qrCodeData: string = null;
 
@@ -47,6 +51,7 @@ export class PdfmakeService {
   }
 
   async loadPdfMaker() {
+
     if (!this.pdfMake) {
       const pdfMakeModule = await import('pdfmake/build/pdfmake');
       const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
@@ -55,22 +60,32 @@ export class PdfmakeService {
     }
   }
 
-  documentDefinition(qrcode: string) {
+  documentDefinition(qrcode: string): any {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
     return {
+      info: {
+        title: 'COVID-19 - Déclaration de déplacement',
+        author: `Ministère de l'injustice`,
+        subject: 'Attestation de déplacement dérogatoire',
+        keywords: [
+          'covid19',
+          'covid-19',
+          'attestation',
+          'déclaration',
+          'déplacement',
+          'officielle',
+          'gouvernement',
+        ],
+      },
       content: [
         {
           text: 'ATTESTATION DE DÉPLACEMENT DÉROGATOIRE DURANT LES HORAIRES DU COUVRE-FEU ',
-          bold: false,
-          // font: 'Times New Roman',
-          fontSize: 17,
-          alignment: 'center',
-          margin: [ 40, 10, 40, 10 ]
+          margin: [ 40, 10, 40, 10 ],
+          style: 'header',
         },
         {
           text: 'En application du décret no 2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire',
-          bold: false,
           fontSize: 9,
           alignment: 'left',
           margin: [ 22, 0, 30, 22 ]
@@ -94,7 +109,6 @@ export class PdfmakeService {
             { text: '                                             à : ' },
             { text: this._varGlobal.setting.cityofbird, fontSize: 11 },
           ],
-          bold: false,
           fontSize: 10.6,
           alignment: 'left',
           margin: [ 20, 0, 20, 5 ]
@@ -108,14 +122,12 @@ export class PdfmakeService {
             ' ',
             { text: this._varGlobal.setting.city, fontSize: 11 }
           ],
-          bold: false,
           fontSize: 10.6,
           alignment: 'left',
           margin: [ 20, 0, 20, 5 ]
         },
         {
           text: `certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé en application des mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire :`,
-          bold: false,
           fontSize: 10.6,
           alignment: 'justify',
           margin: [ 20, 20, 20, 20 ]
@@ -290,9 +302,25 @@ export class PdfmakeService {
         // colored QR
         {
           qr: qrcode, alignment: 'left',
-          margin: [ 20, 20, 20, 20 ], fit: '300'
+          margin: [ 20, 30, 20, 20 ], fit: '300'
         },
-      ]
+      ],
+      styles: {
+        header: {
+          fontSize: 17,
+          alignment: 'center',
+        },
+        subheader: {
+          fontSize: 15,
+          bold: true
+        },
+        quote: {
+          italics: true
+        },
+        small: {
+          fontSize: 8.5
+        }
+      }
     }
   }
 
@@ -333,8 +361,14 @@ export class PdfmakeService {
   }
 
   async exportPdf(activity: number) {
+
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
     await this.loadPdfMaker();
-    this._pdflib.modifyPdf(this.pdfMake.createPdf(documentDefinition));
+
+    const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
+    pdfDocGenerator.getBase64((data) => {
+      this._pdflib.modifyPdf(data, activity);
+    });
+
   }
 }
