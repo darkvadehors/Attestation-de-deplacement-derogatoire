@@ -22,14 +22,14 @@ export class PdfmakeService {
   async generatePdf(qrcode: string) {
 
     //FIXME remetre dateofbird du locastorage
-    console.log('this._varGlobal.setting.dateofbirth', this._varGlobal.setting.dateofbirth);
+    // console.log('this._varGlobal.setting.dateofbirth', this._varGlobal.setting.dateofbirth);
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
-    console.log('dateofbird', this.dateofbirth);
+    // console.log('dateofbird', this.dateofbirth);
 
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
 
-    console.log(this._varGlobal.setting.dateofbirth);
+    // console.log(this._varGlobal.setting.dateofbirth);
     const documentDefinition = this.getDocumentDefinition(qrcode);
     await this.loadPdfMaker();
     this.pdfMake.createPdf(documentDefinition).open();
@@ -51,7 +51,7 @@ export class PdfmakeService {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
 
-    console.log(this._varGlobal.setting.dateofbirth);
+    // console.log(this._varGlobal.setting.dateofbirth);
 
 
     return {

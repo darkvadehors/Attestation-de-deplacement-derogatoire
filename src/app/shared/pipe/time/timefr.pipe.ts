@@ -10,7 +10,7 @@ export class TimefrPipe implements PipeTransform {
 
   transform(value: Date | number): string {
     const date = this._datepite.transform(value, 'dd/MM/yyyy')
-    console.log('date Pipe', date);
+    // console.log('date Pipe', date);
     return date;
   }
 

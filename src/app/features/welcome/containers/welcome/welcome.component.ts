@@ -12,11 +12,19 @@ import { environment } from '../../../../../environments/environment';
 export class WelcomeComponent {
   title: string = environment.title;
 
-  constructor(private _router: Router, private _storage: StorageService) {
+  constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService) { }
+
+  ionViewWillEnter() {
+
+    if (!this._storage.readLocal('setok')) {
+      this._router.navigate([ 'tabs/settings' ])
+    }
   }
 
   launchAttestation(activity: number) {
+
     this._storage.saveOnLine(activity);
+
     // on passe l'activitée en queryParams
     this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
   }

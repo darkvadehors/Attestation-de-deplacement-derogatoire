@@ -1,5 +1,5 @@
 //TODO faire un pdfng build --prod --baseHref ./
-//FIXME Redirection sur welcom si pas de donnée
+//FIXME Redirection sur welcome si pas de donnée
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -34,21 +34,16 @@ export class AttestationComponent {
   constructor(
     public varGlobal:VariableService,
     public storage: StorageService,
-    private _router: Router,
     private _Activatedroute: ActivatedRoute,
     private _timeBackPipe: TimeBackPipe,
     private _activityPipe: ActivityPipe,
     private _pdfService: PdfmakeService
   ) {
     this.varGlobal.loadVar();
-    console.log('varglo', this.varGlobal.setting);
   }
 
   ionViewWillEnter() {
-    // on recharg ela var viriable au cas ou
-    this.varGlobal.loadVar();
-    console.log('varglo', this.varGlobal.setting);
-
+    console.log('varglo ionwillenter', this.varGlobal.setting);
     // Récupère le QueryParametre activity
     this._Activatedroute.queryParamMap.subscribe((params) => {
       this.params = +params.get('activity') || 0;
@@ -67,7 +62,7 @@ export class AttestationComponent {
     // converti le numéro de l'activity en mot
     this.activity = this._activityPipe.transform(this.params);
 
-    console.log('this.params', this.params);
+    // console.log('this.params', this.params);
     // assign a qrCode
     this.qrCodeData =
       'Cree le : ' +
@@ -102,10 +97,5 @@ export class AttestationComponent {
 
   generatePdf() {
     this._pdfService.generatePdf(this.qrCodeData);
-  }
-
-  refresh() {
-    this.params = null;
-    this._router.navigate(['welcome']);
   }
 }
