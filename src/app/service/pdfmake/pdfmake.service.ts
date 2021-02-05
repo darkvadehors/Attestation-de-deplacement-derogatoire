@@ -32,7 +32,6 @@ export class PdfmakeService {
 
   async generatePdf(activity: number) {
 
-    console.log('Activity', activity);
     //Modifie l'heure de création avec un parametre Timeback
     this.timebackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, true);
     this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, false);

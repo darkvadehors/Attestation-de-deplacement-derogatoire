@@ -22,7 +22,6 @@ import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VariableService } from './service/variable/variable.service';
 import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
-import { DayfrPipe } from './shared/pipe/dayfr/dayfr.pipe';
 
 
 @NgModule({
@@ -31,7 +30,6 @@ import { DayfrPipe } from './shared/pipe/dayfr/dayfr.pipe';
     ActivityPipe,
     TimeBackPipe,
     TimefrPipe,
-    DayfrPipe,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +39,7 @@ import { DayfrPipe } from './shared/pipe/dayfr/dayfr.pipe';
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [ VariableService, StorageService, DatePipe, DayfrPipe, TimeBackPipe, ActivityPipe, AttestationComponent, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
+  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, AttestationComponent, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
