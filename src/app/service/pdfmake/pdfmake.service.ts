@@ -54,7 +54,7 @@ export class PdfmakeService {
   }
 
 
-  getDocumentDefinition(qrcode: string) {
+  documentDefinition(qrcode: string) {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
     return {
@@ -334,10 +334,8 @@ export class PdfmakeService {
   }
 
   async exportPdf(activity: number) {
-    const documentDefinition = this.getDocumentDefinition(this.qrCode(activity));
+    const documentDefinition = this.documentDefinition(this.qrCode(activity));
     await this.loadPdfMaker();
     this.pdfMake.createPdf(documentDefinition).open();
-    // const pdf = this.pdfMake.createPdf(documentDefinition);
-    // console.log('pdf', pdf);
   }
 }
