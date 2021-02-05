@@ -20,7 +20,6 @@ export class MapComponent implements OnInit {
 
   // Fonction d'initialisation du composant.
   async ngOnInit() {
-    this._varGlobal.loadVar();
 
     const coordinates = await Geolocation.getCurrentPosition();
 

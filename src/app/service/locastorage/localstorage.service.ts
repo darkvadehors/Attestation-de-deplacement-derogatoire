@@ -15,6 +15,7 @@ export class LocalstorageService {
 
     //control si il y a une datakey dans le storage
     if (localStorage.getItem(datakey)) {
+      //FIXME repasser en crypté
       // let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(datakey)));
       let datas = (JSON.parse(localStorage.getItem(datakey)));
       // console.log('apres decrypt', datas);
@@ -29,6 +30,7 @@ export class LocalstorageService {
   setLocalStorage(datakey: string, data: string) {
     // console.log('avant datacrypt', data);
     // localStorage.setItem(datakey, this._crypto.encrypt(JSON.stringify(data)));
+    //FIXME repasser en crypté
     localStorage.setItem(datakey, (JSON.stringify(data)));
   }
 
