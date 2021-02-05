@@ -95,6 +95,6 @@ export class AttestationComponent {
   }
 
   generatePdf() {
-    this._pdfService.generatePdf(this.qrCodeData);
+    // this._pdfService.generatePdf(this.qrCodeData);
   }
 }
