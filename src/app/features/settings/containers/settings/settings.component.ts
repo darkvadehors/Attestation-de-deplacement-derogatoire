@@ -1,25 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
-
-//FIXME Probleme de chargement des variables
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: [ './settings.component.scss' ],
 })
 export class SettingsComponent implements OnInit {
+
+  @ViewChild('disabled') tabs: ElementRef;
+
   validations_form: FormGroup;
   setting: Usersettings = null;
   save: boolean = false;
 
-  constructor(private _varGlobal: VariableService, private _router: Router, private _storage: StorageService, public alertController: AlertController, public formBuilder: FormBuilder) { }
+  constructor(
+    public alertCtl: AlertController,
+    public formBuilder: FormBuilder,
+    private _varGlobal: VariableService,
+    private _router: Router,
+    private _storage: StorageService,
+    private _renderer: Renderer2,
+  ) { }
 
-  ngOnInit(): any {
+
+  ngOnInit(): void {
+
+    // this._varGlobal.loadVar();
+    console.log('settings', this._varGlobal.setting);
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
 
     this.validations_form = this.formBuilder.group({
@@ -31,20 +43,26 @@ export class SettingsComponent implements OnInit {
         Validators.minLength(4),
       ])),
       cityofbird: new FormControl(this._varGlobal.setting?.cityofbird, Validators.required),
-      adress: new FormControl(this._varGlobal.setting?.adress, Validators.required),
+      address: new FormControl(this._varGlobal.setting?.address, Validators.required),
       city: new FormControl(this._varGlobal.setting?.city, Validators.required),
       zipcode: new FormControl(this._varGlobal.setting?.zipcode, Validators.compose([
         Validators.pattern(zipCodeRegex),
         Validators.maxLength(6),
         Validators.required
       ])),
-      backtime: new FormControl(this._varGlobal.setting?.backtime || '20', Validators.required),
+      timeback: new FormControl(this._varGlobal.setting?.timeback || '20', Validators.required),
       stat: new FormControl(true, Validators.compose([
         Validators.pattern('true'),
         Validators.requiredTrue
       ]))
     });
   }
+
+  ionViewDidEnter(): void {
+    console.log('ionviewDidEnter');
+    // this._renderer.addClass(this.tabs, 'hidden')
+  }
+
 
   validation_messages = {
     'firstname': [
@@ -60,7 +78,7 @@ export class SettingsComponent implements OnInit {
     'cityofbird': [
       { type: 'required', message: 'La ville de naissance est obligatoire.' },
     ],
-    'adress': [
+    'address': [
       { type: 'required', message: 'L\'adresse est obligatoire.' },
     ],
     'zipcode': [
@@ -70,46 +88,27 @@ export class SettingsComponent implements OnInit {
     'city': [
       { type: 'required', message: 'La ville est obligatoire' }
     ],
-    'backtime': [
+    'timeback': [
       { type: 'required', message: 'Le nombres de minutes à soutraire est obligatoire' }
     ],
   };
 
+  onSubmit(): any {
 
-  async confirmAlert() {
-    this.alertController.create({
-      header: 'Confirmation',
-      subHeader: 'Paramètres Enregistrés',
-      message: 'Vos réglages sont enregistrés localement. Vous pouvez créer votre attestation.',
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-            this._varGlobal.ionViewWillEnter();
-            this._router.navigate([ '' ]);
-          }
-        }
-      ]
-    }).then(res => {
-      res.present();
-    });
-  }
+    this._varGlobal.setting = this.validations_form.value;
 
-  onSubmit() {
-
-    // console.log('this.validations_form.value', this.validations_form.value);
     this._storage.saveLocal('ac', this.validations_form.value);
-    this._varGlobal.ionViewWillEnter();
-    this.save = true;
-    this.confirmAlert();
+
+    this._storage.saveLocal('setok', '1');
+    this._router.navigate([ '' ]);
   }
 
-  //TODO verifier si toujours utilise ?
-  ionViewWillLeave() {
-    // console.log('save in ', this.save);
-    if (!this.save && this._storage.readLocal('ac')) {
-      // console.log('save out ', this.save);
-      this._storage.saveLocal('ac', this.validations_form.value);
-    }
+  ionViewWillLeave(): void {
+
+    console.log('ionViewWillLeave');
+
+    // document.querySelector(".welcome").setAttribute("disabled", "false")
+    // document.querySelector(".map").setAttribute("disabled", "false")
+
   }
 }

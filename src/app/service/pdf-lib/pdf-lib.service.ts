@@ -1,4 +1,4 @@
-import { Injectable, Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { VariableService } from '../variable/variable.service';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 // import { FileSaverService } from 'ngx-filesaver';
@@ -6,12 +6,11 @@ import { StorageService } from '../storage/storage.service';
 import { TimeBackPipe } from '../../shared/pipe/time/timeback.pipe';
 import { DayfrPipe } from './../../shared/pipe/dayfr/dayfr.pipe';
 import { ActivityPipe } from '../../shared/pipe/activity/activity.pipe';
+
 @Injectable({
   providedIn: 'root'
 })
-
-export class PdfmakeService {
-
+export class PdfLibService {
   // title: string = environment.title;
   todaydate: any = new Date().toLocaleDateString();
   dayfr: any = null;
@@ -203,7 +202,5 @@ export class PdfmakeService {
     //export file
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' });
     window.open(window.URL.createObjectURL(blob));
-
-
   }
 }

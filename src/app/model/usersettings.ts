@@ -3,9 +3,9 @@ export interface Usersettings {
   lastname: string;
   dateofbirth: Date;
   cityofbird: string;
-  adress: string;
+  address: string;
   city: string;
   zipcode: number;
-  backtime: number;
+  timeback: number;
   lastchoice?: number;
 }

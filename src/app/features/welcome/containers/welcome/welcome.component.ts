@@ -1,3 +1,4 @@
+import { PdfmakeService } from './../../../../service/pdfmake/pdfmake.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
@@ -12,13 +13,19 @@ import { environment } from '../../../../../environments/environment';
 export class WelcomeComponent {
   title: string = environment.title;
 
-  constructor(private _router: Router, private _storage: StorageService) {
+  constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService, private _pdf: PdfmakeService) { }
+
+  ionViewWillEnter() {
+    if (!this._storage.readLocal('setok')) {
+      this._router.navigate([ 'tabs/settings' ])
+    }
   }
 
   launchAttestation(activity: number) {
+
     this._storage.saveOnLine(activity);
-    // on passe l'activitée en queryParams
-    this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
+
+    this._pdf.generatePdf(activity)
   }
 
 }

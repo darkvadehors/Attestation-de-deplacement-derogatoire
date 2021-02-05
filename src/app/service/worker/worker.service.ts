@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class WorkerService {
 
   constructor() {
-    // console.log('tutu');
+    // console.log('Service Worker tutu');
   }
 }

@@ -1,11 +1,17 @@
+/*
+le piepe prend deux valeurs, la date et le choix du séparateur : ou h
+// : => true or 1
+ h => false or 0
+ */
+
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'backtime',
+  name: 'timeback',
 })
-export class BacktimePipe implements PipeTransform {
+export class TimeBackPipe implements PipeTransform {
   transform(time: number, format?: boolean): string {
-    let backTime: string = null;
+    let timeBack: string = null;
 
     // Millisecond per minutes => mpm
     const mpm = 60000;
@@ -16,12 +22,11 @@ export class BacktimePipe implements PipeTransform {
     let minutes = new Date(Date.now() - time * mpm).getMinutes();
 
     const pastM = (minutes < 10 ? '0' : '') + minutes;
-    if (format  ==  true)  {
-      backTime = pastH + ':' + pastM;
+    if (format == true) {
+      timeBack = pastH + ':' + pastM;
     } else {
-      backTime = pastH + 'h' + pastM;
+      timeBack = pastH + 'h' + pastM;
     }
-
-    return backTime;
+    return timeBack;
   }
 }

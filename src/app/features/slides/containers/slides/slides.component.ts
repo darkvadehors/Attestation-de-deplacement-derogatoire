@@ -106,7 +106,7 @@ export class SlidesComponent implements OnInit {
   }
 
   start() {
-    this._storage.saveLocal('fs', '1')
+    this._storage.saveLocal('intro', '1')
     this._router.navigate([ 'tabs/settings' ]);
   }
 }
