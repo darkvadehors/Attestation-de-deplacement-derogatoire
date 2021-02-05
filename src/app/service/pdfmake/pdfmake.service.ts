@@ -3,7 +3,6 @@ import { DatePipe } from '@angular/common';
 import { VariableService } from '../variable/variable.service';
 //Pipe
 import { TimeBackPipe } from '../../shared/pipe/time/timeback.pipe';
-import { DayfrPipe } from '../../shared/pipe/dayfr/dayfr.pipe';
 import { ActivityPipe } from '../../shared/pipe/activity/activity.pipe';
 //PDF
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -18,7 +17,6 @@ export class PdfmakeService {
   resume: any = null;
   dateofbirth: string = null;
   todaydate: any = new Date().toLocaleDateString();
-  dayfr: any = null;
   timebackColon: string = null;
   timebackH: string = null;
 
@@ -29,38 +27,20 @@ export class PdfmakeService {
     private _varGlobal: VariableService,
     private _datepipe: DatePipe,
     private _timeBackPipe: TimeBackPipe,
-    private _dayfr: DayfrPipe,
     private _activityPipe: ActivityPipe,
   ) { }
 
   async generatePdf(activity: number) {
 
     console.log('Activity', activity);
-
     //Modifie l'heure de création avec un parametre Timeback
-    this.timebackColon = this._timeBackPipe.transform(
-      this._varGlobal.setting.timeback,
-      true
-    );
-    this.timebackH = this._timeBackPipe.transform(
-      this._varGlobal.setting.timeback,
-      false
-    );
+    this.timebackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, true);
+    this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, false);
 
     // modifie la date de fr
-    this.dayfr = this._dayfr.transform(
-      this._varGlobal.setting.dateofbirth
-    )
-
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
 
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
-
-
-    // // console.log(this._varGlobal.setting.dateofbirth);
-    // const documentDefinition = this.getDocumentDefinition(qrcode);
-    // await this.loadPdfMaker();
-    // this.pdfMake.createPdf(documentDefinition).open();
 
     this.exportPdf(activity);
   }
@@ -69,8 +49,6 @@ export class PdfmakeService {
     if (!this.pdfMake) {
       const pdfMakeModule = await import('pdfmake/build/pdfmake');
       const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
-      // this.pdfMake = pdfMakeModule;
-      // this.pdfMake.vfs = pdfFontsModule.pdfMake.vfs;
       this.pdfMake = (pdfMakeModule as any).default;
       this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
@@ -320,9 +298,9 @@ export class PdfmakeService {
 
 
 
-  qrCode(params: number) {
+  qrCode(activity: number) {
     // converti le numéro de l'activity en mot
-    const activityName = this._activityPipe.transform(params);
+    const activityName = this._activityPipe.transform(activity);
     // assign a qrCode
     return this.qrCodeData =
       'Cree le : ' +
@@ -335,7 +313,7 @@ export class PdfmakeService {
       ';\nPrenom: ' +
       this._varGlobal.setting.firstname +
       ';\nNaissance: ' +
-      this._varGlobal.setting.dateofbirth +
+    this.dateofbirth +
       ' a ' +
       this._varGlobal.setting.cityofbird +
       // Personnal Adress
@@ -357,7 +335,6 @@ export class PdfmakeService {
   }
 
   async exportPdf(activity: number) {
-
     const documentDefinition = this.getDocumentDefinition(this.qrCode(activity));
     await this.loadPdfMaker();
     this.pdfMake.createPdf(documentDefinition).open();
