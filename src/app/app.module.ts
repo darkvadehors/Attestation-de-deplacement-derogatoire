@@ -21,7 +21,6 @@ import { AppComponent } from './app.component';
 import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VariableService } from './service/variable/variable.service';
-import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
 
 
 @NgModule({
@@ -29,7 +28,6 @@ import { TimefrPipe } from './shared/pipe/time/timefr.pipe';
     AppComponent,
     ActivityPipe,
     TimeBackPipe,
-    TimefrPipe,
   ],
   imports: [
     BrowserModule,
