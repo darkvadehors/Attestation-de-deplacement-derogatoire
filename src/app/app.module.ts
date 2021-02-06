@@ -1,3 +1,4 @@
+// ng build --prod --baseHref ./
 import { AttestationComponent } from './features/attestation/containers/attestation/attestation.component';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';

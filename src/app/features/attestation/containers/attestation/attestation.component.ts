@@ -1,5 +1,3 @@
-//TODO faire un pdfng build --prod --baseHref ./
-//FIXME Redirection sur welcome si pas de donnée
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 

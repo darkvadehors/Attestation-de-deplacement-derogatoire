@@ -28,7 +28,6 @@ export class SettingsComponent implements OnInit {
     private _renderer: Renderer2,
   ) { }
 
-
   ngOnInit(): void {
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
 
@@ -55,20 +54,6 @@ export class SettingsComponent implements OnInit {
       ]))
     });
   }
-
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-  }
-
-  ionViewWillEnter(): void {
-    console.log('ionViewWilLEnter')
-  }
-
-  ionViewDidEnter(): void {
-    console.log('ionviewDidEnter');
-    // this._renderer.addClass(this.tabs, 'hidden')
-  }
-
 
   validation_messages = {
     'firstname': [
@@ -110,8 +95,6 @@ export class SettingsComponent implements OnInit {
   }
 
   ionViewWillLeave(): void {
-
-    console.log('ionViewWillLeave');
 
     // document.querySelector(".welcome").setAttribute("disabled", "false")
     // document.querySelector(".map").setAttribute("disabled", "false")

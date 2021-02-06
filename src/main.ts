@@ -23,3 +23,4 @@ if (navigator.serviceWorker) {
     .then()
     .catch(err => console.log(err));
 }
+//TODO icon iphone
