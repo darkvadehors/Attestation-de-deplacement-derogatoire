@@ -1,5 +1,4 @@
 // ng build --prod --baseHref ./
-import { AttestationComponent } from './features/attestation/containers/attestation/attestation.component';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -38,7 +37,7 @@ import { VariableService } from './service/variable/variable.service';
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, AttestationComponent, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
+  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
