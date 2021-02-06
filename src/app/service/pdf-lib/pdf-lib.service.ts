@@ -30,28 +30,28 @@ export class PdfLibService {
 
     switch (activity) {
       case 1:
-        drawText('x', 63, 558, 13)
+        drawText('x', 73, 558, 13)
         break
       case 2:
-        drawText('x', 63, 506, 12)
+        drawText('x', 73, 506, 12)
         break
       case 3:
-        drawText('x', 63, 454, 12)
+        drawText('x', 73, 454, 12)
         break
       case 4:
-        drawText('x', 63, 415, 12)
+        drawText('x', 73, 415, 12)
         break
       case 5:
-        drawText('x', 63, 392, 12)
+        drawText('x', 73, 392, 12)
         break
       case 6:
-        drawText('x', 63, 367, 12)
+        drawText('x', 73, 367, 12)
         break
       case 7:
-        drawText('x', 63, 329, 12)
+        drawText('x', 73, 329, 12)
         break
       case 8:
-        drawText('x', 63, 291, 12)
+        drawText('x', 73, 291, 12)
         break;
     }
 
@@ -65,8 +65,8 @@ export class PdfLibService {
 
   savePdf(pdfBytes: any, dateFile: String) {
 
-    const fileName = 'attestation-' + dateFile;
-    const a = document.createElement("a");
+    const fileName: string = 'attestation-' + dateFile;
+    const a: any = document.createElement("a");
 
     document.body.appendChild(a);
     // a.style = "display: none";

@@ -23,10 +23,6 @@ export class PdfmakeService {
   timebackH: string = null;
   timebackT: string = null;
 
-
-
-
-
   // QRCode
   qrCodeData: string = null;
 
@@ -71,27 +67,19 @@ export class PdfmakeService {
         title: 'COVID-19 - Déclaration de déplacement',
         author: `Ministère de l'injustice`,
         subject: 'Attestation de déplacement dérogatoire',
-        keywords: [
-          'covid19',
-          'covid-19',
-          'attestation',
-          'déclaration',
-          'déplacement',
-          'officielle',
-          'gouvernement',
-        ],
+        keywords: [ 'covid19', 'covid-19', 'attestation', 'déclaration', 'déplacement', 'officielle', 'gouvernement', ],
       },
       content: [
         {
           text: 'ATTESTATION DE DÉPLACEMENT DÉROGATOIRE DURANT LES HORAIRES DU COUVRE-FEU ',
-          margin: [ 40, 10, 40, 10 ],
+          margin: [ 40, 8.5, 40, 10 ],
           style: 'header',
         },
         {
           text: 'En application du décret no 2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire',
           fontSize: 9,
           alignment: 'left',
-          margin: [ 22, 0, 30, 22 ]
+          margin: [ 30, 0, 60, 22 ]
         },
         {
           text: [
@@ -103,7 +91,7 @@ export class PdfmakeService {
           ],
           fontSize: 10.6,
           alignment: 'left',
-          margin: [ 20, 0, 20, 5 ]
+          margin: [ 30, 0, 20, 5 ]
         },
         {
           text: [
@@ -114,7 +102,7 @@ export class PdfmakeService {
           ],
           fontSize: 10.6,
           alignment: 'left',
-          margin: [ 20, 0, 20, 5 ]
+          margin: [ 30, 0, 20, 5 ]
         },
         {
           text: [
@@ -127,13 +115,13 @@ export class PdfmakeService {
           ],
           fontSize: 10.6,
           alignment: 'left',
-          margin: [ 20, 0, 20, 5 ]
+          margin: [ 30, 0, 20, 5 ]
         },
         {
           text: `certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé en application des mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire :`,
           fontSize: 10.6,
           alignment: 'justify',
-          margin: [ 20, 20, 20, 20 ]
+          margin: [ 30, 20, 20, 20 ]
         },
         {
           columns: [
@@ -148,7 +136,7 @@ export class PdfmakeService {
               text: 'Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou le lieu  d’enseignement et de formation, déplacements professionnels ne pouvant être différés'
             }
           ],
-          margin: [ 20, 0, 20, 0 ]
+          margin: [ 30, 0, 20, 0 ]
         },
         {
           columns: [
@@ -163,7 +151,7 @@ export class PdfmakeService {
               text: 'Déplacements pour des consultations, examens, actes de prévention (dont vaccination) et soins ne pouvant être assurés à distance et ne pouvant être différés ou pour l’achat de produits de santé'
             }
           ],
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           columns: [
@@ -178,7 +166,7 @@ export class PdfmakeService {
               text: 'Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou précaires ou pour la garde d’enfants'
             }
           ],
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           columns: [
@@ -193,7 +181,7 @@ export class PdfmakeService {
               text: 'Déplacements des personnes en situation de handicap et de leur accompagnant'
             }
           ],
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           columns: [
@@ -208,7 +196,7 @@ export class PdfmakeService {
               text: 'Déplacements pour répondre à une convocation judiciaire ou administrative'
             }
           ],
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           columns: [
@@ -223,7 +211,7 @@ export class PdfmakeService {
               text: 'Déplacements pour participer à des missions d’intérêt général sur demande de l’autorité administrative'
             }
           ],
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           columns: [
@@ -238,7 +226,7 @@ export class PdfmakeService {
               text: 'Déplacements liés à des transits ferroviaires, aériens ou en bus pour des déplacements de longues distances'
             }
           ],
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           columns: [
@@ -253,7 +241,7 @@ export class PdfmakeService {
               text: 'Déplacements brefs, dans un rayon maximal d’un kilomètre autour du domicile pour les besoins des animaux de compagnie'
             }
           ],
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           text: [
@@ -262,33 +250,33 @@ export class PdfmakeService {
           ],
           fontSize: 10.6,
           alignment: 'left',
-          margin: [ 20, 10, 20, 0 ]
+          margin: [ 30, 10, 20, 0 ]
         },
         {
           text: [
             'le : ',
             { text: this.todaydate, fontSize: 11, },
-            { text: '                                             à : ' },
+            { text: '                                                        à : ' },
             { text: this.timebackColon, fontSize: 11 },
           ],
           fontSize: 10.6,
           alignment: 'left',
-          margin: [ 20, 5, 20, 0 ]
+          margin: [ 30, 5, 20, 0 ]
         },
         {
           text: '(Date et heure de début de sortie à mentionner obligatoirement)',
           fontSize: 10.6,
           alignment: 'left',
-          margin: [ 20, 5, 0, 20 ]
+          margin: [ 30, 5, 0, 20 ]
         },
         {
-          qr: qrcode, alignment: 'right',
-          margin: [ 0, 0, 20, 0 ], fit: '100'
+          qr: qrcode, alignment: 'left',
+          margin: [ 390, 0, 0, 0 ], fit: '114', version: 10, eccLevel: 'H'
         },
         {
           columns: [
             {
-              width: 20,
+              width: 15,
               text: [
                 { text: '1', fontSize: 5 }
               ]
@@ -300,12 +288,14 @@ export class PdfmakeService {
               alignment: 'justify',
             }
           ],
-          margin: [ 20, 15, 40, 0 ]
+          margin: [ 50, 15, 32, 0 ]
         },
+
         // colored QR
         {
           qr: qrcode, alignment: 'left',
-          margin: [ 20, 30, 20, 20 ], fit: '300'
+          margin: [ 16, 12, 0, 0 ], fit: '305', version: 10, eccLevel: 'H',
+          pageBreak: 'before'
         },
       ],
       styles: {
@@ -367,7 +357,6 @@ export class PdfmakeService {
 
     // modifie la date
     const dateFile = this._datepipe.transform(this.todaydate, 'yyyy-MM-dd_') + this.timebackT;
-    console.log(dateFile);
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
     await this.loadPdfMaker();
 
