@@ -12,6 +12,7 @@ export class TabsComponent {
     constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService) { }
 
     ionViewWillLoad() {
+
         if (!this._storage.readLocal('setok')) {
             this._router.navigate([ 'tabs/settings' ])
         }
