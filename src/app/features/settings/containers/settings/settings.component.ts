@@ -2,7 +2,6 @@ import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/co
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { exit } from 'process';
 import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
