@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
-import { environment } from '../../../../../environments/environment';
 import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
 
 @Component({
@@ -10,8 +9,6 @@ import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
   styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent {
-  title: string = environment.title;
-
   constructor(private _router: Router, private _storage: StorageService, private _pdfmake: PdfmakeService) { }
 
   ionViewWillEnter() {
