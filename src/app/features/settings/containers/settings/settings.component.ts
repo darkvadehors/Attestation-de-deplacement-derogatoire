@@ -29,6 +29,7 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._varGlobal.loadVar();
     let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
 
     this.validations_form = this.formBuilder.group({
@@ -53,6 +54,10 @@ export class SettingsComponent implements OnInit {
         Validators.requiredTrue
       ]))
     });
+  }
+
+  ionViewDidEnter() {
+    this._varGlobal.loadVar();
   }
 
   validation_messages = {

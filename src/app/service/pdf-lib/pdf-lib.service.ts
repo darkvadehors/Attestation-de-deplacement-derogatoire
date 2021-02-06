@@ -72,8 +72,9 @@ export class PdfLibService {
     // a.style = "display: none";
 
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' }),
-      url = window.URL.createObjectURL(blob);
+    url = window.URL.createObjectURL(blob);
     a.href = url;
+    a.target = "_blank"
     a.download = fileName;
     a.click();
     window.URL.revokeObjectURL(url);

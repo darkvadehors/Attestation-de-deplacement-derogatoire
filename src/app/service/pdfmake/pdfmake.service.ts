@@ -267,7 +267,7 @@ export class PdfmakeService {
           text: '(Date et heure de début de sortie à mentionner obligatoirement)',
           fontSize: 10.6,
           alignment: 'left',
-          margin: [ 30, 5, 0, 20 ]
+          margin: [ 30, 5, 0, 10 ]
         },
         {
           qr: qrcode, alignment: 'left',
