@@ -19,10 +19,6 @@ const routes: Routes = [
             {
                 path: 'settings',
                 loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule)
-            },
-            {
-                path: 'attestation',
-                loadChildren: () => import('../attestation/attestation.modules').then(m => m.AttestationModule)
             }
         ]
     },
