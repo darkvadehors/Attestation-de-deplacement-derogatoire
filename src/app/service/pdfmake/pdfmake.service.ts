@@ -21,6 +21,7 @@ export class PdfmakeService {
   todaydate: any = new Date().toLocaleDateString();
   timebackColon: string = null;
   timebackH: string = null;
+  timebackT: string = null;
 
 
 
@@ -40,8 +41,9 @@ export class PdfmakeService {
   async generatePdf(activity: number) {
 
     //Modifie l'heure de création avec un parametre Timeback
-    this.timebackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, true);
-    this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, false);
+    this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 1);
+    this.timebackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2);
+    this.timebackT = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 3);
 
     // modifie la date de fr
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
@@ -363,13 +365,15 @@ export class PdfmakeService {
 
   async exportPdf(activity: number) {
 
+    // modifie la date
+    const dateFile = this._datepipe.transform(this.todaydate, 'yyyy-MM-dd_') + this.timebackT;
+    console.log(dateFile);
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
     await this.loadPdfMaker();
 
     const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
     pdfDocGenerator.getBase64((data) => {
-      this._pdflib.modifyPdf(data, activity);
+      this._pdflib.modifyPdf(data, activity, dateFile);
     });
-
   }
 }

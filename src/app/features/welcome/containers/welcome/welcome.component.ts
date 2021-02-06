@@ -25,8 +25,6 @@ export class WelcomeComponent {
     //creation du pdf
     this._pdfmake.generatePdf(activity);
 
-    // // on passe l'activitée en queryParams
-    // this._router.navigate([ 'tabs/attestation' ], { queryParams: { activity } });
   }
 
 }

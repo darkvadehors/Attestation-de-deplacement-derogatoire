@@ -1,20 +1,22 @@
+import { environment } from './../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
-import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument, StandardFonts } from 'pdf-lib';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PdfLibService {
 
-  constructor() { }
+  constructor(private _datepipe: DatePipe) { }
 
-  async modifyPdf(pdf: any, activity: number) {
+  async modifyPdf(pdf: any, activity: number, dateFile: String) {
 
     const pdfDoc = await PDFDocument.load(pdf)
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
     const pages = pdfDoc.getPages()
 
-    const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+    // const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
 
     const firstPage = pages[ 0 ]
     const { width, height } = firstPage.getSize()
@@ -22,6 +24,10 @@ export class PdfLibService {
     const drawText = (text: any, x: number, y: number, size = 11) => {
       firstPage.drawText(text, { x, y, size, font })
     }
+
+    // attestation-2021-02-05_13-26
+    pdfDoc.setTitle(environment.title)
+
     switch (activity) {
       case 1:
         drawText('x', 63, 558, 13)
@@ -50,9 +56,28 @@ export class PdfLibService {
     }
 
     const pdfBytes = await pdfDoc.save()
-    //export file
 
-    const blob = new Blob([ pdfBytes ], { type: 'application/pdf' });
-    window.open(window.URL.createObjectURL(blob));
+    // const blob = new Blob([ pdfBytes ], { type: 'application/pdf' });
+    // window.open(window.URL.createObjectURL(blob));
+
+    this.savePdf(pdfBytes, dateFile)
   }
+
+  savePdf(pdfBytes: any, dateFile: String) {
+
+    const fileName = 'attestation-' + dateFile;
+    const a = document.createElement("a");
+
+    document.body.appendChild(a);
+    // a.style = "display: none";
+
+    const blob = new Blob([ pdfBytes ], { type: 'application/pdf' }),
+      url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+
+  }
+
 }

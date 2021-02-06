@@ -10,7 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'timeback',
 })
 export class TimeBackPipe implements PipeTransform {
-  transform(time: number, format?: boolean): string {
+  transform(time: number, format?: number): string {
     let timeBack: string = null;
 
     // Millisecond per minutes => mpm
@@ -22,10 +22,16 @@ export class TimeBackPipe implements PipeTransform {
     let minutes = new Date(Date.now() - time * mpm).getMinutes();
 
     const pastM = (minutes < 10 ? '0' : '') + minutes;
-    if (format == true) {
-      timeBack = pastH + ':' + pastM;
-    } else {
-      timeBack = pastH + 'h' + pastM;
+    switch (format) {
+      case 1:
+        timeBack = pastH + 'h' + pastM;
+        break
+      case 2:
+        timeBack = pastH + ':' + pastM;
+        break
+      case 3:
+        timeBack = pastH + '-' + pastM;
+        break
     }
 
     return timeBack;
