@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VariableService } from './service/variable/variable.service';
+import { App } from '@capacitor/core';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,9 +9,19 @@ import { VariableService } from './service/variable/variable.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private _varGlobal: VariableService) { }
+  constructor(private _varGlobal: VariableService, private _platform: Platform) {
+    this.appInitializer();
+  }
 
   ngOnInit() {
-    this._varGlobal.loadVar();
+
+  }
+
+  async appInitializer() {
+
+    await this._platform.ready();
+    App.addListener('appStateChange', ({ isActive }) => {
+      if (isActive) { this._varGlobal.loadVar() }
+    })
   }
 }
