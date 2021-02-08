@@ -1,4 +1,3 @@
-import { environment } from './../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { VariableService } from '../variable/variable.service';
