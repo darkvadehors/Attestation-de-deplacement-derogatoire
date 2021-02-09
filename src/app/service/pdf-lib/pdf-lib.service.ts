@@ -4,6 +4,8 @@ import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { DatePipe } from '@angular/common';
 import { FileSaverService } from 'ngx-filesaver';
 import { HttpClient } from '@angular/common/http';
+import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+import { readFile } from 'fs';
 @Injectable({
   providedIn: 'root'
 })
@@ -78,11 +80,16 @@ export class PdfLibService {
 
       // window.open(window.URL.createObjectURL(blob));
 
-      this._httpClient.get(pdfBytes, {
-        // responseType: ResponseContentType.Blob // This must be a Blob type
-      }).subscribe(res => {
-        this._FileSaverService.save((<any>res)._body, fileName);
-      });
+      // this._httpClient.get(pdfBytes, {
+      //   // responseType: ResponseContentType.Blob // This must be a Blob type
+      // }).subscribe(res => {
+      //   this._FileSaverService.save((<any>res)._body, fileName);
+      // });
+      // const { Filesystem } = Plugins;
+      // readFile(options: FileReadOptions) => Promise<FileReadResult>
+
+      //TODO changer l'adresse de la bar d'adresse
+      window.open(window.URL.createObjectURL(blob), '_blank');
 
     } else {
       //Desktop
