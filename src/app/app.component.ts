@@ -14,12 +14,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this._varGlobal.loadVar();
   }
 
   async appInitializer() {
 
     await this._platform.ready();
+
+    console.log('Chargé', this._varGlobal.setting)
     App.addListener('appStateChange', ({ isActive }) => {
       if (isActive) { this._varGlobal.loadVar() }
     })
