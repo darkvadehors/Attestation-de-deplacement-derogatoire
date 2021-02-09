@@ -63,7 +63,9 @@ export class PdfLibService {
   }
 
   savePdf(pdfBytes: any, dateFile: String) {
+
     //TODO transformer en pipe de control mobile desktop
+
     const fileName: string = 'attestation-' + dateFile;
     const link: any = document.createElement("a");
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
