@@ -2,13 +2,15 @@ import { environment } from './../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { DatePipe } from '@angular/common';
-
+import { FileSaverService } from 'ngx-filesaver';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class PdfLibService {
 
-  constructor(private _datepipe: DatePipe) { }
+  constructor(private _datepipe: DatePipe, private _httpClient: HttpClient,
+    private _FileSaverService: FileSaverService,) { }
 
   async modifyPdf(pdf: any, activity: number, dateFile: String) {
 
@@ -57,27 +59,40 @@ export class PdfLibService {
 
     const pdfBytes = await pdfDoc.save()
 
-    // const blob = new Blob([ pdfBytes ], { type: 'application/pdf' });
-    // window.open(window.URL.createObjectURL(blob));
-
     this.savePdf(pdfBytes, dateFile)
   }
 
   savePdf(pdfBytes: any, dateFile: String) {
-
+    //TODO transformer en pipe de control mobile desktop
     const fileName: string = 'attestation-' + dateFile;
-    const a: any = document.createElement("a");
+    const link: any = document.createElement("a");
+    const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
+    const url = window.URL.createObjectURL(blob);
 
-    document.body.appendChild(a);
-    // a.style = "display: none";
+    document.body.appendChild(link);
 
-    const blob = new Blob([ pdfBytes ], { type: 'application/pdf' }),
-    url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.target = "_blank"
-    a.download = fileName;
-    a.click();
-    window.URL.revokeObjectURL(url);
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      //Mobile
+
+      // window.open(window.URL.createObjectURL(blob));
+
+      this._httpClient.get(pdfBytes, {
+        // responseType: ResponseContentType.Blob // This must be a Blob type
+      }).subscribe(res => {
+        this._FileSaverService.save((<any>res)._body, fileName);
+      });
+
+    } else {
+      //Desktop
+      link.setAttribute("target", "_blank");
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+    }
+    // window.URL.revokeObjectURL(url);
+    // window.URL.createObjectURL(url);
+
 
   }
 
