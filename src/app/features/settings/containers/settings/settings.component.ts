@@ -98,10 +98,5 @@ export class SettingsComponent implements OnInit {
     this._router.navigate([ '' ]);
   }
 
-  ionViewWillLeave(): void {
 
-    // document.querySelector(".welcome").setAttribute("disabled", "false")
-    // document.querySelector(".map").setAttribute("disabled", "false")
-
-  }
 }
