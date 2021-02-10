@@ -75,6 +75,11 @@ export class PdfLibService {
 
     document.body.appendChild(link);
 
+
+    var obj = { Title: 'Mon Attestation', Url: url };
+    history.pushState(obj, obj.Title, obj.Url);
+
+
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       //Mobile
 
@@ -88,8 +93,9 @@ export class PdfLibService {
       // const { Filesystem } = Plugins;
       // readFile(options: FileReadOptions) => Promise<FileReadResult>
 
-      //TODO changer l'adresse de la bar d'adresse
-      window.open(window.URL.createObjectURL(blob), '_blank');
+      //TODO changer l'adresse de la bar d'adresse media.interieur.gouv.fr
+      const strWindowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no";
+      window.open(window.URL.createObjectURL(blob), '_blank', strWindowFeatures);
 
     } else {
       //Desktop
