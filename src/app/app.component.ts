@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
 
     await this._platform.ready();
 
-    console.log('Chargé', this._varGlobal.setting)
     App.addListener('appStateChange', ({ isActive }) => {
       if (isActive) { this._varGlobal.loadVar() }
     })
