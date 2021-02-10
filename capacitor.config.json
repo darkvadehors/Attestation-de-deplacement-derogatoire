@@ -6,7 +6,10 @@
   "webDir": "dist/attestationcovid19",
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 0
+      "showSpinner": true,
+      "launchShowDuration": 3000,
+      "launchAutoHide": false,
+      "splashImmersive": true
     }
   },
   "cordova": {}
