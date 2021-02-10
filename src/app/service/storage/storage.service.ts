@@ -28,6 +28,7 @@ export class StorageService{
     this._ls.setLocalStorage(datakey, data);
   }
 
+  //TODO sup Local storage
   // Online
   //TODO passer le type en string
   saveOnLine(data: any) {

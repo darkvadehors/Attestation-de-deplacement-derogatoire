@@ -61,6 +61,7 @@ export class PdfmakeService {
   documentDefinition(qrcode: string): any {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
+    //FIXME ajout la font time new roman
     return {
       info: {
         title: 'COVID-19 - Déclaration de déplacement',
