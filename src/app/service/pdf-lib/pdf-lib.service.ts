@@ -76,6 +76,7 @@ export class PdfLibService {
       //Mobile
 
       //TODO changer l'adresse de la bar d'adresse media.interieur.gouv.fr
+      // document.documentElement.requestFullscreen();
       const strWindowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no";
       window.open(window.URL.createObjectURL(blob), '_blank', strWindowFeatures);
 
