@@ -32,6 +32,6 @@ export class StorageService{
   //TODO passer le type en string
   saveOnLine(data: any) {
     // console.log('saveonline');
-    this._fb.saveStat(data);
+    // this._fb.saveStat(data);
   }
 }
