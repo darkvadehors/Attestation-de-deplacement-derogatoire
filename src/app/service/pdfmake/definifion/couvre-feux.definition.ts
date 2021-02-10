@@ -1,0 +1,2 @@
+export class CouvreFeux.Definition {
+}
