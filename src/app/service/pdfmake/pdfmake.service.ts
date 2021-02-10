@@ -48,16 +48,6 @@ export class PdfmakeService {
     this.exportPdf(activity);
   }
 
-  async loadPdfMaker() {
-
-    if (!this.pdfMake) {
-      const pdfMakeModule = await import('pdfmake/build/pdfmake');
-      const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
-      this.pdfMake = (pdfMakeModule as any).default;
-      this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
-    }
-  }
-
   documentDefinition(qrcode: string): any {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
@@ -358,7 +348,13 @@ export class PdfmakeService {
     // modifie la date
     const dateFile = this._datepipe.transform(this.todaydate, 'yyyy-MM-dd_') + this.timebackT;
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
-    await this.loadPdfMaker();
+
+    if (!this.pdfMake) {
+      const pdfMakeModule = await import('pdfmake/build/pdfmake');
+      const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
+      this.pdfMake = (pdfMakeModule as any).default;
+      this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
+    }
 
     const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
     pdfDocGenerator.getBase64((data) => {
