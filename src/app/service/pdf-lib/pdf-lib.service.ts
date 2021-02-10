@@ -2,17 +2,13 @@ import { environment } from './../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { DatePipe } from '@angular/common';
-import { FileSaverService } from 'ngx-filesaver';
 import { HttpClient } from '@angular/common/http';
-import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
-import { readFile } from 'fs';
 @Injectable({
   providedIn: 'root'
 })
 export class PdfLibService {
 
-  constructor(private _datepipe: DatePipe, private _httpClient: HttpClient,
-    private _FileSaverService: FileSaverService,) { }
+  constructor(private _datepipe: DatePipe, private _httpClient: HttpClient) { }
 
   async modifyPdf(pdf: any, activity: number, dateFile: String) {
 
@@ -76,22 +72,8 @@ export class PdfLibService {
     document.body.appendChild(link);
 
 
-    var obj = { Title: 'Mon Attestation', Url: url };
-    history.pushState(obj, obj.Title, obj.Url);
-
-
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       //Mobile
-
-      // window.open(window.URL.createObjectURL(blob));
-
-      // this._httpClient.get(pdfBytes, {
-      //   // responseType: ResponseContentType.Blob // This must be a Blob type
-      // }).subscribe(res => {
-      //   this._FileSaverService.save((<any>res)._body, fileName);
-      // });
-      // const { Filesystem } = Plugins;
-      // readFile(options: FileReadOptions) => Promise<FileReadResult>
 
       //TODO changer l'adresse de la bar d'adresse media.interieur.gouv.fr
       const strWindowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no";

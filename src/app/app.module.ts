@@ -6,7 +6,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { FileSaverModule } from 'ngx-filesaver';
 // Ionic
 import { IonicModule } from '@ionic/angular';
 
