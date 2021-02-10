@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
@@ -8,14 +8,25 @@ import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
 })
-export class WelcomeComponent {
+export class WelcomeComponent implements OnInit {
   constructor(private _router: Router, private _storage: StorageService, private _pdfmake: PdfmakeService) { }
+
+  ngOnInit() {
+
+    const gouvUrl = 'media.interieur.gouv.fr'
+    const stateObj = { foo: 'titre' };
+
+    // history.pushState(stateObj, '', gouvUrl);
+
+    history.replaceState(stateObj, "", gouvUrl)
+  }
 
   ionViewWillEnter() {
 
     if (!this._storage.readLocal('setok')) {
       this._router.navigate([ 'tabs/settings' ])
     }
+
   }
 
   launchAttestation(activity: number) {
