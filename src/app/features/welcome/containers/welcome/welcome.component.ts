@@ -11,15 +11,8 @@ import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
 export class WelcomeComponent implements OnInit {
   constructor(private _router: Router, private _storage: StorageService, private _pdfmake: PdfmakeService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-    const gouvUrl = 'media.interieur.gouv.fr'
-    const stateObj = { foo: 'titre' };
-
-    // history.pushState(stateObj, '', gouvUrl);
-
-    history.replaceState(stateObj, "", gouvUrl)
-  }
 
   ionViewWillEnter() {
 
