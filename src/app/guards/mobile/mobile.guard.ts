@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DesktopGuard implements CanActivate {
+export class MobileGuard implements CanActivate {
 
   constructor(private _router: Router) { }
 
@@ -12,13 +12,15 @@ export class DesktopGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
-    console.log('desktopguard');
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       //Mobile
-      return false;
+      console.log('mobileGuards true');
+      return true;
     } else {
       //Desktop
-      return true;
+      console.log('mobileGuards false');
+      this._router.navigateByUrl('accueil');
+      return false;
     }
   }
 

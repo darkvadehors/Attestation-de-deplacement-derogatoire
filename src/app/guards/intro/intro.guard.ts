@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { StorageService } from '../../service/storage/storage.service';
 
 @Injectable({
@@ -12,12 +12,15 @@ export class IntroGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    // intro => First Start
+      // intro => First Start
+
     if (this._storage.readLocal('intro')) {
+      console.log('introguard true');
       return true;
     } else {
+      console.log('introguard false');
       this._router.navigateByUrl('intro');
-      return false
+      // return false;
     }
   }
 

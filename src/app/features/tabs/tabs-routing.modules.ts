@@ -1,3 +1,4 @@
+import { MobileGuard } from './../../guards/mobile/mobile.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TabsComponent } from './containers/tabs/tabs.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
         children: [
             {
                 path: 'welcome',
-                loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule)
+                loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule),
+                canActivate: [ MobileGuard ]
             },
             {
                 path: 'map',
@@ -18,7 +20,8 @@ const routes: Routes = [
             },
             {
                 path: 'settings',
-                loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule)
+                loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule),
+                canActivate: [ MobileGuard ]
             }
         ]
     },
