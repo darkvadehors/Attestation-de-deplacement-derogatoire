@@ -14,11 +14,9 @@ export class MobileGuard implements CanActivate {
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       //Mobile
-      console.log('mobileGuards true');
       return true;
     } else {
       //Desktop
-      console.log('mobileGuards false');
       this._router.navigateByUrl('accueil');
 
     }

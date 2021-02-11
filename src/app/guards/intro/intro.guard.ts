@@ -15,10 +15,8 @@ export class IntroGuard implements CanActivate {
       // intro => First Start
 
     if (this._storage.readLocal('intro')) {
-      console.log('introguard true');
       return true;
     } else {
-      console.log('introguard false');
       this._router.navigateByUrl('intro');
       // return false;
     }
