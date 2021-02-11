@@ -20,7 +20,7 @@ export class MobileGuard implements CanActivate {
       //Desktop
       console.log('mobileGuards false');
       this._router.navigateByUrl('accueil');
-      return false;
+
     }
   }
 
