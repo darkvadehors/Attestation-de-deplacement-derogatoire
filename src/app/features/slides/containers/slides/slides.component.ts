@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 import { StorageService } from '../../../../service/storage/storage.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { StorageService } from '../../../../service/storage/storage.service';
 })
 export class SlidesComponent implements OnInit {
 
-  constructor(private _router: Router, private _storage: StorageService) { }
+  constructor(private _router: Router, private _storage: StorageService, private _platform: Platform) { }
 
-  ngOnInit(): any {
+  async ngOnInit(): Promise<any> {
 
     const slideOpts = {
       initialSlide: 1,
@@ -103,6 +104,8 @@ export class SlidesComponent implements OnInit {
         }
       }
     }
+    await this._platform.ready();
+
   }
 
   start() {
