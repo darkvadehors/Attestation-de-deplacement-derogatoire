@@ -11,7 +11,8 @@ export class DesktopComponent implements OnInit {
 
   ngOnInit(): void {
 
-    history.pushState("", "", "media.inferieur.gauv.fr/attestation-couvre-feu-covid-19")
+    // history.replaceState("", "", "media.inferieur.gauv.fr/attestation-couvre-feu-covid-19")
+    history.replaceState("", "", "disponible_uniquement_sur_mobile")
   }
 
 }
