@@ -40,7 +40,17 @@ import { VariableService } from './service/variable/variable.service';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
   ],
-  providers: [ VariableService, StorageService, DatePipe, TimeBackPipe, ActivityPipe, { provide: LocationStrategy, useClass: HashLocationStrategy } ],
+  providers: [
+    VariableService,
+    StorageService,
+    DatePipe,
+    TimeBackPipe,
+    ActivityPipe,
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
