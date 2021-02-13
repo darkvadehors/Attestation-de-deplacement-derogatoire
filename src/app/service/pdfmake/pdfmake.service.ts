@@ -17,7 +17,8 @@ export class PdfmakeService {
   pdfMake: any = null;
   resume: any = null;
   dateofbirth: string = null;
-  todaydate: any = new Date().toLocaleDateString();
+  toDayFr: string = new Date().toLocaleDateString();
+  toDay: Date = new Date();
   timebackColon: string = null;
   timebackH: string = null;
   timebackT: string = null;
@@ -34,6 +35,7 @@ export class PdfmakeService {
   ) { }
 
   async generatePdf(activity: number) {
+
 
     //Modifie l'heure de création avec un parametre Timeback
     this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 1);
@@ -245,7 +247,7 @@ export class PdfmakeService {
         {
           text: [
             'le : ',
-            { text: this.todaydate, fontSize: 11, },
+            { text: this.toDayFr, fontSize: 11, },
             { text: '                                                        à : ' },
             { text: this.timebackColon, fontSize: 11 },
           ],
@@ -313,7 +315,7 @@ export class PdfmakeService {
     // assign a qrCode
     return this.qrCodeData =
       'Cree le : ' +
-      this.todaydate +
+    this.toDayFr +
       ' a ' +
       this.timebackH +
       // identification
@@ -335,7 +337,7 @@ export class PdfmakeService {
       ' ' +
       // Exit time
       ';\nSortie: ' +
-      this.todaydate +
+    this.toDayFr +
       ' a ' +
       this.timebackColon +
       ';\nMotifs: ' +
@@ -346,7 +348,7 @@ export class PdfmakeService {
   async exportPdf(activity: number) {
 
     // modifie la date
-    const dateFile = this._datepipe.transform(this.todaydate, 'yyyy-MM-dd_') + this.timebackT;
+    const dateFile = this._datepipe.transform(this.toDay, 'yyyy-MM-dd_') + this.timebackT;
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
 
     if (!this.pdfMake) {
