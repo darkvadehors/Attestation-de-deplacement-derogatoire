@@ -1,15 +1,16 @@
-import { environment } from './../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 @Injectable({
   providedIn: 'root'
 })
 export class PdfLibService {
 
-  constructor(private _datepipe: DatePipe, private _httpClient: HttpClient) { }
 
+  constructor() { }
+
+  //-----------------------------------------------------------------------------------------Modify PDF
   async modifyPdf(pdf: any, activity: number, dateFile: String) {
 
     const pdfDoc = await PDFDocument.load(pdf)
@@ -60,27 +61,55 @@ export class PdfLibService {
     this.savePdf(pdfBytes, dateFile)
   }
 
-  savePdf(pdfBytes: any, dateFile: String) {
+  //-----------------------------------------------------------------------------------------Save PDF
 
-    //TODO transformer en pipe de control mobile desktop
+  async savePdf(pdfBytes: any, dateFile: String) {
 
-    const fileName: string = 'attestation-' + dateFile;
+    const { Filesystem } = Plugins;
+    const fileName: string = 'attestation-' + dateFile + '.pdf';
     const link: any = document.createElement("a");
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
     const url = window.URL.createObjectURL(blob);
 
     document.body.appendChild(link);
 
-
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       //Mobile
-
-      //TODO changer l'adresse de la bar d'adresse media.interieur.gouv.fr
       // document.documentElement.requestFullscreen();
+      /*
       const strWindowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no";
       window.open(window.URL.createObjectURL(blob), '_blank', strWindowFeatures);
+      */
+
+      // try {
+      //   const result = await Filesystem.writeFile({
+      //     // path: fileName,
+      //     path: 'test/test.txt',
+      //     data: 'url',
+      //     directory: FilesystemDirectory.Documents,
+      //     encoding: FilesystemEncoding.UTF8,
+      //     recursive: true
+      //   })
+      //   console.log('Wrote file', result);
+      // } catch (e) {
+      //   console.error('Unable to write file', e);
+      // }
+
+
+      // const contents: any = await Filesystem.readFile({
+      //   path: fileName,
+      //   directory: FilesystemDirectory.Cache,
+      //   encoding: FilesystemEncoding.UTF8
+      // });
+      // console.log('contenu du fichier', contents);
+
+      // window.open(contents, '_blank');
+
+
+
 
     } else {
+      //FIXME A supprimer
       //Desktop
       link.setAttribute("target", "_blank");
       link.href = url;
@@ -90,8 +119,5 @@ export class PdfLibService {
     }
     // window.URL.revokeObjectURL(url);
     // window.URL.createObjectURL(url);
-
-
   }
-
 }

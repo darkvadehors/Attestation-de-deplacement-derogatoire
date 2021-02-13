@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CryptoService } from '../crypto/crypto.service';
+import { CryptoService } from '../../crypto/crypto.service';
 
 @Injectable({
   providedIn: 'root',

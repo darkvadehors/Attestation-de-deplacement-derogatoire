@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
-import { PdfmakeService } from '../../../../service/pdfmake/pdfmake.service';
+import { PdfmakeService } from '../../../../service/pdf/pdfmake/pdfmake.service';
 
 @Component({
   selector: 'app-welcome',

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { VariableService } from '../variable/variable.service';
+import { VariableService } from '../../variable/variable.service';
 //Pipe
-import { TimeBackPipe } from '../../shared/pipe/time/timeback.pipe';
-import { ActivityPipe } from '../../shared/pipe/activity/activity.pipe';
+import { TimeBackPipe } from '../../../shared/pipe/time/timeback.pipe';
+import { ActivityPipe } from '../../../shared/pipe/activity/activity.pipe';
 //PDF
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
-import { PdfLibService } from './../pdf-lib/pdf-lib.service';
+import { PdfLibService } from '../pdf-lib/pdf-lib.service';
 
 @Injectable({
   providedIn: 'root'
@@ -315,7 +315,7 @@ export class PdfmakeService {
     // assign a qrCode
     return this.qrCodeData =
       'Cree le : ' +
-    this.toDayFr +
+      this.toDayFr +
       ' a ' +
       this.timebackH +
       // identification
@@ -324,7 +324,7 @@ export class PdfmakeService {
       ';\nPrenom: ' +
       this._varGlobal.setting.firstname +
       ';\nNaissance: ' +
-    this.dateofbirth +
+      this.dateofbirth +
       ' a ' +
       this._varGlobal.setting.cityofbird +
       // Personnal Adress
@@ -337,7 +337,7 @@ export class PdfmakeService {
       ' ' +
       // Exit time
       ';\nSortie: ' +
-    this.toDayFr +
+      this.toDayFr +
       ' a ' +
       this.timebackColon +
       ';\nMotifs: ' +

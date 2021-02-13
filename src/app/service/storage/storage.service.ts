@@ -4,8 +4,8 @@ Storage.service prend  deux parametres pour el local storage:
  * datakey => pour la clé de variable
 */
 import { Injectable } from '@angular/core';
-import { FirebaseService } from '../firebase/firebase.service';
-import { LocalstorageService } from '../locastorage/localstorage.service';
+import { FirebaseService } from './firebase/firebase.service';
+import { LocalstorageService } from './locastorage/localstorage.service';
 
 @Injectable({
   providedIn: 'root',
