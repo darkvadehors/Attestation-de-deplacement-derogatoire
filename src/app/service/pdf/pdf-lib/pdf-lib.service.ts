@@ -63,61 +63,29 @@ export class PdfLibService {
 
   //-----------------------------------------------------------------------------------------Save PDF
 
-  async savePdf(pdfBytes: any, dateFile: String) {
+  savePdf(pdfBytes: any, dateFile: String) {
 
     const { Filesystem } = Plugins;
-    const fileName: string = 'attestation-' + dateFile + '.pdf';
-    const link: any = document.createElement("a");
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
     const url = window.URL.createObjectURL(blob);
-
-    document.body.appendChild(link);
-
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      //Mobile
-      // document.documentElement.requestFullscreen();
-      /*
-      const strWindowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no";
-      window.open(window.URL.createObjectURL(blob), '_blank', strWindowFeatures);
-      */
-
-      // try {
-      //   const result = await Filesystem.writeFile({
-      //     // path: fileName,
-      //     path: 'test/test.txt',
-      //     data: 'url',
-      //     directory: FilesystemDirectory.Documents,
-      //     encoding: FilesystemEncoding.UTF8,
-      //     recursive: true
-      //   })
-      //   console.log('Wrote file', result);
-      // } catch (e) {
-      //   console.error('Unable to write file', e);
-      // }
+    const fileName: string = 'attestation-' + dateFile + '.pdf';
+    const link: any = document.createElement("a");
 
 
-      // const contents: any = await Filesystem.readFile({
-      //   path: fileName,
-      //   directory: FilesystemDirectory.Cache,
-      //   encoding: FilesystemEncoding.UTF8
-      // });
-      // console.log('contenu du fichier', contents);
+    //FIXME Bug avec Firefox Mobile
 
-      // window.open(contents, '_blank');
+    // incompatible Firefox Mobile
+    const strWindowFeatures = "menubar=yes,location=no,resizable=yes,scrollbars=yes,status=no";
+    window.open(url, '_blank', strWindowFeatures);
 
 
-
-
-    } else {
-      //FIXME A supprimer
-      //Desktop
-      link.setAttribute("target", "_blank");
-      link.href = url;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-    }
-    // window.URL.revokeObjectURL(url);
+    //Compitablie firefox Mobile
+    // document.body.appendChild(link);
+    // link.href = url;
+    // link.setAttribute("target", "_blank");
+    // link.download = fileName;
+    // link.click();
     // window.URL.createObjectURL(url);
+    // window.URL.revokeObjectURL(url);
   }
 }
