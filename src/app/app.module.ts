@@ -11,8 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 
 //Firebase
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
+// import { AngularFireModule } from "@angular/fire";
+// import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 //Pipe
 import { ActivityPipe } from './shared/pipe/activity/activity.pipe';
@@ -35,8 +35,6 @@ import { VariableService } from './service/variable/variable.service';
     BrowserModule,
     AppRoutingModule,
     IonicModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
   ],

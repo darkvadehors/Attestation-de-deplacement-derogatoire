@@ -1,5 +1,4 @@
 import { SettingsGuard } from './../../guards/settings/settings.guard';
-import { IntroGuard } from './../../guards/intro/intro.guard';
 import { MobileGuard } from './../../guards/mobile/mobile.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

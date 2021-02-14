@@ -5,10 +5,11 @@ import { VariableService } from '../../variable/variable.service';
 import { TimeBackPipe } from '../../../shared/pipe/time/timeback.pipe';
 import { ActivityPipe } from '../../../shared/pipe/activity/activity.pipe';
 //PDF
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+// import * as pdfMake from 'pdfmake/build/pdfmake';
+// (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 import { PdfLibService } from '../pdf-lib/pdf-lib.service';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,7 @@ export class PdfmakeService {
     private _timeBackPipe: TimeBackPipe,
     private _activityPipe: ActivityPipe,
     private _pdflib: PdfLibService,
+    public loadingController: LoadingController,
   ) { }
 
   async generatePdf(activity: number) {
@@ -47,7 +49,19 @@ export class PdfmakeService {
 
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
-    this.exportPdf(activity);
+    const loading = await this.loadingController.create({
+      // cssClass: 'my-custom-class',
+      message: 'Patienter ...',
+      // duration: 2000
+    });
+
+    //appel le loader
+    await loading.present();
+
+    await this.exportPdf(activity);
+
+    //finir le loader
+    await loading.dismiss();
   }
 
   documentDefinition(qrcode: string): any {
@@ -358,8 +372,8 @@ export class PdfmakeService {
       this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
 
-    const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
-    pdfDocGenerator.getBase64((data) => {
+    const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition);
+    pdfDocGenerator.getBase64((data: any) => {
       this._pdflib.modifyPdf(data, activity, dateFile);
     });
   }

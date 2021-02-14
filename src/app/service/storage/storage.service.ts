@@ -4,7 +4,7 @@ Storage.service prend  deux parametres pour el local storage:
  * datakey => pour la clé de variable
 */
 import { Injectable } from '@angular/core';
-import { FirebaseService } from './firebase/firebase.service';
+// import { FirebaseService } from './firebase/firebase.service';
 import { LocalstorageService } from './locastorage/localstorage.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ import { LocalstorageService } from './locastorage/localstorage.service';
 export class StorageService{
 
   constructor(
-    private _fb: FirebaseService,
+    // private _fb: FirebaseService,
     private _ls: LocalstorageService
   ) { }
 
