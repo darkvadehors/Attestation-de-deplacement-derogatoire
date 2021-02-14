@@ -1,7 +1,6 @@
 import { environment } from '../../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
-import { PDFDocument, StandardFonts } from 'pdf-lib';
-import { Plugins, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+import { Browser, Plugins } from '@capacitor/core';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,8 +12,14 @@ export class PdfLibService {
   //-----------------------------------------------------------------------------------------Modify PDF
   async modifyPdf(pdf: any, activity: number, dateFile: String) {
 
-    const pdfDoc = await PDFDocument.load(pdf)
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica)
+
+    const pdflibModule = await import('pdf-lib').then(({
+      PDFDocument, StandardFonts
+    }) => ({
+      PDFDocument, StandardFonts
+    }));
+    const pdfDoc = await pdflibModule.PDFDocument.load(pdf)
+    const font = await pdfDoc.embedFont(pdflibModule.StandardFonts.Helvetica)
     const pages = pdfDoc.getPages()
 
     // const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
@@ -63,20 +68,25 @@ export class PdfLibService {
 
   //-----------------------------------------------------------------------------------------Save PDF
 
-  savePdf(pdfBytes: any, dateFile: String) {
+  async savePdf(pdfBytes: any, dateFile: String) {
 
-    const { Filesystem } = Plugins;
+    // const { Filesystem } = Plugins;
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
     const url = window.URL.createObjectURL(blob);
-    const fileName: string = 'attestation-' + dateFile + '.pdf';
-    const link: any = document.createElement("a");
+    // const fileName: string = 'attestation-' + dateFile + '.pdf';
+    // const link: any = document.createElement("a");
 
 
     //FIXME Bug avec Firefox Mobile
 
     // incompatible Firefox Mobile
-    const strWindowFeatures = "menubar=yes,location=no,resizable=yes,scrollbars=yes,status=no";
-    window.open(url, '_blank', strWindowFeatures);
+    // const strWindowFeatures = "menubar=yes,location=no,resizable=yes,scrollbars=yes,status=no";
+    // window.open(url, '_blank', strWindowFeatures);
+
+    //await Browser.open({ url: 'http://capacitorjs.com/' });
+    // demande autorisation
+    console.log('blob', blob);
+    await Browser.open({ url });
 
 
     //Compitablie firefox Mobile
