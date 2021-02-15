@@ -73,29 +73,48 @@ export class PdfLibService {
     // const { Filesystem } = Plugins;
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
     const url = window.URL.createObjectURL(blob);
-    // const fileName: string = 'attestation-' + dateFile + '.pdf';
-    // const link: any = document.createElement("a");
 
 
     //FIXME Bug avec Firefox Mobile
 
     // incompatible Firefox Mobile
-    // const strWindowFeatures = "menubar=yes,location=no,resizable=yes,scrollbars=yes,status=no";
-    // window.open(url, '_blank', strWindowFeatures);
+    // window.open(url, '_blank', "resizable=yes,scrollbars=yes,status=yes");
+    // window.URL.createObjectURL(url);
+    // window.URL.revokeObjectURL(url);
 
     //await Browser.open({ url: 'http://capacitorjs.com/' });
     // demande autorisation
-    console.log('blob', blob);
-    await Browser.open({ url });
+    // console.log('blob', blob);
+    // await Browser.open({ url });
 
+    const win = window.open(url, '_blank');
+    if (win) {
+      //Browser has allowed it to be opened
+      win.focus();
+    } else {
+      //Browser has blocked it
+      alert('Please allow popups for this website');
+    }
 
-    //Compitablie firefox Mobile
-    // document.body.appendChild(link);
+    // //Compitablie firefox Mobile
+    // const fileName: string = 'attestation-' + dateFile + '.pdf';
+    // const link: any = document.createElement("a");
     // link.href = url;
-    // link.setAttribute("target", "_blank");
-    // link.download = fileName;
+    // // link.setAttribute("target", "_blank");
+    // link.setAttribute("type", "hidden"); // make it hidden if needed
+    // link.target = "_blank";
+    // link.download = fileName || 'Attestation.pdf';
+    // document.body.appendChild(link); // Ajoute l'element au DOM
     // link.click();
-    // window.URL.createObjectURL(url);
-    // window.URL.revokeObjectURL(url);
+    // link.remove();
+    // document.body.removeChild(link); // Enleve l'element du DOM
+
+
+
+
+
+
+
   }
+
 }

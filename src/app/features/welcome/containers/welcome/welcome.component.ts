@@ -9,7 +9,10 @@ import { PdfmakeService } from '../../../../service/pdf/pdfmake/pdfmake.service'
   styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
-  constructor(private _router: Router, private _storage: StorageService, private _pdfmake: PdfmakeService) { }
+  constructor(
+    private _router: Router,
+    private _storage: StorageService,
+    private _pdfmake: PdfmakeService) { }
 
   ngOnInit() { }
 

@@ -51,7 +51,7 @@ export class PdfmakeService {
 
     const loading = await this.loadingController.create({
       // cssClass: 'my-custom-class',
-      message: 'Patienter ...',
+      message: 'Patientez.<br> votre attestation <br> Arrive...',
       // duration: 2000
     });
 
