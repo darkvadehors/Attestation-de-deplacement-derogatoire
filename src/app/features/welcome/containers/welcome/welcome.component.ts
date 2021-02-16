@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
@@ -14,8 +15,13 @@ export class WelcomeComponent implements OnInit {
     private _storage: StorageService,
     private _pdfmake: PdfmakeService) { }
 
-  ngOnInit() { }
-
+  ngOnInit() {
+    // Controle si IOS message de mise en garde
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      //IOS
+      alert('Attention sur IOS. Firefox est pas compatible avec CovAttest');
+    }
+  }
 
   ionViewWillEnter() {
 
