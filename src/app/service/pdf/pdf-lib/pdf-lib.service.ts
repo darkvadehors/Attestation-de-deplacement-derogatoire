@@ -1,6 +1,6 @@
 import { environment } from '../../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
-import { Browser, Plugins } from '@capacitor/core';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -71,50 +71,54 @@ export class PdfLibService {
   async savePdf(pdfBytes: any, dateFile: String) {
 
     // const { Filesystem } = Plugins;
+    // const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
+    // si pas de type download
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
     const url = window.URL.createObjectURL(blob);
-
 
     //FIXME Bug avec Firefox Mobile
 
     // incompatible Firefox Mobile
-    // window.open(url, '_blank', "resizable=yes,scrollbars=yes,status=yes");
+    // demande ouverure
+    // window.open(url, '_blank');
     // window.URL.createObjectURL(url);
     // window.URL.revokeObjectURL(url);
 
     //await Browser.open({ url: 'http://capacitorjs.com/' });
     // demande autorisation
     // console.log('blob', blob);
+    // Message ouverture
     // await Browser.open({ url });
 
-    const win = window.open(url, '_blank');
-    if (win) {
-      //Browser has allowed it to be opened
-      win.focus();
-    } else {
-      //Browser has blocked it
-      alert('Please allow popups for this website');
-    }
+    // check si bloquer de pop-up
+    // const win = window.open(url, '_blank');
+    // if (win) {
+    //   //Browser has allowed it to be opened
+    //   win.focus();
+    // } else {
+    //   //Browser has blocked it
+    //   alert('Please allow popups for this website');
+    // }
 
     // //Compitablie firefox Mobile
-    // const fileName: string = 'attestation-' + dateFile + '.pdf';
-    // const link: any = document.createElement("a");
-    // link.href = url;
-    // // link.setAttribute("target", "_blank");
+    const fileName: string = 'attestation-' + dateFile + '.pdf';
+    const link: any = document.createElement("a");
+    link.href = url;
+    link.setAttribute("target", "_blank");
     // link.setAttribute("type", "hidden"); // make it hidden if needed
     // link.target = "_blank";
-    // link.download = fileName || 'Attestation.pdf';
-    // document.body.appendChild(link); // Ajoute l'element au DOM
+    link.download = fileName;
+    document.body.appendChild(link); // Ajoute l'element au DOM
     // link.click();
+    link.dispatchEvent(
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      })
+    );
     // link.remove();
-    // document.body.removeChild(link); // Enleve l'element du DOM
-
-
-
-
-
-
-
+    document.body.removeChild(link); // Enleve l'element du DOM
   }
 
 }
