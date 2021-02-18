@@ -375,6 +375,4 @@ FodyWeavers.xsd
 */environments/
 icons/
 -Travail/
-package-lock.json
-.DS_Store
-*.DS_Store
+*package-lock.json
