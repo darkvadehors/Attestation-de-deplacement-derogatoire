@@ -1,6 +1,6 @@
-import { Input } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { LoadingController, ModalController, NavParams } from '@ionic/angular';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
@@ -8,13 +8,30 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     templateUrl: 'pdfviewer.html',
     styleUrls: [ 'pdfviewer.scss' ]
 })
-export class pdfViewer {
+
+export class pdfViewer implements OnInit {
+    loading: any;
 
     // Data passed in by componentProps
     @Input() pdfUrl: any;
 
 
-    constructor(public pdfviewer: PdfViewerModule, public modalCtrl: ModalController, private navParams: NavParams) { }
+    constructor(public loadingController: LoadingController, public pdfviewer: PdfViewerModule, public modalCtrl: ModalController) { }
+
+    async ngOnInit() {
+        this.loading = await this.loadingController.create({
+            message: `Création de l'attestation....`,
+        });
+        //appel le loader
+        await this.loading.present();
+    }
+
+
+    async ionViewDidEnter() {
+        //finir le loader
+        await this.loading.dismiss();
+        console.log('rooo');
+    }
 
     closeModal() {
         this.modalCtrl.dismiss({
