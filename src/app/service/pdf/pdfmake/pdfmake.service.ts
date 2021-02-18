@@ -16,7 +16,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class PdfmakeService {
   pdfMake: any = null;
-  resume: any = null;
+  // resume: any = null;
   dateofbirth: string = null;
   toDayFr: string = new Date().toLocaleDateString();
   toDay: Date = new Date();
@@ -47,7 +47,7 @@ export class PdfmakeService {
     // modifie la date de fr
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
 
-    sessionStorage.setItem('resume', JSON.stringify(this.resume));
+    // sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
     const loading = await this.loadingController.create({
       // cssClass: 'my-custom-class',
@@ -65,7 +65,7 @@ export class PdfmakeService {
   }
 
   documentDefinition(qrcode: string): any {
-    sessionStorage.setItem('resume', JSON.stringify(this.resume));
+    // sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
     //FIXME ajout la font time new roman
     return {
