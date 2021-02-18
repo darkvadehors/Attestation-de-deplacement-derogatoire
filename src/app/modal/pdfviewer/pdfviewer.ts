@@ -1,7 +1,7 @@
 import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LoadingController, ModalController, NavParams } from '@ionic/angular';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PDFDocumentProxy, PdfViewerModule } from 'ng2-pdf-viewer';
 
 @Component({
     selector: 'pdfviewer',
@@ -26,10 +26,10 @@ export class pdfViewer implements OnInit {
         await this.loading.present();
     }
 
-
-    async ionViewDidEnter() {
+    // après chargement complet du PDF
+    callBackFn(pdf: PDFDocumentProxy) {
         //finir le loader
-        await this.loading.dismiss();
+        this.loading.dismiss();
     }
 
     closeModal() {

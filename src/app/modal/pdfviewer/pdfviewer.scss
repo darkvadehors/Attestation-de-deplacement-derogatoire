@@ -1,15 +1,18 @@
 .ion-page{
     background-color: rgb(255, 255, 255);
-    ion-buttons {
-        position: absolute;
-        --backdrop-opacity: 100;
-    }
+
     pdf-viewer {
         display: block;
         height: 100vh;
     }
+
     ion-buttons{
-        // color: transparent;
+        font-size: large;
+        position: absolute;
+        color: transparent;
+        ion-icon{
+            color: lightgray;
+        }
     }
 }
 

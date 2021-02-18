@@ -1,18 +1,15 @@
 
 <div class="ion-page">
-
-    <pdf-viewer [src]= pdfUrl
-    [render-text]="false"
-    [show-all]="true"
-    [fit-to-page]="false"
-    [original-size]="false"
-    [autoresize]="true"
-    [show-borders]="false"
-    style="display: block;height: 100vh;">
-  </pdf-viewer>
-
-  <ion-buttons slot="end" icon-only color='black' (click)="closeModal()">
-    <ion-icon name="close-circle-outline"></ion-icon>
+  <ion-buttons color='black' (click)="closeModal()">
+    <ion-icon size="large" name="close-circle-outline"></ion-icon>
   </ion-buttons>
 
+  <pdf-viewer [src]= pdfUrl
+    [render-text]="false"
+    [show-all]="true"
+    [original-size]="false"
+    [autoresize]="true"
+    (after-load-complete)="callBackFn($event)"
+    >
+  </pdf-viewer>
 </div>
