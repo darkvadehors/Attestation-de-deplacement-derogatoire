@@ -30,7 +30,6 @@ export class pdfViewer implements OnInit {
     async ionViewDidEnter() {
         //finir le loader
         await this.loading.dismiss();
-        console.log('rooo');
     }
 
     closeModal() {
