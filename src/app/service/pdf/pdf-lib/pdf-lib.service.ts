@@ -71,33 +71,29 @@ export class PdfLibService {
         break;
     }
 
-    // const pdfBytes = await pdfDoc.save()
+    const pdfBytes = await pdfDoc.save()
     // const pdfBytes = await pdfDoc.saveAsBase64()
-    const pdfBytes = await pdfDoc.saveAsBase64({ dataUri: true })
+    // const pdfBytes = await pdfDoc.saveAsBase64({ dataUri: true })
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
-    const url = window.URL.createObjectURL(blob);
+    const pdfUrl = window.URL.createObjectURL(blob);
     const fileName: string = 'attestation-' + dateFile + '.pdf';
 
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
+      // nom du component de la modal
       component: pdfViewer,
       cssClass: 'my-custom-class',
+      // swipeToClose: true,
+      keyboardClose: true,
       componentProps: {
-        'title': fileName
-      },
-      swipeToClose: true,
+        'pdfUrl': pdfUrl,
+      }
     });
-
+    // ouvre la modal
     return await modal.present();
 
   }
 
   //-----------------------------------------------------------------------------------------Save PDF
-
-  async savePdf(pdfBytes: any) {
-
-    // si pas de type download
-    const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
-    const pdfUrl = window.URL.createObjectURL(blob);
 
     //FIXME Bug avec Firefox Mobile
 
@@ -135,21 +131,5 @@ export class PdfLibService {
     //Capacitor browser
     // ouvre un nouvelle ongle si utf8 mais ne fonctionne pas sur firefox
     // await Browser.open({ url: url });
-
-
-    const modal = await this.modalCtrl.create({
-      // nom du component de la modal
-      component: pdfViewer,
-      cssClass: 'my-custom-class',
-      // swipeToClose: true,
-      keyboardClose: true,
-      componentProps: {
-        'pdfUrl': pdfUrl,
-      }
-    });
-    // ouvre la modal
-    return await modal.present();
-
-  }
 
 }
