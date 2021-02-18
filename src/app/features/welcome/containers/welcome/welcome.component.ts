@@ -17,10 +17,10 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     // Controle si IOS message de mise en garde
-    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      //IOS
-      alert('Attention sur IOS. Firefox est pas compatible avec CovAttest');
-    }
+    // if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    //   //IOS
+    //   alert('Attention sur IOS. Firefox est pas compatible avec CovAttest');
+    // }
   }
 
   ionViewWillEnter() {
