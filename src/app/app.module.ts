@@ -24,12 +24,18 @@ import { StorageService } from './service/storage/storage.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { VariableService } from './service/variable/variable.service';
 
+//Modal
+import { pdfViewer } from './modal/pdfviewer/pdfviewer'
+
+//PDF
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActivityPipe,
     TimeBackPipe,
+    pdfViewer,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,7 @@ import { VariableService } from './service/variable/variable.service';
     IonicModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
+    PdfViewerModule,
   ],
   providers: [
     VariableService,

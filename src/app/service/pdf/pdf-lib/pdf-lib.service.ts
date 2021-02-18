@@ -1,13 +1,23 @@
+import { pdfViewer } from './../../../modal/pdfviewer/pdfviewer';
 import { environment } from '../../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
+
+//Capacitor
+import { Plugins } from '@capacitor/core';
+const { Filesystem, Browser } = Plugins;
+
+//Ionic
+import { ModalController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PdfLibService {
+  routerOutlet: any;
 
 
-  constructor() { }
+  constructor(public modalController: ModalController, private modalCtrl: ModalController) { }
 
   //-----------------------------------------------------------------------------------------Modify PDF
   async modifyPdf(pdf: any, activity: number, dateFile: String) {
@@ -61,64 +71,85 @@ export class PdfLibService {
         break;
     }
 
-    const pdfBytes = await pdfDoc.save()
+    // const pdfBytes = await pdfDoc.save()
+    // const pdfBytes = await pdfDoc.saveAsBase64()
+    const pdfBytes = await pdfDoc.saveAsBase64({ dataUri: true })
+    const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
+    const url = window.URL.createObjectURL(blob);
+    const fileName: string = 'attestation-' + dateFile + '.pdf';
 
-    this.savePdf(pdfBytes, dateFile)
+    const modal = await this.modalController.create({
+      component: pdfViewer,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'title': fileName
+      },
+      swipeToClose: true,
+    });
+
+    return await modal.present();
+
   }
 
   //-----------------------------------------------------------------------------------------Save PDF
 
-  async savePdf(pdfBytes: any, dateFile: String) {
+  async savePdf(pdfBytes: any) {
 
-    // const { Filesystem } = Plugins;
-    // const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
     // si pas de type download
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
-    const url = window.URL.createObjectURL(blob);
+    const pdfUrl = window.URL.createObjectURL(blob);
 
     //FIXME Bug avec Firefox Mobile
 
     // incompatible Firefox Mobile
-    // demande ouverure
-    // window.open(url, '_blank');
-    // window.URL.createObjectURL(url);
-    // window.URL.revokeObjectURL(url);
+    // demande ouverure dasn un nouvelle onglet ne fonction pas avec firefox
+    // window.open(url);
 
-    //await Browser.open({ url: 'http://capacitorjs.com/' });
-    // demande autorisation
-    // console.log('blob', blob);
+
+    // demande autorisation et ouvre dans un autre onglet mais ne fonction pas avec firefox
     // Message ouverture
     // await Browser.open({ url });
 
-    // check si bloquer de pop-up
-    // const win = window.open(url, '_blank');
-    // if (win) {
-    //   //Browser has allowed it to be opened
-    //   win.focus();
-    // } else {
-    //   //Browser has blocked it
-    //   alert('Please allow popups for this website');
-    // }
 
+    // Ouvre le pdf dans le meme onglet
     // //Compitablie firefox Mobile
-    const fileName: string = 'attestation-' + dateFile + '.pdf';
-    const link: any = document.createElement("a");
-    link.href = url;
-    link.setAttribute("target", "_blank");
-    // link.setAttribute("type", "hidden"); // make it hidden if needed
+    // const fileName: string = 'attestation-' + dateFile + '.pdf';
+    // const link: any = document.createElement("a");
+    // link.href = url;
+    // link.download = fileName;
+    // // link.setAttribute("target", "_blank");
     // link.target = "_blank";
-    link.download = fileName;
-    document.body.appendChild(link); // Ajoute l'element au DOM
-    // link.click();
-    link.dispatchEvent(
-      new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-        view: window
-      })
-    );
+    // // document.body.appendChild(link); // Ajoute l'element au DOM
+    // // link.click();
+    // link.dispatchEvent(
+    //   new MouseEvent('click', {
+    //     bubbles: true,
+    //     cancelable: true,
+    //     view: window
+    //   })
+    // );
     // link.remove();
-    document.body.removeChild(link); // Enleve l'element du DOM
+    // document.body.removeChild(link); // Enleve l'element du DOM
+
+
+    //Capacitor browser
+    // ouvre un nouvelle ongle si utf8 mais ne fonctionne pas sur firefox
+    // await Browser.open({ url: url });
+
+
+    const modal = await this.modalCtrl.create({
+      // nom du component de la modal
+      component: pdfViewer,
+      cssClass: 'my-custom-class',
+      // swipeToClose: true,
+      keyboardClose: true,
+      componentProps: {
+        'pdfUrl': pdfUrl,
+      }
+    });
+    // ouvre la modal
+    return await modal.present();
+
   }
 
 }

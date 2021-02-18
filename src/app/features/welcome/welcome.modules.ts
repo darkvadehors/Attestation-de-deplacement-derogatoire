@@ -10,7 +10,7 @@ import { WelcomeRoutingModule } from './welcome-routing.modules';
     imports: [
         CommonModule,
         WelcomeRoutingModule,
-        IonicModule
+        IonicModule,
     ]
 })
 export class WelcomeModule { }

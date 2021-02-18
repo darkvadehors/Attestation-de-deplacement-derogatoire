@@ -1,4 +1,3 @@
-import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
