@@ -10,7 +10,7 @@ import { PDFDocumentProxy, PdfViewerModule } from 'ng2-pdf-viewer';
 })
 
 export class pdfViewer implements OnInit {
-    loading: any;
+    loading: HTMLIonLoadingElement;
 
     // Data passed in by componentProps
     @Input() pdfUrl: any;

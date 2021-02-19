@@ -50,9 +50,7 @@ export class PdfmakeService {
     // sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
     const loading = await this.loadingController.create({
-      // cssClass: 'my-custom-class',
       message: 'Patientez....',
-      // duration: 2000
     });
 
     //appel le loader
@@ -277,7 +275,7 @@ export class PdfmakeService {
         },
         {
           qr: qrcode, alignment: 'left',
-          margin: [ 390, 0, 0, 0 ], fit: '114', version: 10, eccLevel: 'H'
+          margin: [ 390, 0, 0, 0 ], fit: '114', version: 10, eccLevel: 'M',
         },
         {
           columns: [
@@ -300,7 +298,7 @@ export class PdfmakeService {
         // colored QR
         {
           qr: qrcode, alignment: 'left',
-          margin: [ 16, 12, 0, 0 ], fit: '305', version: 10, eccLevel: 'H',
+          margin: [ 16, 12, 0, 0 ], fit: '305', version: 10, eccLevel: 'M',
           pageBreak: 'before'
         },
       ],
