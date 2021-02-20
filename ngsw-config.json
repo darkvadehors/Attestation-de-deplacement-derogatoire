@@ -3,13 +3,13 @@
   "index": "/index.html",
   "assetGroups": [
     {
-      "name": "attestationcovid19",
+      "name": "covattest",
       "installMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
           "/index.html",
-          "/manifest.manifest",
+          "/manifest.webmanifest",
           "/*.css",
           "/*.js"
         ]

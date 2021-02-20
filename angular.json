@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "attestationcovid19",
+  "newProjectRoot": "covattest",
   "projects": {
-    "attestationcovid19": {
+    "covattest": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -21,7 +21,7 @@
               "lodash",
               "pdfjs-dist"
             ],
-            "outputPath": "dist/attestationcovid19",
+            "outputPath": "dist/covattest",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -35,7 +35,8 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
-              "src/manifest.manifest"
+              "src/manifest.manifest",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss",
@@ -110,18 +111,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "attestationcovid19:build"
+            "browserTarget": "covattest:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "attestationcovid19:build:production"
+              "browserTarget": "covattest:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "attestationcovid19:build"
+            "browserTarget": "covattest:build"
           }
         },
         "test": {
@@ -134,7 +135,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.manifest"
+              "src/manifest.manifest",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -159,35 +161,35 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "attestationcovid19:serve"
+            "devServerTarget": "covattest:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "attestationcovid19:serve:production"
+              "devServerTarget": "covattest:serve:production"
             }
           }
         },
         "ionic-cordova-serve": {
           "builder": "@ionic/angular-toolkit:cordova-serve",
           "options": {
-            "cordovaBuildTarget": "attestationcovid19:ionic-cordova-build",
-            "devServerTarget": "attestationcovid19:serve"
+            "cordovaBuildTarget": "covattest:ionic-cordova-build",
+            "devServerTarget": "covattest:serve"
           },
           "configurations": {
             "production": {
-              "cordovaBuildTarget": "attestationcovid19:ionic-cordova-build:production",
-              "devServerTarget": "attestationcovid19:serve:production"
+              "cordovaBuildTarget": "covattest:ionic-cordova-build:production",
+              "devServerTarget": "covattest:serve:production"
             }
           }
         },
         "ionic-cordova-build": {
           "builder": "@ionic/angular-toolkit:cordova-build",
           "options": {
-            "browserTarget": "attestationcovid19:build"
+            "browserTarget": "covattest:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "attestationcovid19:build:production"
+              "browserTarget": "covattest:build:production"
             }
           }
         },
@@ -198,5 +200,5 @@
       }
     }
   },
-  "defaultProject": "attestationcovid19"
+  "defaultProject": "covattest"
 }
