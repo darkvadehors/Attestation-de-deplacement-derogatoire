@@ -9,6 +9,9 @@ import { PdfmakeService } from '../../../../service/pdf/pdfmake/pdfmake.service'
   styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
+
+  pdfMake: any;
+
   constructor(
     private _router: Router,
     private _storage: StorageService,
@@ -22,10 +25,18 @@ export class WelcomeComponent implements OnInit {
     // }
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
 
+    console.log('1');
     if (!this._storage.readLocal('setok')) {
       this._router.navigate([ 'tabs/settings' ])
+    }
+
+    if (!this.pdfMake) {
+      const pdfMakeModule = await import('pdfmake/build/pdfmake');
+      const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
+      this.pdfMake = (pdfMakeModule as any).default;
+      this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
 
   }

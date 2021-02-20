@@ -275,7 +275,7 @@ export class PdfmakeService {
         },
         {
           qr: qrcode, alignment: 'left',
-          margin: [ 390, 0, 0, 0 ], fit: '114', version: 10, eccLevel: 'M',
+          margin: [ 390, 0, 0, 0 ], fit: '114'
         },
         {
           columns: [

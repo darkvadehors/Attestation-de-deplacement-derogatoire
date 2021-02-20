@@ -1,9 +1,9 @@
 {
-  "appId": "attestationcovid19",
-  "appName": "attestationcovid19",
+  "appId": "covattest",
+  "appName": "covattest",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "dist/attestationcovid19",
+  "webDir": "dist/covattest",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 3000,
