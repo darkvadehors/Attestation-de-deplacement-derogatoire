@@ -1,5 +1,5 @@
 {
-  "appId": "fr.johnben.attestationcovid19",
+  "appId": "attestationcovid19",
   "appName": "attestationcovid19",
   "bundledWebRuntime": false,
   "npmClient": "npm",

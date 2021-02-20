@@ -1,4 +1,4 @@
-// ng build --prod --baseHref ./
+// ng build --prod --base-href ./
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

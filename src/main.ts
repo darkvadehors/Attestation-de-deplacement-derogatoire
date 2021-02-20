@@ -16,10 +16,10 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   // Call the element loader after the platform has been bootstrapped;
 defineCustomElements(window);
 
-const serviceWorker = './app/service/worker/worker.service.ts'
-if (navigator.serviceWorker) {
-  // console.log('serviceWorker OK');
-  navigator.serviceWorker.register(serviceWorker)
-    .then()
-    .catch(err => console.log(err));
-}
+// const serviceWorker = 'app/service/worker/worker.service.ts'
+// if (navigator.serviceWorker) {
+//   // console.log('serviceWorker OK');
+//   navigator.serviceWorker.register('./ws.ts')
+//     .then()
+//     .catch(err => console.log(err));
+// }

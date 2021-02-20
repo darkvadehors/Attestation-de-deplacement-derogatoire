@@ -73,10 +73,6 @@
               }
             ],
             "scripts": [
-              {
-                "input": "node_modules/pdfjs-dist/es5/web/pdf_viewer.js",
-                "bundleName": "pdf_viewer"
-              }
             ]
           },
           "configurations": {
