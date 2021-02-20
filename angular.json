@@ -19,7 +19,9 @@
           "options": {
             "allowedCommonJsDependencies": [
               "lodash",
-              "pdfjs-dist"
+              "pdfjs-dist",
+              "crypto",
+              "pdf-lib"
             ],
             "outputPath": "dist/covattest",
             "index": "src/index.html",
