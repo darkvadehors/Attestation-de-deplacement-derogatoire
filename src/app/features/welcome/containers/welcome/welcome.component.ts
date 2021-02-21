@@ -27,7 +27,6 @@ export class WelcomeComponent implements OnInit {
 
   async ionViewWillEnter() {
 
-    console.log('1');
     if (!this._storage.readLocal('setok')) {
       this._router.navigate([ 'tabs/settings' ])
     }
