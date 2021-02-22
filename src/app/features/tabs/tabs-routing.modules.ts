@@ -16,11 +16,6 @@ const routes: Routes = [
                 canActivate: [ MobileGuard, SettingsGuard ]
             },
             {
-                path: 'map',
-                loadChildren: () => import('../map/map.modules').then(m => m.MapModule),
-                canActivate: [ MobileGuard, SettingsGuard ]
-            },
-            {
                 path: 'settings',
                 loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule),
                 canActivate: [ MobileGuard ]

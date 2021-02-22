@@ -7,13 +7,8 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-
 // Ionic
 import { IonicModule } from '@ionic/angular';
-
-//Firebase
-// import { AngularFireModule } from "@angular/fire";
-// import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 //Pipe
 import { ActivityPipe } from './shared/pipe/activity/activity.pipe';
