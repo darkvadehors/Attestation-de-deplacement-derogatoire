@@ -17,6 +17,17 @@
       </ion-text>
     </ion-slide>
     <ion-slide>
+      <h2>Etape 1</h2>
+      <img src="#"/>
+      <p><b>Pensez à enregistrer le raccourcis sur l'écran d'accueil</b></p>
+      <ion-text>
+        <div *ngIf="checkOs; else elseBlock">Content to render when condition is true.</div>
+<ng-template #elseBlock>Content to render when condition is false.</ng-template>
+
+
+      </ion-text>
+    </ion-slide>
+    <ion-slide>
       <h2>Voila c'est fini !</h2>
       <img src="assets/images/intro/img-intro03.png"/>
       <p><b>Votre Attestation</b><br> est déjà prête.<br>Cliquer<br>Présenter.</p>

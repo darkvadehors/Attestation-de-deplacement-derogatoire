@@ -10,6 +10,7 @@ import { StorageService } from '../../../../service/storage/storage.service';
 })
 export class SlidesComponent implements OnInit {
 
+  const checkOs: boolean
   constructor(private _router: Router, private _storage: StorageService, private _platform: Platform) { }
 
   async ngOnInit(): Promise<any> {
@@ -106,7 +107,18 @@ export class SlidesComponent implements OnInit {
     }
     await this._platform.ready();
 
+
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      //IOS
+      console.log('ios');
+      this.checkOs = true;
+    } else {
+      console.log('and');
+      this.checkOs = false;
+    }
+
   }
+
 
   start() {
     this._storage.saveLocal('intro', '1')
