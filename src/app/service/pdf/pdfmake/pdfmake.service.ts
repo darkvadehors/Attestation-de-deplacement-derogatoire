@@ -18,7 +18,7 @@ export class PdfmakeService {
   pdfMake: any = null;
   // resume: any = null;
   dateofbirth: string = null;
-  toDayFr: string = new Date().toLocaleDateString();
+  toDayFr: string;
   toDay: Date = new Date();
   timebackColon: string = null;
   timebackH: string = null;
@@ -43,7 +43,7 @@ export class PdfmakeService {
     this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 1);
     this.timebackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2);
     this.timebackT = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 3);
-
+    this.toDayFr = this._datepipe.transform(this.toDay, "dd/mm/yyyy")
     // modifie la date de fr
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
 
