@@ -19,9 +19,7 @@ export class PdfLibService {
 
   constructor(public modalController: ModalController, private modalCtrl: ModalController) { }
 
-  //-----------------------------------------------------------------------------------------Modify PDF
   async modifyPdf(pdf: any, activity: number, dateFile: String) {
-
 
     const pdflibModule = await import('pdf-lib').then(({
       PDFDocument, StandardFonts
@@ -32,8 +30,6 @@ export class PdfLibService {
     const font = await pdfDoc.embedFont(pdflibModule.StandardFonts.Helvetica)
     const pages = pdfDoc.getPages()
 
-    // const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
-
     const firstPage = pages[ 0 ]
     const { width, height } = firstPage.getSize()
 
@@ -41,7 +37,6 @@ export class PdfLibService {
       firstPage.drawText(text, { x, y, size, font })
     }
 
-    // attestation-2021-02-05_13-26
     pdfDoc.setTitle(environment.title)
 
     switch (activity) {
@@ -72,64 +67,19 @@ export class PdfLibService {
     }
 
     const pdfBytes = await pdfDoc.save()
-    // const pdfBytes = await pdfDoc.saveAsBase64()
-    // const pdfBytes = await pdfDoc.saveAsBase64({ dataUri: true })
     const blob = new Blob([ pdfBytes ], { type: 'application/pdf' })
     const pdfUrl = window.URL.createObjectURL(blob);
-    const fileName: string = 'attestation-' + dateFile + '.pdf';
 
     const modal = await this.modalCtrl.create({
-      // nom du component de la modal
       component: pdfViewer,
       cssClass: 'my-custom-class',
-      // swipeToClose: true,
       keyboardClose: true,
       componentProps: {
         'pdfUrl': pdfUrl,
       }
     });
-    // ouvre la modal
     return await modal.present();
 
   }
-
-  //-----------------------------------------------------------------------------------------Save PDF
-
-    //FIXME Bug avec Firefox Mobile
-
-    // incompatible Firefox Mobile
-    // demande ouverure dasn un nouvelle onglet ne fonction pas avec firefox
-    // window.open(url);
-
-
-    // demande autorisation et ouvre dans un autre onglet mais ne fonction pas avec firefox
-    // Message ouverture
-    // await Browser.open({ url });
-
-
-    // Ouvre le pdf dans le meme onglet
-    // //Compitablie firefox Mobile
-    // const fileName: string = 'attestation-' + dateFile + '.pdf';
-    // const link: any = document.createElement("a");
-    // link.href = url;
-    // link.download = fileName;
-    // // link.setAttribute("target", "_blank");
-    // link.target = "_blank";
-    // // document.body.appendChild(link); // Ajoute l'element au DOM
-    // // link.click();
-    // link.dispatchEvent(
-    //   new MouseEvent('click', {
-    //     bubbles: true,
-    //     cancelable: true,
-    //     view: window
-    //   })
-    // );
-    // link.remove();
-    // document.body.removeChild(link); // Enleve l'element du DOM
-
-
-    //Capacitor browser
-    // ouvre un nouvelle ongle si utf8 mais ne fonctionne pas sur firefox
-    // await Browser.open({ url: url });
 
 }

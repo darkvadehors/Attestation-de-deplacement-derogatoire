@@ -12,13 +12,11 @@ export class IntroGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-      // intro => First Start
 
     if (this._storage.readLocal('intro')) {
       return true;
     } else {
       this._router.navigateByUrl('intro');
-      // return false;
     }
   }
 

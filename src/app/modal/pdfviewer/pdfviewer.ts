@@ -22,13 +22,10 @@ export class pdfViewer implements OnInit {
         this.loading = await this.loadingController.create({
             message: `Création de l'attestation....`,
         });
-        //appel le loader
         await this.loading.present();
     }
 
-    // après chargement complet du PDF
     callBackFn(pdf: PDFDocumentProxy) {
-        //finir le loader
         this.loading.dismiss();
     }
 

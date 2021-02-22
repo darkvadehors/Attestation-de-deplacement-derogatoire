@@ -29,7 +29,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this._varGlobal.loadVar();
-    // let zipCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
 
     this.validations_form = this.formBuilder.group({
       firstname: new FormControl(this._varGlobal.setting?.firstname, Validators.required),
@@ -43,8 +42,6 @@ export class SettingsComponent implements OnInit {
       adress: new FormControl(this._varGlobal.setting?.adress, Validators.required),
       city: new FormControl(this._varGlobal.setting?.city, Validators.required),
       zipcode: new FormControl(this._varGlobal.setting?.zipcode, Validators.compose([
-        // Validators.pattern(zipCodeRegex),
-        // Validators.maxLength(6),
         Validators.required
       ])),
       timeback: new FormControl(this._varGlobal.setting?.timeback || '20', Validators.required),
@@ -78,7 +75,6 @@ export class SettingsComponent implements OnInit {
     ],
     'zipcode': [
       { type: 'required', message: 'Le code postale est obligatoire.' },
-      // { type: 'pattern', message: 'Merci de rentrer un code postale valide' }
     ],
     'city': [
       { type: 'required', message: 'La ville est obligatoire' }

@@ -5,9 +5,6 @@ import { VariableService } from '../../variable/variable.service';
 import { TimeBackPipe } from '../../../shared/pipe/time/timeback.pipe';
 import { ActivityPipe } from '../../../shared/pipe/activity/activity.pipe';
 //PDF
-// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-// import * as pdfMake from 'pdfmake/build/pdfmake';
-// (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 import { PdfLibService } from '../pdf-lib/pdf-lib.service';
 import { LoadingController } from '@ionic/angular';
 
@@ -16,15 +13,12 @@ import { LoadingController } from '@ionic/angular';
 })
 export class PdfmakeService {
   pdfMake: any = null;
-  // resume: any = null;
   dateofbirth: string = null;
   toDayFr: string;
   toDay: Date = new Date();
   timebackColon: string = null;
   timebackH: string = null;
   timebackT: string = null;
-
-  // QRCode
   qrCodeData: string = null;
 
   constructor(
@@ -37,28 +31,20 @@ export class PdfmakeService {
   ) { }
 
   async generatePdf(activity: number) {
-
-
-    //Modifie l'heure de création avec un parametre Timeback
     this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 1);
     this.timebackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2);
     this.timebackT = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 3);
     this.toDayFr = this._datepipe.transform(this.toDay, "dd/MM/yyyy")
-    // modifie la date de fr
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
-
-    // sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
     const loading = await this.loadingController.create({
       message: 'Patientez....',
     });
 
-    //appel le loader
     await loading.present();
 
     await this.exportPdf(activity);
 
-    //finir le loader
     await loading.dismiss();
   }
 
@@ -359,7 +345,6 @@ export class PdfmakeService {
 
   async exportPdf(activity: number) {
 
-    // modifie la date
     const dateFile = this._datepipe.transform(this.toDay, 'yyyy-MM-dd_') + this.timebackT;
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
 

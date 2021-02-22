@@ -8,7 +8,7 @@ import { PdfmakeService } from '../../../../service/pdf/pdfmake/pdfmake.service'
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
 
   pdfMake: any;
 
@@ -16,14 +16,6 @@ export class WelcomeComponent implements OnInit {
     private _router: Router,
     private _storage: StorageService,
     private _pdfmake: PdfmakeService) { }
-
-  ngOnInit() {
-    // Controle si IOS message de mise en garde
-    // if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    //   //IOS
-    //   alert('Attention sur IOS. Firefox est pas compatible avec CovAttest');
-    // }
-  }
 
   async ionViewWillEnter() {
 
@@ -44,7 +36,6 @@ export class WelcomeComponent implements OnInit {
 
     this._storage.saveOnLine(activity);
 
-    //creation du pdf
     this._pdfmake.generatePdf(activity);
 
   }

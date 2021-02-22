@@ -13,7 +13,6 @@ export class VariableService {
   constructor(private _storage: StorageService, private _router: Router) { }
 
   loadVar() {
-    // on test si il y a une donnée dans le localstorage et on la charge
     if (this._storage.readLocal('ac')) {
       const {
         firstname,
@@ -39,8 +38,6 @@ export class VariableService {
         lastchoice,
       };
     } else {
-
-      // sinon on va la creer
       this._router.navigate([ 'tabs/settings' ]);
     }
   }
