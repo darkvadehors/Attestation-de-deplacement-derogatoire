@@ -14,6 +14,7 @@ export class TimeBackPipe implements PipeTransform {
     let minutes = new Date(Date.now() - time * mpm).getMinutes();
 
     const pastM = (minutes < 10 ? '0' : '') + minutes;
+
     switch (format) {
       case 1:
         timeBack = pastH + 'h' + pastM;
