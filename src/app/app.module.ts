@@ -26,6 +26,8 @@ import { pdfViewer } from './modal/pdfviewer/pdfviewer'
 //PDF
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
+//Service Upadte
+import { CheckUpdateService } from './service/checkUpdate/check-update.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
+    CheckUpdateService
   ],
   bootstrap: [AppComponent],
 })

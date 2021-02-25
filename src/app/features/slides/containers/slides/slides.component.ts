@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { StorageService } from '../../../../service/storage/storage.service';
-
+import { version } from '../../../../../../package.json'
 @Component({
   selector: 'app-slides',
   templateUrl: './slides.component.html',
@@ -11,6 +11,7 @@ import { StorageService } from '../../../../service/storage/storage.service';
 export class SlidesComponent implements OnInit {
 
   checkOs: boolean = null;
+  public version: string = version;
 
   constructor(private _router: Router, private _storage: StorageService, private _platform: Platform) { }
 

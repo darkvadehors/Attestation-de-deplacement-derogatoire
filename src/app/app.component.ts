@@ -1,3 +1,4 @@
+import { CheckUpdateService } from './service/checkUpdate/check-update.service';
 import { Component, OnInit } from '@angular/core';
 import { VariableService } from './service/variable/variable.service';
 import { App } from '@capacitor/core';
@@ -9,8 +10,9 @@ import { Platform } from '@ionic/angular';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private _varGlobal: VariableService, private _platform: Platform) {
+  constructor(private _varGlobal: VariableService, private _platform: Platform, private _upDate: CheckUpdateService) {
     this.appInitializer();
+    this._upDate;
   }
 
   ngOnInit() {
