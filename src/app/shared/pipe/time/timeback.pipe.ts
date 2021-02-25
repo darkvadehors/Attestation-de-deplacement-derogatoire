@@ -9,10 +9,11 @@ export class TimeBackPipe implements PipeTransform {
 
     const mpm = 60000;
 
-    const pastH = new Date(Date.now() - time * mpm).getHours();
+    let heures = new Date(Date.now() - time * mpm).getHours();
 
     let minutes = new Date(Date.now() - time * mpm).getMinutes();
 
+    const pastH = (heures < 10 ? '0' : '') + heures
     const pastM = (minutes < 10 ? '0' : '') + minutes;
 
     switch (format) {
