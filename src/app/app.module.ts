@@ -1,5 +1,6 @@
 // ng build --prod --base-href ./
 // ng build --prod --base-href ./ && npm run deploy
+// ng build --prod --common-chunk --named-chunks --optimization --service-worker --source-map --base-href ./
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
