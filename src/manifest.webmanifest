@@ -7,7 +7,7 @@
     "government",
     "health"
   ],
-  "description": "L'application officielle du peuple pour la génération d'attestation de déplacement dérogatoire dématérialisée.",
+  "description": "L'application officielle du peuple pour la generation d attestation de deplacement derogatoire dematerialisee.",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
