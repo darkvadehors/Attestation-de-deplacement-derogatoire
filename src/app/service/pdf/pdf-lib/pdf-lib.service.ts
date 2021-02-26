@@ -8,6 +8,7 @@ const { Filesystem, Browser } = Plugins;
 
 //Ionic
 import { ModalController } from '@ionic/angular';
+import { LoadingService } from '../../loading/loading.service';
 
 
 @Injectable({
@@ -17,7 +18,11 @@ export class PdfLibService {
   routerOutlet: any;
 
 
-  constructor(public modalController: ModalController, private modalCtrl: ModalController) { }
+  constructor(
+    public modalController: ModalController,
+    private modalCtrl: ModalController,
+    public loading: LoadingService
+  ) { }
 
   async modifyPdf(pdf: any, activity: number, dateFile: String) {
 
@@ -79,7 +84,6 @@ export class PdfLibService {
       }
     });
     return await modal.present();
-
   }
 
 }

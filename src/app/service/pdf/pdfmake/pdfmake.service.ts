@@ -1,3 +1,4 @@
+import { LoadingService } from './../../../service/loading/loading.service';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { VariableService } from '../../variable/variable.service';
@@ -28,6 +29,7 @@ export class PdfmakeService {
     private _activityPipe: ActivityPipe,
     private _pdflib: PdfLibService,
     public loadingController: LoadingController,
+    public loading: LoadingService
   ) { }
 
   async generatePdf(activity: number) {
@@ -37,15 +39,17 @@ export class PdfmakeService {
     this.toDayFr = this._datepipe.transform(this.toDay, "dd/MM/yyyy")
     this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
 
-    const loading = await this.loadingController.create({
-      message: 'Patientez....',
-    });
+    // const loading = await this.loadingController.create({
+    //   message: 'Patientez....',
+    // });
 
-    await loading.present();
+    // await loading.present();
+
+    this.loading.show();
 
     await this.exportPdf(activity);
 
-    await loading.dismiss();
+    // await loading.dismiss();
   }
 
   documentDefinition(qrcode: string): any {

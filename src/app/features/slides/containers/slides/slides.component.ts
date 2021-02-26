@@ -111,10 +111,8 @@ export class SlidesComponent implements OnInit {
     if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
 
       //IOS
-      console.log('ios');
       this.checkOs = true;
     } else {
-      console.log('and');
       this.checkOs = false;
     }
 

@@ -1,3 +1,4 @@
+import { LoadingService } from '../../../../service/loading/loading.service';
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,7 +25,7 @@ export class SettingsComponent implements OnInit {
     private _varGlobal: VariableService,
     private _router: Router,
     private _storage: StorageService,
-    private _renderer: Renderer2,
+    public loading: LoadingService,
   ) { }
 
   ngOnInit(): void {
@@ -91,6 +92,7 @@ export class SettingsComponent implements OnInit {
     this._storage.saveLocal('ac', this.validations_form.value);
 
     this._storage.saveLocal('setok', '1');
+    this.loading.show();
     this._router.navigate([ '' ]);
   }
 

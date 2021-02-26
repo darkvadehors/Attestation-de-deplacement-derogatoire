@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { LoadingService } from './../../../../service/loading/loading.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { PdfmakeService } from '../../../../service/pdf/pdfmake/pdfmake.service';
@@ -16,7 +17,8 @@ export class WelcomeComponent {
   constructor(
     private _router: Router,
     private _storage: StorageService,
-    private _pdfmake: PdfmakeService) { }
+    private _pdfmake: PdfmakeService,
+    public loading: LoadingService) { }
 
   async ionViewWillEnter() {
 
@@ -31,6 +33,11 @@ export class WelcomeComponent {
       this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
 
+  }
+
+  ionViewDidEnter() {
+    console.log('did enter');
+    this.loading.hide();
   }
 
   launchAttestation(activity: number) {

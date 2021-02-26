@@ -2,6 +2,7 @@ import { Input, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LoadingController, ModalController, NavParams } from '@ionic/angular';
 import { PDFDocumentProxy, PdfViewerModule } from 'ng2-pdf-viewer';
+import { LoadingService } from 'src/app/service/loading/loading.service';
 
 @Component({
     selector: 'pdfviewer',
@@ -10,23 +11,28 @@ import { PDFDocumentProxy, PdfViewerModule } from 'ng2-pdf-viewer';
 })
 
 export class pdfViewer implements OnInit {
-    loading: HTMLIonLoadingElement;
+    // loading: HTMLIonLoadingElement;
 
     // Data passed in by componentProps
     @Input() pdfUrl: any;
 
 
-    constructor(public loadingController: LoadingController, public pdfviewer: PdfViewerModule, public modalCtrl: ModalController) { }
+    constructor(
+        public loadingController: LoadingController,
+        public pdfviewer: PdfViewerModule,
+        public modalCtrl: ModalController,
+        public loading: LoadingService
+    ) { }
 
     async ngOnInit() {
-        this.loading = await this.loadingController.create({
-            message: `Création de l'attestation....`,
-        });
-        await this.loading.present();
+        // this.loading = await this.loadingController.create({
+        //     message: `Création de l'attestation....`,
+        // });
+        // await this.loading.present();
     }
 
     callBackFn(pdf: PDFDocumentProxy) {
-        this.loading.dismiss();
+        this.loading.hide();
     }
 
     closeModal() {

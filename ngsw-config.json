@@ -27,5 +27,14 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "covattest",
+      "cacheConfig": {
+        "maxSize": 6,
+        "maxAge": "7d"
+      };
+    }
   ]
 }
