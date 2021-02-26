@@ -1,11 +1,6 @@
 .ion-page{
     background-color: rgb(255, 255, 255);
 
-    pdf-viewer {
-        display: block;
-        height: 100vh;
-    }
-
     ion-buttons{
         font-size: large;
         position: absolute;
@@ -13,6 +8,11 @@
         ion-icon{
             color: gray;
         }
+    }
+
+    pdf-viewer {
+        display: block;
+        height: 100vh;
     }
 }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
-import { VariableService } from '../../../../service/variable/variable.service';
 
 @Component({
     selector: 'app-tabs',
@@ -9,7 +8,7 @@ import { VariableService } from '../../../../service/variable/variable.service';
     styleUrls: [ './tabs.component.scss' ]
 })
 export class TabsComponent {
-    constructor(private _router: Router, private _storage: StorageService, private _varGlobal: VariableService) { }
+    constructor(private _router: Router, private _storage: StorageService) { }
 
     ionViewWillLoad() {
 

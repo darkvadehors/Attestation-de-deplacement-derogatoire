@@ -36,12 +36,13 @@ export class WelcomeComponent {
   }
 
   ionViewDidEnter() {
-    console.log('did enter');
-    this.loading.hide();
+    // Hide loading quand la page est chargé
+    // this.loading.hide();
   }
 
   launchAttestation(activity: number) {
 
+    this.loading.show();
     this._storage.saveOnLine(activity);
 
     this._pdfmake.generatePdf(activity);

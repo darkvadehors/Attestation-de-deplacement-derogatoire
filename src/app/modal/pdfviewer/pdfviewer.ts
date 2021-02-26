@@ -11,7 +11,7 @@ import { LoadingService } from 'src/app/service/loading/loading.service';
 })
 
 export class pdfViewer implements OnInit {
-    // loading: HTMLIonLoadingElement;
+    loading: HTMLIonLoadingElement;
 
     // Data passed in by componentProps
     @Input() pdfUrl: any;
@@ -21,7 +21,7 @@ export class pdfViewer implements OnInit {
         public loadingController: LoadingController,
         public pdfviewer: PdfViewerModule,
         public modalCtrl: ModalController,
-        public loading: LoadingService
+        public loadingservice: LoadingService
     ) { }
 
     async ngOnInit() {
@@ -32,8 +32,14 @@ export class pdfViewer implements OnInit {
     }
 
     callBackFn(pdf: PDFDocumentProxy) {
-        this.loading.hide();
+        // arret le loading une fois le pdf genere
+        // console.log('callback');
+        // this.loadingservice.hide();
     }
+
+    pageRendered(e: CustomEvent) {
+        this.loadingservice.hide();
+      }
 
     closeModal() {
         this.modalCtrl.dismiss({

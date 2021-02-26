@@ -9,7 +9,7 @@
     [show-all]="true"
     [original-size]="false"
     [autoresize]="true"
-    (after-load-complete)="callBackFn($event)"
+    (page-rendered)="pageRendered($event)"
     >
   </pdf-viewer>
 </div>
