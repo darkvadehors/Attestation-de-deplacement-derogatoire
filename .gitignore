@@ -364,7 +364,8 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Mac - Desktop Services Store
-*.DS_Store
+*DS_Store
+**/*.DS_Store
 *_MACOSX
 
 # Windows
@@ -375,5 +376,5 @@ FodyWeavers.xsd
 */environments/
 icons/
 -Travail/
-*package-lock.json
+**/package-lock.json
 deploy.js
