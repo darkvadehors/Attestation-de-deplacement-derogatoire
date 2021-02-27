@@ -7,12 +7,14 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.ico",
+          "/assets/images/favicons/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
           "/*.js",
-          "/svg/**"
+          "/svg/home.svg",
+          "/svg/settings-outline.svg",
+          "/svg/close-circle-outline.svg"
         ]
       }
     },
@@ -23,7 +25,7 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(eot|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
     }
