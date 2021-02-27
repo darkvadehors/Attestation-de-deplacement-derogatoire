@@ -1,65 +1,76 @@
+
 <ion-content fullscreen class="ion-padding" scroll-y="false" color="secondary">
   <ion-slides>
     <!-- -------------------------------- Slide 1 ------------------------------------------------- -->
     <ion-slide>
-      <img src="assets/images/intro/img-intro01.png"/>
-      <h2>Bienvenue sur <b><br>CovAttest</b></h2>
-      <p>La liberté dans la poche...</p>
-      <ion-text>
-      </ion-text>
+      <div class="slide">
+        <img class="intro" src="assets/images/intro/img-intro01.png"/>
+        <h2>Bienvenue sur <b><br>CovAttest</b></h2>
+        <p>La liberté dans la poche...</p>
+      </div>
       <div class="arrow"><span></span><span></span><span></span></div>
     </ion-slide>
-    <!-- -------------------------------- Slide 2 ------------------------------------------------- -->
+    <!-- -------------------------------- Slide 2 Etape 1 ----------------------------------------- -->
     <ion-slide>
+      <ion-header>
+        <h1>Etape 1</h1>
+      </ion-header>
       <ion-text>
-        <h2>Etape 1</h2>
-        <div *ngIf="checkOs; else elseBlock">
-          <img class="oslogo" src="assets/images/intro/safari.png"/>
+        <div *ngIf="checkOs; else elseBlock" class="slide">
+          <img  class="oslogo"src="assets/images/intro/safari.png"/>
           <p>Enregistrer le raccourcis sur <br> l'écran d'accueil avec Safari</p>
           <p><img class="os" src="assets/images/intro/ios1.png" alt="Safari"></p>
           <p><img class="os" src="assets/images/intro/ios2.png" alt="Safari"></p>
           <p> <img class="os" src="assets/images/intro/ios3.png" alt="Safari"></p>
         </div>
-        <ng-template #elseBlock>
-          <img class="oslogo" src="assets/images/intro/android.png"/>
-          <p>Enregistrer le raccourcis sur l'écran d'accueil</p>
-          <p><img class="os" src="assets/images/intro/android1.png" alt="Android"></p>
-          <p><img class="os" src="assets/images/intro/android2.png" alt="Android"></p>
-          <p> <img class="os" src="assets/images/intro/android3.png" alt="Android"></p>
+        <ng-template #elseBlock >
+          <div class="slide">
+            <img class="oslogo" src="assets/images/intro/android.png"/>
+            <p>Enregistrer le raccourcis sur l'écran d'accueil</p>
+            <p><img class="os" src="assets/images/intro/android1.png" alt="Android"></p>
+            <p><img class="os" src="assets/images/intro/android2.png" alt="Android"></p>
+            <p> <img class="os" src="assets/images/intro/android3.png" alt="Android"></p>
+          </div>
         </ng-template>
       </ion-text>
-      <ion-text>
         <div class="arrow"><span></span><span></span><span></span></div>
-      </ion-text>
     </ion-slide>
-    <!-- -------------------------------- Slide 2 ------------------------------------------------- -->
+    <!-- -------------------------------- Slide 3 Etape 3 ----------------------------------------- -->
     <ion-slide>
-      <h2>Etape 2</h2>
-      <img src="assets/images/intro/img-intro02.png"/>
-      <p><b>Ouvrir l'app nouvellement installée et Remplir</b> ces informations la première fois.</p>
-      <ion-text>
-        <div class="arrow"><span></span><span></span><span></span></div>
-      </ion-text>
+      <ion-header>
+        <h1>Etape 2</h1>
+      </ion-header>
+      <div class="slide">
+        <img class="intro" src="assets/images/intro/img-intro02.png"/>
+        <p>Ouvrir l'app nouvellement installée </p>
+        <p>Remplir ces informations la première fois.</p>
+      </div>
+      <div class="arrow"><span></span><span></span><span></span></div>
     </ion-slide>
     <!-- -------------------------------- Slide 4 ------------------------------------------------- -->
     <ion-slide>
-      <h2>Voila c'est fini !</h2>
-      <img src="assets/images/intro/img-intro03.png"/>
-      <p>
-        <b>Votre Attestation</b>
-        <br> est déjà prête.
-      </p>
-      <p>
-        Choisissez,
-        <br>
-        Présenter!
-      </p>
-      <ion-button fill="clear" color="danger" fill="solid" size="large" (click)="start()">Démarrer
-        <ion-icon slot="end" name="arrow-forward">
-        </ion-icon>
-      </ion-button>
-
-    </ion-slide>
+      <ion-header>
+        <h1>Voila c'est fini !</h1>
+      </ion-header>
+      <div class="slide">
+        <img class="intro" src="assets/images/intro/img-intro03.png"/>
+        <p>
+          <b>Votre Attestation</b>
+          <br> est déjà prête.
+        </p>
+        <p>
+          Choisissez,
+          <br>
+          Présenter!
+        </p>
+        <ion-button fill="clear" color="danger" fill="solid" size="large" (click)="start()">Démarrer
+          <ion-icon slot="end" name="arrow-forward">
+          </ion-icon>
+        </ion-button>
+      </div>
+      </ion-slide>
   </ion-slides>
-  <ion-text>Version {{version}}</ion-text>
 </ion-content>
+<ion-footer>
+  <ion-text clas="version">Version {{version}}</ion-text>
+</ion-footer>

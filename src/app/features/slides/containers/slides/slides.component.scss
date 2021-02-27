@@ -1,68 +1,89 @@
 /* Without setting height the slides will take up the height of the slide's content */
-ion-slides {
-  height: 100%;
+ion-content{
+  ion-slides {
+    height: 100%;
 
-  ion-slide {
-    display: block;
-    text-align: center;
-    h2 {
-      margin-top: 2.8rem;
-    }
-
-    img {
-      max-height: 50%;
-      width: 60%;
-    }
-
-    img.oslogo{
-      max-width: 70px;
-      max-height: 70px;
-    }
-
-    p{
-      margin: 10px 10%;
-    }
-
-    .arrow{
-      position: absolute;
-      margin: 20% 10% 0 0%;
-      left: 55%;
-      bottom: 10%;
-      transform: translate(-50%,-50%);
-      transform: rotate(90deg);
-    }
-
-    .arrow span{
+    ion-slide {
       display: block;
-      width: 20px;
-      height: 20px;
-      border-bottom: 3px solid #fff;
-      border-right: 3px solid #fff;
-      transform: rotate(45deg);
-      margin: -10px;
-      animation: animate 2s infinite;
-    }
+      text-align: center;
+      justify-content: space-around;
 
-    .arrow span:nth-child(2){
-      animation-delay: -0.2s;
-    }
-
-    .arrow span:nth-child(3){
-      animation-delay: -0.4s;
-    }
-
-    @keyframes animate {
-      0%{
-          opacity: 0;
-          transform: rotate(45deg) translate(-20px,-20px);
+      h1 {
+        margin-top: 0px;
       }
-      50%{
-          opacity: 1;
+       .slide{
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+
+        img.intro {
+          max-height: 50%;
+          width: 60%;
+        }
+
+        img.oslogo{
+          max-width: 120px;
+          max-height: 120px;
+        }
+
+        img.os{
+          max-height: 44px;
+        }
+
+        p{
+          margin: 10px 10%;
+        }
       }
-      100%{
-          opacity: 0;
-          transform: rotate(45deg) translate(20px,20px);
+
+      .arrow{
+        position: absolute;
+        margin: 20% 10% 0 0%;
+        left: 55%;
+        bottom: 10%;
+        transform: translate(-50%,-50%);
+        transform: rotate(90deg);
+      }
+
+      .arrow span{
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-bottom: 3px solid #fff;
+        border-right: 3px solid #fff;
+        transform: rotate(45deg);
+        margin: -10px;
+        animation: animate 2s infinite;
+      }
+
+      .arrow span:nth-child(2){
+        animation-delay: -0.2s;
+      }
+
+      .arrow span:nth-child(3){
+        animation-delay: -0.4s;
+      }
+
+      @keyframes animate {
+        0%{
+            opacity: 0;
+            transform: rotate(45deg) translate(-20px,-20px);
+        }
+        50%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+            transform: rotate(45deg) translate(20px,20px);
+        }
       }
     }
   }
+}
+
+ion-footer {
+  text-align: center;
+  margin-bottom: 5px;
 }
