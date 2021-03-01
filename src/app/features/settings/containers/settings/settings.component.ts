@@ -92,9 +92,11 @@ export class SettingsComponent implements OnInit {
     this._storage.saveLocal('ac', this.validations_form.value);
 
     this._storage.saveLocal('setok', '1');
-    this.loading.show();
+
     this._router.navigate([ '' ]);
   }
 
-
+  ionViewWillLeave() {
+    this.loading.show();
+  }
 }
