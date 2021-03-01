@@ -1,3 +1,4 @@
+import { LoadingService } from 'src/app/service/loading/loading.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DesktopComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loading: LoadingService) { }
 
   ngOnInit(): void {
 
     history.replaceState("", "", "disponible_uniquement_sur_mobile")
+    this.loading.hide();
   }
 
 }
