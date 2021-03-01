@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { PdfmakeService } from '../../../../service/pdf/pdfmake/pdfmake.service';
-import { version } from '../../../../../../package.json'
+import { version } from '../../../../../../package.json';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -37,12 +38,13 @@ export class WelcomeComponent {
 
   ionViewDidEnter() {
     // Hide loading quand la page est chargé
-    // this.loading.hide();
+    this.loading.hide();
   }
 
   launchAttestation(activity: number) {
 
     this.loading.show();
+
     this._storage.saveOnLine(activity);
 
     this._pdfmake.generatePdf(activity);
