@@ -1,9 +1,9 @@
-import { LoadingService } from './../../../../service/loading/loading.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from '../../../../service/storage/storage.service';
-import { PdfmakeService } from '../../../../service/pdf/pdfmake/pdfmake.service';
-import { version } from '../../../../../../package.json';
+import { LoadingService } from './../../../../service/loading/loading.service';
+import { StorageService } from './../../../../service/storage/storage.service';
+import { PdfmakeService } from './../../../../service/pdf/pdfmake/pdfmake.service';
+import { version } from './../../../../../../package.json';
 
 @Component({
   selector: 'app-welcome',
