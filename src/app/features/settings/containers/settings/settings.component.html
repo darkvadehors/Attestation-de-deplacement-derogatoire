@@ -112,7 +112,6 @@
       <div>
         <div>
           <ion-grid>
-
             <ion-row>
               <ion-col class="ion-align-self-center" size-md>
                 <ion-button  color="danger" type="reset" expand="block">Effacer</ion-button>
@@ -120,7 +119,16 @@
               <ion-col>
                 <ion-button class="submit-btn" color="success" type="submit" expand="block" size-md [disabled]="!validations_form.valid">Valider</ion-button>
               </ion-col>
-
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-align-self-start">
+                <ion-text>Version de L'application {{version}}</ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button  color="success" expand="block" (click)="updateIos()" >Mise à jour</ion-button>
+              </ion-col>
             </ion-row>
           </ion-grid>
         </div>

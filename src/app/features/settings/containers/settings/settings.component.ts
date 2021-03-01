@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
+import { version } from '../../../../../../package.json'
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -18,6 +19,7 @@ export class SettingsComponent implements OnInit {
   validations_form: FormGroup;
   setting: Usersettings = null;
   save: boolean = false;
+  public version: string = version;
 
   constructor(
     public alertCtl: AlertController,
@@ -55,6 +57,7 @@ export class SettingsComponent implements OnInit {
 
   ionViewDidEnter() {
     this._varGlobal.loadVar();
+    this.loading.hide();
   }
 
   validation_messages = {
@@ -98,5 +101,9 @@ export class SettingsComponent implements OnInit {
 
   ionViewWillLeave() {
     this.loading.show();
+  }
+
+  updateIos() {
+    location.reload();
   }
 }
