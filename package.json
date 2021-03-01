@@ -31,6 +31,7 @@
     "angularx-qrcode": "^10.0.11",
     "crypto-js": "^4.0.0",
     "google-libphonenumber": "^3.2.15",
+    "http-server": "^0.12.3",
     "moment": "^2.29.1",
     "ng2-pdf-viewer": "^6.4.0",
     "pdf-lib": "^1.16.0",
