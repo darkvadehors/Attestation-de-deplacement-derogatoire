@@ -32,8 +32,8 @@ export class AppComponent {
         // on check les mise à jour
         this._update.checkForUpdate().then(async () => {
           // console.log('check Mise a jour');
-          const toast = await this.toastController.create({ message: 'Vérification des mises à jours.', duration: 3000 })
-          toast.present()
+          // const toast = await this.toastController.create({ message: 'Vérification des mises à jours.', duration: 3000 })
+          // toast.present()
         });
 
 
