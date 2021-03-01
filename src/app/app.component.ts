@@ -1,5 +1,5 @@
 import { SwUpdate } from '@angular/service-worker';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VariableService } from './service/variable/variable.service';
 import { App } from '@capacitor/core';
 import { Platform, ToastController } from '@ionic/angular';
@@ -9,7 +9,7 @@ import { LoadingService } from './service/loading/loading.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(
     private _varGlobal: VariableService,
@@ -18,11 +18,14 @@ export class AppComponent {
     public toastController: ToastController,
     public loading: LoadingService
   ) {
-    this.loading.show();
     this._varGlobal.loadVar();
     this.updateClient();
     this.appInitializer();
     }
+
+  ngOnInit(): void {
+    this.loading.show
+  }
 
   async appInitializer() {
     // quand la platform est prete
