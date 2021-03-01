@@ -1,3 +1,4 @@
+import { LoadingService } from 'src/app/service/loading/loading.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
@@ -13,7 +14,7 @@ export class SlidesComponent implements OnInit {
   checkOs: boolean = null;
   public version: string = version;
 
-  constructor(private _router: Router, private _storage: StorageService, private _platform: Platform) { }
+  constructor(private _router: Router, private _storage: StorageService, private _platform: Platform, public loading: LoadingService) { }
 
   async ngOnInit(): Promise<any> {
 
@@ -118,7 +119,9 @@ export class SlidesComponent implements OnInit {
 
   }
 
-
+  ionViewDidEnter() {
+    this.loading.hide();
+  }
   start() {
     this._storage.saveLocal('intro', '1')
     this._router.navigate([ 'tabs/settings' ]);
