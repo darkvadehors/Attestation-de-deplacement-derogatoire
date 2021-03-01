@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { LoadingController, ModalController, NavParams } from '@ionic/angular';
 import { PDFDocumentProxy, PdfViewerModule } from 'ng2-pdf-viewer';
 import { LoadingService } from 'src/app/service/loading/loading.service';
-
 @Component({
     selector: 'pdfviewer',
     templateUrl: 'pdfviewer.html',
@@ -22,20 +21,22 @@ export class pdfViewer implements OnInit {
         public pdfviewer: PdfViewerModule,
         public modalCtrl: ModalController,
         public loadingservice: LoadingService
-    ) { }
+    ) {
+    }
 
-    async ngOnInit() {
+
+        async ngOnInit() {
         // this.loading = await this.loadingController.create({
         //     message: `Création de l'attestation....`,
         // });
         // await this.loading.present();
     }
 
-    callBackFn(pdf: PDFDocumentProxy) {
-        // arret le loading une fois le pdf genere
-        // console.log('callback');
-        // this.loadingservice.hide();
-    }
+    // callBackFn(pdf: PDFDocumentProxy) {
+    //     // arret le loading une fois le pdf genere
+    //     // console.log('callback');
+    //     // this.loadingservice.hide();
+    // }
 
     pageRendered(e: CustomEvent) {
         this.loadingservice.hide();
