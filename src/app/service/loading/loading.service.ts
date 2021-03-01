@@ -11,6 +11,8 @@ export class LoadingService {
   constructor(public loadingController: LoadingController) {
     this.loading = this.loadingController.create({
       message: 'Patientez....',
+      spinner: 'dots',
+      cssClass: 'loading',
     });
 
   }
