@@ -1,3 +1,4 @@
+import { SwUpdate } from '@angular/service-worker';
 import { LoadingService } from '../../../../service/loading/loading.service';
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -19,7 +20,7 @@ export class SettingsComponent implements OnInit {
   validations_form: FormGroup;
   setting: Usersettings = null;
   save: boolean = false;
-  public version: string = version;
+  public versionLocal: string = version;
 
   constructor(
     public alertCtl: AlertController,
@@ -28,6 +29,7 @@ export class SettingsComponent implements OnInit {
     private _router: Router,
     private _storage: StorageService,
     public loading: LoadingService,
+    private _Update: SwUpdate
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +60,10 @@ export class SettingsComponent implements OnInit {
   ionViewDidEnter() {
     this._varGlobal.loadVar();
     this.loading.hide();
+    this._Update.available.subscribe((event) => {
+      console.log('object update');
+      // confirm('Nouvelle version');
+    })
   }
 
   validation_messages = {
