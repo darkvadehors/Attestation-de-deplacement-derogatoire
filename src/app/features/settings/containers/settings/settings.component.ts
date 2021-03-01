@@ -89,6 +89,7 @@ export class SettingsComponent implements OnInit {
   };
 
   onSubmit(): any {
+    this.loading.show();
 
     this._varGlobal.setting = this.validations_form.value;
 
