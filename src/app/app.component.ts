@@ -1,5 +1,5 @@
 import { SwUpdate } from '@angular/service-worker';
-import { Component, OnInit, ApplicationRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { VariableService } from './service/variable/variable.service';
 import { App } from '@capacitor/core';
 import { Platform, ToastController } from '@ionic/angular';
@@ -15,14 +15,13 @@ export class AppComponent {
     private _varGlobal: VariableService,
     private _platform: Platform,
     private _update: SwUpdate,
-    private _appRef: ApplicationRef,
     public toastController: ToastController,
     public loading: LoadingService
   ) {
     this.loading.show();
-    this.appInitializer();
     this._varGlobal.loadVar();
     this.updateClient();
+    this.appInitializer();
     }
 
   async appInitializer() {
@@ -41,17 +40,16 @@ export class AppComponent {
         // on check les mise à jour
         if (this._update.isEnabled) {
           this._update.checkForUpdate().then(async () => {
-            // console.log('check Mise a jour');
-            // const toast = await this.toastController.create({ message: 'Vérification des mises à jours.', duration: 3000 })
-            // toast.present()
           });
+
         }
-
-
-
-        //   const toast = await this.toastController.create({ message: 'Vérification des mises à jours.', duration: 3000 })
-        //   toast.present()
-
+        // else if (/webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) { // Si Apple
+        //   //Mobile
+        //   this._update.available.subscribe((event) => {
+        //     console.log('hash', event.current)
+        //   });
+        //   // location.reload()
+        // }
       }
 
     })
@@ -71,3 +69,5 @@ export class AppComponent {
   }
 
 }
+// const toast = await this.toastController.create({ message: 'Vérification des mises à jours.', duration: 3000 })
+// toast.present()
