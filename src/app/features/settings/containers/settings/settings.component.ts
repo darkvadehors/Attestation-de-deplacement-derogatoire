@@ -104,6 +104,7 @@ export class SettingsComponent implements OnInit {
   }
 
   updateIos() {
+    this.loading.show();
     location.reload();
   }
 }
