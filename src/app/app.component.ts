@@ -39,11 +39,13 @@ export class AppComponent {
 
         // console.log('isstable');
         // on check les mise à jour
-        this._update.checkForUpdate().then(async () => {
-          // console.log('check Mise a jour');
-          // const toast = await this.toastController.create({ message: 'Vérification des mises à jours.', duration: 3000 })
-          // toast.present()
-        });
+        if (this._update.isEnabled) {
+          this._update.checkForUpdate().then(async () => {
+            // console.log('check Mise a jour');
+            // const toast = await this.toastController.create({ message: 'Vérification des mises à jours.', duration: 3000 })
+            // toast.present()
+          });
+        }
 
 
 
@@ -56,17 +58,16 @@ export class AppComponent {
   }
 
   updateClient() {
-    if (!this._update.isEnabled) {
+    if (this._update.isEnabled) {
       // console.log('Not Enabled');
-      return;
-    }
-    this._update.available.subscribe(async (event) => {
-      // console.log(`current`, event.current, `available `, event.available);
-      // Si update available toast et reload
-      const toast = await this.toastController.create({ message: 'Mises à jours.', duration: 3000, position: 'middle' })
-      toast.present().then(() => this._update.activateUpdate().then(() => location.reload()));
+      this._update.available.subscribe(async (event) => {
+        // console.log(`current`, event.current, `available `, event.available);
+        // Si update available toast et reload
+        const toast = await this.toastController.create({ message: 'Mise à jour.', duration: 3000 })
+        toast.present().then(() => this._update.activateUpdate().then(() => location.reload()));
 
-    });
+      });
+    }
   }
 
 }
