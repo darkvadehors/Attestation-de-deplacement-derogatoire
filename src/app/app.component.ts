@@ -3,6 +3,7 @@ import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { VariableService } from './service/variable/variable.service';
 import { App } from '@capacitor/core';
 import { Platform, ToastController } from '@ionic/angular';
+import { LoadingService } from './service/loading/loading.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,11 +11,19 @@ import { Platform, ToastController } from '@ionic/angular';
 })
 export class AppComponent {
 
-  constructor(private _varGlobal: VariableService, private _platform: Platform, private _update: SwUpdate, private _appRef: ApplicationRef, public toastController: ToastController) {
+  constructor(
+    private _varGlobal: VariableService,
+    private _platform: Platform,
+    private _update: SwUpdate,
+    private _appRef: ApplicationRef,
+    public toastController: ToastController,
+    public loading: LoadingService
+  ) {
+    this.loading.show();
     this.appInitializer();
     this._varGlobal.loadVar();
     this.updateClient();
-  }
+    }
 
   async appInitializer() {
     // quand la platform est prete
