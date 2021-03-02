@@ -8,7 +8,6 @@ import { ActivityPipe } from '../../../shared/pipe/activity/activity.pipe';
 //PDF
 import { PdfLibService } from '../pdf-lib/pdf-lib.service';
 import { LoadingController } from '@ionic/angular';
-
 @Injectable({
   providedIn: 'root'
 })
