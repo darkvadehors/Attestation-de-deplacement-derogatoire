@@ -8,6 +8,7 @@ import { ActivityPipe } from '../../../shared/pipe/activity/activity.pipe';
 //PDF
 import { PdfLibService } from '../pdf-lib/pdf-lib.service';
 import { LoadingController } from '@ionic/angular';
+import { fonts, vfs } from 'pdfmake/build/pdfmake';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +21,8 @@ export class PdfmakeService {
   timebackH: string = null;
   timebackT: string = null;
   qrCodeData: string = null;
+  fontSize1: number = 9;
+  fontSize2: number = 10.2;
 
   constructor(
     private _varGlobal: VariableService,
@@ -64,15 +67,21 @@ export class PdfmakeService {
       },
       content: [
         {
-          text: 'ATTESTATION DE DÉPLACEMENT DÉROGATOIRE DURANT LES HORAIRES DU COUVRE-FEU ',
+          text: 'ATTESTATION DE DÉPLACEMENT DÉROGATOIRE',
           margin: [ 40, 8.5, 40, 10 ],
           style: 'header',
         },
         {
-          text: 'En application du décret no 2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire',
-          fontSize: 9,
+          text: 'En application de l’article 4 du décret no 2020-1310 du 29 octobre 2020 prescrivant les mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire.',
+          fontSize: this.fontSize1,
           alignment: 'left',
-          margin: [ 30, 0, 60, 22 ]
+          lineHeight: 1,
+          // characterSpacing: 0.2,
+          margin: [ 20, 0, 60, 22 ]
+        },
+        {
+          qr: qrcode, alignment: 'right',
+          margin: [ 40, -25, 0, 0 ], fit: '105.5'
         },
         {
           text: [
@@ -80,11 +89,10 @@ export class PdfmakeService {
             { text: this._varGlobal.setting.firstname, fontSize: 11 },
             ' ',
             { text: this._varGlobal.setting.lastname, fontSize: 11 },
-
           ],
-          fontSize: 10.6,
+          fontSize: this.fontSize2,
           alignment: 'left',
-          margin: [ 30, 0, 20, 5 ]
+          margin: [ 20, -40, 20, 5 ]
         },
         {
           text: [
@@ -93,9 +101,9 @@ export class PdfmakeService {
             { text: '                                             à : ' },
             { text: this._varGlobal.setting.cityofbird, fontSize: 11 },
           ],
-          fontSize: 10.6,
+          fontSize: this.fontSize2,
           alignment: 'left',
-          margin: [ 30, 0, 20, 5 ]
+          margin: [ 20, 0, 20, 5 ]
         },
         {
           text: [
@@ -106,37 +114,41 @@ export class PdfmakeService {
             ' ',
             { text: this._varGlobal.setting.city, fontSize: 11 }
           ],
-          fontSize: 10.6,
+          fontSize: this.fontSize2,
           alignment: 'left',
-          margin: [ 30, 0, 20, 5 ]
-        },
-        {
-          text: `certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé en application des mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire :`,
-          fontSize: 10.6,
-          alignment: 'justify',
-          margin: [ 30, 20, 20, 20 ]
+          margin: [ 20, 0, 20, 5 ]
         },
         {
           columns: [
             {
-              width: 30,
+              text: [ `certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé en application des mesures générales nécessaires pour faire face à l’épidémie de COVID-19 dans le cadre de l’état d’urgence sanitaire`, { text: '1', fontSize: 8, style: [ 'sup', 'small' ] }, ` :` ],
+              fontSize: this.fontSize2,
+              alignment: 'justify',
+            },
+          ],
+          margin: [ 20, 20, 20, 10 ]
+        },
+        {
+          columns: [
+            {
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
               width: '*',
-              text: 'Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou le lieu  d’enseignement et de formation, déplacements professionnels ne pouvant être différés'
+              text: 'Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou le lieu d’enseignement et de formation, déplacements professionnels ne pouvant être différés.'
             }
           ],
-          margin: [ 30, 0, 20, 0 ]
+          margin: [ 20, 0, 20, 0 ]
         },
         {
           columns: [
             {
-              width: 30,
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
@@ -144,14 +156,14 @@ export class PdfmakeService {
               text: 'Déplacements pour des consultations, examens, actes de prévention (dont vaccination) et soins ne pouvant être assurés à distance et ne pouvant être différés ou pour l’achat de produits de santé'
             }
           ],
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           columns: [
             {
-              width: 30,
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
@@ -159,14 +171,14 @@ export class PdfmakeService {
               text: 'Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou précaires ou pour la garde d’enfants'
             }
           ],
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           columns: [
             {
-              width: 30,
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
@@ -174,14 +186,14 @@ export class PdfmakeService {
               text: 'Déplacements des personnes en situation de handicap et de leur accompagnant'
             }
           ],
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           columns: [
             {
-              width: 30,
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
@@ -189,14 +201,14 @@ export class PdfmakeService {
               text: 'Déplacements pour répondre à une convocation judiciaire ou administrative'
             }
           ],
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           columns: [
             {
-              width: 30,
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
@@ -204,14 +216,14 @@ export class PdfmakeService {
               text: 'Déplacements pour participer à des missions d’intérêt général sur demande de l’autorité administrative'
             }
           ],
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           columns: [
             {
-              width: 30,
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
@@ -219,14 +231,14 @@ export class PdfmakeService {
               text: 'Déplacements liés à des transits ferroviaires, aériens ou en bus pour des déplacements de longues distances'
             }
           ],
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           columns: [
             {
-              width: 30,
+              width: 25,
               text: [
-                { text: '[  ]', fontSize: 12 }
+                { text: '[  ]', fontSize: this.fontSize1 }
               ]
             },
             {
@@ -234,16 +246,81 @@ export class PdfmakeService {
               text: 'Déplacements brefs, dans un rayon maximal d’un kilomètre autour du domicile pour les besoins des animaux de compagnie'
             }
           ],
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
+        },
+        {
+          text: 'MOTIFS SUPPLEMENTAIRES APPLICABLES UNIQUEMENT DE 6H A 18H DANS LES TERRITOIRES SOUMIS A UN CONFINEMENT LE WEEK-END',
+          bold: true,
+          margin: [ 20, 10, 20, 0 ],
+        },
+        {
+          columns: [
+            {
+              width: 25,
+              text: [
+                { text: '[  ]', fontSize: this.fontSize1 }
+              ]
+            },
+            {
+              width: '*',
+              text: `Déplacements pour effectuer des achats de fournitures nécessaires à l'activité professionnelle, des achats de première nécessité, des retraits de commandes, des livraisons à domicile, ainsi que pour les déménagements.`
+            }
+          ],
+          margin: [ 20, 10, 20, 0 ]
+        },
+        {
+          columns: [
+            {
+              width: 25,
+              text: [
+                { text: '[  ]', fontSize: this.fontSize1 }
+              ]
+            },
+            {
+              width: '*',
+              text: `Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal de cinq kilomètres autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile.`
+            }
+          ],
+          margin: [ 20, 10, 20, 0 ]
+        },
+        {
+          columns: [
+            {
+              width: 25,
+              text: [
+                { text: '[  ]', fontSize: this.fontSize1 }
+              ]
+            },
+            {
+              width: '*',
+              text: `Déplacements à destination ou en provenance d’un lieu de culte, participation à des rassemblements, réunions ou activités sur la voie publique ou dans un lieu ouvert au public qui ne sont pas interdits en application de l'article 3.`,
+            }
+          ],
+          margin: [ 20, 10, 20, 0 ]
+        },
+        {
+          columns: [
+            {
+              width: 25,
+              text: [
+                { text: '[  ]', fontSize: this.fontSize1 }
+              ]
+            },
+            {
+              width: '*',
+              text: 'Déplacements pour se rendre dans un service public ou chez un professionnel du droit, pour un acte ou une démarche qui ne peuvent être réalisés à distance.',
+            }
+          ],
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           text: [
             'Fait à :  ',
             { text: this._varGlobal.setting.city, fontSize: 11 },
           ],
-          fontSize: 10.6,
+          fontSize: this.fontSize2,
           alignment: 'left',
-          margin: [ 30, 10, 20, 0 ]
+          margin: [ 20, 10, 20, 0 ]
         },
         {
           text: [
@@ -252,19 +329,15 @@ export class PdfmakeService {
             { text: '                                                        à : ' },
             { text: this.timebackColon, fontSize: 11 },
           ],
-          fontSize: 10.6,
+          fontSize: this.fontSize2,
           alignment: 'left',
-          margin: [ 30, 5, 20, 0 ]
+          margin: [ 20, 0, 20, 0 ]
         },
         {
           text: '(Date et heure de début de sortie à mentionner obligatoirement)',
-          fontSize: 10.6,
+          fontSize: this.fontSize2,
           alignment: 'left',
-          margin: [ 30, 5, 0, 10 ]
-        },
-        {
-          qr: qrcode, alignment: 'left',
-          margin: [ 390, 0, 0, 0 ], fit: '114'
+          margin: [ 30, 0, 0, 10 ]
         },
         {
           columns: [
@@ -283,12 +356,12 @@ export class PdfmakeService {
           ],
           margin: [ 50, 15, 32, 0 ]
         },
-
+        // -------------------------Page Break-----------------------------
         // colored QR
         {
           qr: qrcode, alignment: 'left',
           margin: [ 16, 12, 0, 0 ], fit: '305', version: 10, eccLevel: 'M',
-          pageBreak: 'before'
+          // pageBreak: 'before'
         },
       ],
       styles: {
@@ -305,7 +378,7 @@ export class PdfmakeService {
         },
         small: {
           fontSize: 8.5
-        }
+        },
       }
     }
   }
@@ -353,12 +426,12 @@ export class PdfmakeService {
 
     if (!this.pdfMake) {
       const pdfMakeModule = await import('pdfmake/build/pdfmake');
-      const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
+      // const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
       this.pdfMake = (pdfMakeModule as any).default;
-      this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
+      // this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
 
-    const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition);
+    const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition, null, fonts);
     pdfDocGenerator.getBase64((data: any) => {
       this._pdflib.modifyPdf(data, activity, dateFile);
     });

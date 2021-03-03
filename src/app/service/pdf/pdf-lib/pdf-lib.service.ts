@@ -34,40 +34,53 @@ export class PdfLibService {
     const pdfDoc = await pdflibModule.PDFDocument.load(pdf)
     const font = await pdfDoc.embedFont(pdflibModule.StandardFonts.Helvetica)
     const pages = pdfDoc.getPages()
-
     const firstPage = pages[ 0 ]
     const { width, height } = firstPage.getSize()
-
     const drawText = (text: any, x: number, y: number, size = 11) => {
       firstPage.drawText(text, { x, y, size, font })
     }
 
     pdfDoc.setTitle(environment.title)
+    let marginLeft = 62;
+    let marginRight = 12;
+    let marginBottum = 60;
 
     switch (activity) {
       case 1:
-        drawText('x', 73, 558, 13)
+        drawText('x', marginLeft, 603, marginRight)
         break
       case 2:
-        drawText('x', 73, 506, 12)
+        drawText('x', marginLeft, 551, marginRight)
         break
       case 3:
-        drawText('x', 73, 454, 12)
+        drawText('x', marginLeft, 499, marginRight)
         break
       case 4:
-        drawText('x', 73, 415, 12)
+        drawText('x', marginLeft, 460, marginRight)
         break
       case 5:
-        drawText('x', 73, 392, 12)
+        drawText('x', marginLeft, 437, marginRight)
         break
       case 6:
-        drawText('x', 73, 367, 12)
+        drawText('x', marginLeft, 412, marginRight)
         break
       case 7:
-        drawText('x', 73, 329, 12)
+        drawText('x', marginLeft, 374, marginRight)
         break
       case 8:
-        drawText('x', 73, 291, 12)
+        drawText('x', marginLeft, 336, marginRight)
+        break;
+      case 9:
+        drawText('x', marginLeft, 260, marginRight)
+        break;
+      case 10:
+        drawText('x', marginLeft, 208, marginRight)
+        break;
+      case 11:
+        drawText('x', marginLeft, 128, marginRight)
+        break;
+      case 12:
+        drawText('x', marginLeft, marginBottum + 15, marginRight)
         break;
     }
 

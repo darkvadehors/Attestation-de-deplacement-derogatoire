@@ -30,6 +30,18 @@ export class ActivityPipe implements PipeTransform {
       case 8:
         activity = 'animaux';
         break;
+      case 9:
+        activity = 'courses';
+        break;
+      case 10:
+        activity = 'sport';
+        break;
+      case 11:
+        activity = 'rassemblement';
+        break;
+      case 12:
+        activity = 'demarche';
+        break;
     }
     return activity;
   }
