@@ -11,11 +11,11 @@ export class StorageService{
     private _ls: LocalstorageService
   ) { }
 
-  readLocal(datakey: string) {
-    return this._ls.readLocalStorage(datakey);
+  readLocal(datakey: string, crypt?: boolean) {
+    return this._ls.readLocalStorage(datakey, crypt);
   }
-  saveLocal(datakey: string, data: string) {
-    this._ls.setLocalStorage(datakey, data);
+  saveLocal(datakey: string, data: string, crypt?: boolean) {
+    this._ls.setLocalStorage(datakey, data, crypt);
   }
 
   saveOnLine(data: any) {

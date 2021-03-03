@@ -9,19 +9,28 @@ export class LocalstorageService {
 
   constructor(private _crypto: CryptoService) { }
 
-  readLocalStorage(datakey: string): any {
+  readLocalStorage(datakey: string, crypt: boolean = true): any {
 
     if (localStorage.getItem(datakey)) {
-      let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(datakey)));
-      return datas;
+      if (crypt === true) {
+        let datas = JSON.parse(this._crypto.decrypt(localStorage.getItem(datakey)));
+        return datas;
+      } else {
+        let datas = JSON.parse(localStorage.getItem(datakey));
+        return datas;
+      }
     } else {
       return null;
     }
 
   }
 
-  setLocalStorage(datakey: string, data: string) {
-    localStorage.setItem(datakey, this._crypto.encrypt(JSON.stringify(data)));
+  setLocalStorage(datakey: string, data: string, crypt: boolean = true): any {
+    if (crypt === true) {
+      localStorage.setItem(datakey, this._crypto.encrypt(JSON.stringify(data)));
+    } else {
+      localStorage.setItem(datakey, JSON.stringify(data));
+    }
   }
 
 }
