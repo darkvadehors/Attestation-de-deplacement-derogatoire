@@ -1,3 +1,4 @@
+import { UpdateIosService } from './service/updateIos/update-ios.service';
 import { SwUpdate } from '@angular/service-worker';
 import { Component, OnInit } from '@angular/core';
 import { VariableService } from './service/variable/variable.service';
@@ -15,8 +16,9 @@ export class AppComponent implements OnInit {
     private _varGlobal: VariableService,
     private _platform: Platform,
     private _update: SwUpdate,
+    private _upDateIos: UpdateIosService,
     public toastController: ToastController,
-    public loading: LoadingService
+    public loading: LoadingService,
   ) {
     this._varGlobal.loadVar();
     this.updateClient();
@@ -24,10 +26,12 @@ export class AppComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    console.log('oninit');
     this.loading.show
   }
 
   async appInitializer() {
+    console.log('Appinit');
     // quand la platform est prete
     await this._platform.ready();
 
@@ -35,24 +39,22 @@ export class AppComponent implements OnInit {
     App.addListener('appStateChange', async ({ isActive }) => {
 
       if (isActive) {
-        // console.log('isactivate');
+        console.log('isactivated');
         // quand l'app est activé on charge la varglobale
         this._varGlobal.loadVar();
 
-        // console.log('isstable');
-        // on check les mise à jour
+        // on check si les mises à jour sont activé => ServiceWorker
         if (this._update.isEnabled) {
+          console.log('isEnabled');
+          // pour android
           this._update.checkForUpdate().then(async () => {
+            console.log('CheckForUpDate');
           });
-
+          // } else if (/webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) { // Si Apple
+        } else { // Si Apple
+          console.log('update IOS');
+          this._upDateIos.checkUpdateIos();
         }
-        // else if (/webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) { // Si Apple
-        //   //Mobile
-        //   this._update.available.subscribe((event) => {
-        //     console.log('hash', event.current)
-        //   });
-        //   // location.reload()
-        // }
       }
 
     })

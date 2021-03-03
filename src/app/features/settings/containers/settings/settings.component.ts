@@ -1,3 +1,4 @@
+import { UpdateIosService } from './../../../../service/updateIos/update-ios.service';
 import { SwUpdate } from '@angular/service-worker';
 import { LoadingService } from '../../../../service/loading/loading.service';
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
@@ -25,11 +26,12 @@ export class SettingsComponent implements OnInit {
   constructor(
     public alertCtl: AlertController,
     public formBuilder: FormBuilder,
+    public loading: LoadingService,
     private _varGlobal: VariableService,
     private _router: Router,
     private _storage: StorageService,
-    public loading: LoadingService,
-    private _Update: SwUpdate
+    private _Update: SwUpdate,
+    private _upDateIos: UpdateIosService
   ) { }
 
   ngOnInit(): void {
@@ -100,6 +102,7 @@ export class SettingsComponent implements OnInit {
     this._varGlobal.setting = this.validations_form.value;
 
     this._storage.saveLocal('ac', this.validations_form.value);
+    this._upDateIos.createVersionIos();
 
     this._storage.saveLocal('setok', '1');
 
