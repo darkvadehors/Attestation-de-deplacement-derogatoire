@@ -8,7 +8,7 @@ import { ActivityPipe } from '../../../shared/pipe/activity/activity.pipe';
 //PDF
 import { PdfLibService } from '../pdf-lib/pdf-lib.service';
 import { LoadingController } from '@ionic/angular';
-import { fonts, vfs } from 'pdfmake/build/pdfmake';
+// import { fonts } from 'pdfmake/build/pdfmake';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,8 +21,6 @@ export class PdfmakeService {
   timebackH: string = null;
   timebackT: string = null;
   qrCodeData: string = null;
-  fontSize1: number = 9;
-  fontSize2: number = 10.2;
 
   constructor(
     private _varGlobal: VariableService,
@@ -55,16 +53,7 @@ export class PdfmakeService {
   }
 
   documentDefinition(qrcode: string): any {
-    // sessionStorage.setItem('resume', JSON.stringify(this.resume));
-
-    //FIXME ajout la font time new roman
     return {
-      info: {
-        title: 'COVID-19 - Déclaration de déplacement',
-        author: `Ministère de l'injustice`,
-        subject: 'Attestation de déplacement dérogatoire',
-        keywords: [ 'covid19', 'covid-19', 'attestation', 'déclaration', 'déplacement', 'officielle', 'gouvernement', ],
-      },
       content: [
         // colored QR
         {
@@ -112,7 +101,7 @@ export class PdfmakeService {
 
   async exportPdf(activity: number) {
 
-    const dateFile = this._datepipe.transform(this.toDay, 'yyyy-MM-dd_') + this.timebackT;
+    // const dateFile = this._datepipe.transform(this.toDay, 'yyyy-MM-dd_') + this.timebackT;
     const documentDefinition = this.documentDefinition(this.qrCode(activity));
 
     if (!this.pdfMake) {
@@ -122,9 +111,10 @@ export class PdfmakeService {
       // this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
 
-    const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition, null, fonts);
+    // const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition, null, fonts);
+    const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition);
     pdfDocGenerator.getBase64((data: any) => {
-      this._pdflib.modifyPdf(data, activity, dateFile);
+      this._pdflib.modifyPdf(data, activity);
     });
   }
 }

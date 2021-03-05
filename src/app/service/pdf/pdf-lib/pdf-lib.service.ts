@@ -12,10 +12,11 @@ import { ModalController } from '@ionic/angular';
 import { LoadingService } from '../../loading/loading.service';
 
 // PDF-Lib
-import { PDFDocument, StandardFonts } from 'pdf-lib';
+// import { PDFDocument, StandardFonts } from 'pdf-lib';
+
+// mmodification des heures
 import { DatePipe } from '@angular/common';
 import { TimeBackPipe } from 'src/app/shared/pipe/time/timeback.pipe';
-import { ActivityPipe } from 'src/app/shared/pipe/activity/activity.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +30,10 @@ export class PdfLibService {
     private modalCtrl: ModalController,
     private _datepipe: DatePipe,
     private _timeBackPipe: TimeBackPipe,
-    private _activityPipe: ActivityPipe,
-    public modalController: ModalController,
     public loading: LoadingService,
   ) { }
 
-  async modifyPdf(pdf: any, activity: number, dateFile: String) {
+  async modifyPdf(pdf: any, activity: number) {
 
     // import de la library
     const pdflibModule = await import('pdf-lib').then(({ PDFDocument, StandardFonts }) => ({ PDFDocument, StandardFonts }));
@@ -42,7 +41,7 @@ export class PdfLibService {
     // const pdfDoc = await pdflibModule.PDFDocument.load(pdf)
 
     // Fetch qrCode
-    const certificateUrl = '/assets/certificate.33362af4.pdf';
+    const certificateUrl = './assets/certificate.33362af4.pdf';
 
     // Fetch certificate PDF
     const certificatePdfBytes = await fetch(certificateUrl).then((res) =>
@@ -56,16 +55,16 @@ export class PdfLibService {
     // const pdfDoc = await PDFDocument.create();
 
     // Load a PDFDocument from the existing PDF bytes
-    const pdfDoc = await PDFDocument.load(certificatePdfBytes)
+    const pdfDoc = await pdflibModule.PDFDocument.load(certificatePdfBytes)
 
     // Embed the first page of the American flag PDF
     const [ qrCode ] = await pdfDoc.embedPdf(qrCodePdfBytes);
 
     // Load the constitution PDF into a PDFDocument
-    const usConstitutionPdf = await PDFDocument.load(certificatePdfBytes);
+    // const usConstitutionPdf = await PDFDocument.load(certificatePdfBytes);
 
     // Embed the Helvetica font
-    const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    // const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const font = await pdfDoc.embedFont(pdflibModule.StandardFonts.Helvetica)
 
     //On prend la premère page et on l'attribut a page1
@@ -79,8 +78,6 @@ export class PdfLibService {
       x: page1.getWidth() - qrCodeDims1.width + 60,
       y: page1.getHeight() - qrCodeDims1.height - 90,
     });
-
-
 
     //  2° QRcode
     // Get the width/height of the American flag PDF scaled down to 30% of its original size
@@ -96,7 +93,6 @@ export class PdfLibService {
       y: page2.getHeight() - qrCodeDims2.height - 50,
     });
 
-    // ############################ Ancien Code ##################################
     const pages = pdfDoc.getPages()
     const firstPage = pages[ 0 ]
     const { width, height } = firstPage.getSize()

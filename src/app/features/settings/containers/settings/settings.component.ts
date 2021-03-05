@@ -63,7 +63,7 @@ export class SettingsComponent implements OnInit {
     this._varGlobal.loadVar();
     this.loading.hide();
     this._Update.available.subscribe((event) => {
-      console.log('object update');
+      // console.log('object update');
       // confirm('Nouvelle version');
     })
   }

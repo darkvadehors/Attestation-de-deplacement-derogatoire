@@ -26,12 +26,12 @@ export class AppComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log('oninit');
+    // console.log('oninit');
     this.loading.show
   }
 
   async appInitializer() {
-    console.log('Appinit');
+    // console.log('Appinit');
     // quand la platform est prete
     await this._platform.ready();
 
@@ -39,20 +39,20 @@ export class AppComponent implements OnInit {
     App.addListener('appStateChange', async ({ isActive }) => {
 
       if (isActive) {
-        console.log('isactivated');
+        // console.log('isactivated');
         // quand l'app est activé on charge la varglobale
         this._varGlobal.loadVar();
 
         // on check si les mises à jour sont activé => ServiceWorker
         if (this._update.isEnabled) {
-          console.log('isEnabled');
+          // console.log('isEnabled');
           // pour android
           this._update.checkForUpdate().then(async () => {
-            console.log('CheckForUpDate');
+            // console.log('CheckForUpDate');
           });
           // } else if (/webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) { // Si Apple
         } else { // Si Apple
-          console.log('update IOS');
+          // console.log('update IOS');
           this._upDateIos.checkUpdateIos();
         }
       }
