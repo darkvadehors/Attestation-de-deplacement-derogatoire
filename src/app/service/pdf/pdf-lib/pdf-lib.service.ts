@@ -115,45 +115,47 @@ export class PdfLibService {
     drawText(this._varGlobal.setting.cityofbird, 311, 684);
     drawText(adress, marginLeft1 + 4, 667);
 
+    let y: number = null;
+
     switch (activity) {
       case 1:
-        // drawText('x', marginX, 603, marginRight2)
-        drawText('x', marginX, marginY + 505, marginRight2)
+        y = 505;
         break
       case 2:
-        drawText('x', marginX, marginY + 471, marginRight2)
+        y = 471;
         break
       case 3:
-        drawText('x', marginX, marginY + 437, marginRight2)
+        y = 437;
         break
       case 4:
-        drawText('x', marginX, marginY + 404, marginRight2)
+        y = 404;
         break
       case 5:
-        drawText('x', marginX, marginY + 383, marginRight2)
+        y = 383;
         break
       case 6:
-        drawText('x', marginX, marginY + 362, marginRight2)
+        y = 362;
         break
       case 7:
-        drawText('x', marginX, marginY + 328, marginRight2)
+        y = 328;
         break
       case 8:
-        drawText('x', marginX, marginY + 295, marginRight2)
+        y = 295;
         break;
       case 9:
-        drawText('x', marginX, marginY + 230, marginRight2)
+        y = 230;
         break;
       case 10:
-        drawText('x', marginX, marginY + 185, marginRight2)
+        y = 185;
         break;
       case 11:
-        drawText('x', marginX, marginY + 115, marginRight2)
+        y = 115;
         break;
       case 12:
-        drawText('x', marginX, marginY + 70, marginRight2)
+        y = 70;
         break;
     }
+    drawText('x', marginX, marginY + y, marginRight2)
 
     drawText(this._varGlobal.setting.city, 106, 113);
     drawText(this._datepipe.transform(this.toDay, "dd/MM/yyyy"), 92, 94);
