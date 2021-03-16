@@ -1,10 +1,11 @@
-import { UpdateIosService } from './../../../../service/updateIos/update-ios.service';
-import { SwUpdate } from '@angular/service-worker';
-import { LoadingService } from '../../../../service/loading/loading.service';
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import { AlertController } from '@ionic/angular';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { LoadingService } from '../../../../service/loading/loading.service';
+import { UpdateIosService } from './../../../../service/updateIos/update-ios.service';
 import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
