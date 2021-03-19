@@ -45,7 +45,7 @@ export class WelcomeComponent {
 
     this.loading.show();
 
-    this._storage.saveOnLine(activity);
+    // this._storage.saveOnLine(activity);
 
     this._pdfmake.generatePdf(activity);
 
