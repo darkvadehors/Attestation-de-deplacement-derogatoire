@@ -12,7 +12,7 @@ import { AttestationRoutingModule } from './attestation-routing.modules';
         CommonModule,
         AttestationRoutingModule,
         IonicModule,
-    ],
+    ]
 
 })
 export class AttestationModule { }

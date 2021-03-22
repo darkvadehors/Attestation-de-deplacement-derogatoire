@@ -1,3 +1,4 @@
+import { AttestationComponent } from './features/attestation/containers/attestation/attestation.component';
 // ng build --prod --base-href ./
 // ng build --prod --base-href ./ && npm run deploy
 // ng build --prod --common-chunk --named-chunks --optimization --service-worker --source-map --base-href ./
