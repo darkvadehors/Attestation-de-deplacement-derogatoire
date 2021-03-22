@@ -16,6 +16,10 @@ const routes: Routes = [
                 canActivate: [ MobileGuard, SettingsGuard ]
             },
             {
+                path: 'attestation',
+                loadChildren: () => import('../attestation/attestation.modules').then(m => m.AttestationModule),
+            },
+            {
                 path: 'settings',
                 loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule),
                 canActivate: [ MobileGuard ]
