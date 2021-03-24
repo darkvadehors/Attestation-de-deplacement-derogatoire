@@ -18,6 +18,10 @@ export class StorageService{
     this._ls.setLocalStorage(datakey, data, crypt);
   }
 
-  saveOnLine(data: any) {
+
+  deleteLocal(datakey: string) {
+    this._ls.delLocalStorage(datakey);
   }
+
+  saveOnLine(data: any) { }
 }

@@ -156,6 +156,11 @@ export class SettingsComponent implements OnInit {
     // console.log("radioBlur");
   }
 
+  revoirIntro() {
+    this._storage.deleteLocal("intro");
+    location.reload();
+
+  }
 
 
 }
