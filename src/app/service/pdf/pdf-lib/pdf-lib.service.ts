@@ -1,4 +1,4 @@
-import { pdfViewer } from './../../../modal/pdfviewer/pdfviewer';
+import { AttestationPdfComponent } from './../../../modal/attestation-pdf/attestation-pdf.component';
 import { environment } from '../../../../environments/environment.prod';
 import { VariableService } from '../../variable/variable.service';
 import { Injectable } from '@angular/core';
@@ -28,7 +28,7 @@ export class PdfLibService {
   constructor(
     private _varGlobal: VariableService,
     private modalCtrl: ModalController,
-    private _datepipe: DatePipe,
+    private _datePipe: DatePipe,
     private _timeBackPipe: TimeBackPipe,
     public loading: LoadingService,
   ) { }
@@ -108,10 +108,10 @@ export class PdfLibService {
 
     const name: string = this._varGlobal.setting.firstname + ' ' + this._varGlobal.setting.lastname;
     const adress: string = this._varGlobal.setting.adress + ' ' + this._varGlobal.setting.zipcode + ' ' + this._varGlobal.setting.city;
-    const dateofbirth: string = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy').toString();
+    const dateOfBirth: string = this._datePipe.transform(this._varGlobal.setting.dateOfBirth, 'dd/MM/yyyy').toString();
 
     drawText(name, marginLeft1, 704);
-    drawText(dateofbirth, marginLeft1, 684);
+    drawText(dateOfBirth, marginLeft1, 684);
     drawText(this._varGlobal.setting.cityofbird, 311, 684);
     drawText(adress, marginLeft1 + 4, 667);
 
@@ -158,7 +158,7 @@ export class PdfLibService {
     drawText('x', marginX, marginY + y, marginRight2)
 
     drawText(this._varGlobal.setting.city, 106, 113);
-    drawText(this._datepipe.transform(this.toDay, "dd/MM/yyyy"), 92, 94);
+    drawText(this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 92, 94);
     drawText(this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
 
     const pdfBytes = await pdfDoc.save()
@@ -166,7 +166,7 @@ export class PdfLibService {
     const pdfUrl = window.URL.createObjectURL(blob);
 
     const modal = await this.modalCtrl.create({
-      component: pdfViewer,
+      component: AttestationPdfComponent,
       cssClass: 'my-custom-class',
       keyboardClose: true,
       componentProps: {

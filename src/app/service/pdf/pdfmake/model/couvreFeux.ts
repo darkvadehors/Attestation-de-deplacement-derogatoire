@@ -31,7 +31,7 @@
 //         {
 //           text: [
 //             'Né(e) le : ',
-//                 { text: this.dateofbirth, fontSize: 11, },
+//                 { text: this.dateOfBirth, fontSize: 11, },
 //                 { text: '                                             à : ' },
 //                 { text: this._varGlobal.setting.cityofbird, fontSize: 11 },
 //           ],
@@ -192,7 +192,7 @@
 //             'le : ',
 //                 { text: this.toDayFr, fontSize: 11, },
 //                 { text: '                                                        à : ' },
-//                 { text: this.timebackColon, fontSize: 11 },
+//                 { text: this.timeBackColon, fontSize: 11 },
 //           ],
 //           fontSize: 10.6,
 //           alignment: 'left',

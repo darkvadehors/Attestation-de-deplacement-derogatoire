@@ -37,11 +37,11 @@
 
       <ion-item>
         <ion-label>Date de naissance :</ion-label>
-        <ion-input formControlName = "dateofbirth"  type="date" placeholder="16/03/2020"></ion-input>
+        <ion-input formControlName = "dateOfBirth"  type="date" placeholder="16/03/2020"></ion-input>
       </ion-item>
       <div class="validation-errors">
-        <ng-container *ngFor="let validation of validation_messages.dateofbirth">
-          <div class="error-message" *ngIf="validations_form.get('dateofbirth').hasError(validation.type) && (validations_form.get('dateofbirth').dirty || validations_form.get('dateofbirth').touched)">
+        <ng-container *ngFor="let validation of validation_messages.dateOfBirth">
+          <div class="error-message" *ngIf="validations_form.get('dateOfBirth').hasError(validation.type) && (validations_form.get('dateOfBirth').dirty || validations_form.get('dateOfBirth').touched)">
             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
           </div>
         </ng-container>
@@ -109,6 +109,26 @@
         </ng-container>
       </div>
 
+
+        <ion-list>
+          <ion-radio-group  formControlName="screenmode" allow-empty-selection="false" value="{{screenmode}}" name="radio-group" (ionChange)="radioGroupChange($event)" #screenModeRadio>
+            <ion-list-header>
+              <ion-label>Mode d'affichage</ion-label>
+            </ion-list-header>
+
+            <ion-item (ionFocus)="radioFocus()" (ionSelect)="radioSelect($event)" (ionBlur)="radioBlur()">
+              <ion-label>TousAntiPv</ion-label>
+              <ion-radio slot="start" name="screenmode" [value]="1" checked="true" ></ion-radio>
+            </ion-item>
+
+            <ion-item (ionFocus)="radioFocus()" (ionSelect)="radioSelect($event)" (ionBlur)="radioBlur()">
+              <ion-label>Pdf</ion-label>
+              <ion-radio slot="start" name="screenmode" [value]="2"  checked="true" ></ion-radio>
+            </ion-item>
+
+          </ion-radio-group>
+        </ion-list>
+
       <div>
         <div>
           <ion-grid>
@@ -127,7 +147,7 @@
             </ion-row>
             <ion-row>
               <ion-col>
-                <ion-button  color="success" expand="block" (click)="updateIos()" >Forcer la mise à jour</ion-button>
+                <ion-button mode="ios"  fill="outline" color="success" expand="block" (click)="updateIos()" >Forcer la mise à jour</ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>

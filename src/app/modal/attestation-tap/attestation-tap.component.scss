@@ -1,0 +1,30 @@
+section{
+
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    header{
+
+        ion-buttons{
+        margin: 11% 4% 7% 4%;
+            ion-button{
+                font-size: 0.9em;
+                color: aliceblue;
+                text-transform: none;
+            }
+        }
+    }
+
+    content{
+        margin: 4%;
+        padding: 5% 0;
+        color: aliceblue;
+        text-align: center;
+
+        .qrcodeImg .qrcode img{
+            width:94%;
+        }
+    }
+}

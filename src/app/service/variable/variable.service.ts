@@ -17,24 +17,26 @@ export class VariableService {
       const {
         firstname,
         lastname,
-        dateofbirth,
+        dateOfBirth,
         cityofbird,
         adress,
         city,
         zipcode,
         timeback,
+        screenmode,
         lastchoice,
       } = this._storage.readLocal('ac');
 
       this.setting = {
         firstname,
         lastname,
-        dateofbirth,
+        dateOfBirth,
         cityofbird,
         adress,
         city,
         zipcode,
         timeback,
+        screenmode,
         lastchoice,
       };
     } else {

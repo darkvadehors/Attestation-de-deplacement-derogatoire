@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonRadioGroup } from '@ionic/angular';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -18,11 +18,18 @@ import { version } from '../../../../../../package.json'
 export class SettingsComponent implements OnInit {
 
   @ViewChild('disabled') tabs: ElementRef;
+  @ViewChild('screenModeRadio') radioGroup: IonRadioGroup
+
+  //Get value on ionChange on IonRadioGroup
+  selectedRadioGroup: any;
+  //Get value on ionSelect on IonRadio item
+  selectedRadioItem: any;
 
   validations_form: FormGroup;
-  setting: Usersettings = null;
+  setting: Usersettings = undefined;
   save: boolean = false;
-  public versionLocal: string = version;
+  screenmode: number;
+  versionLocal: string = version;
 
   constructor(
     public alertCtl: AlertController,
@@ -38,10 +45,22 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this._varGlobal.loadVar();
 
+    console.log("var", this._varGlobal.setting);
+
+    if (this.screenmode == undefined) {
+      console.log("c'est null");
+      this.screenmode = 1;
+      // this._varGlobal.setting.screenmode = this.screenMode;
+      //
+      // console.log("this._varGlobal.setting.screenmode", this._varGlobal.setting.screenmode);
+      // this.screenMode = this._varGlobal.setting.screenmode;
+      console.log("this.screen", this.screenmode);
+    }
+
     this.validations_form = this.formBuilder.group({
       firstname: new FormControl(this._varGlobal.setting?.firstname, Validators.required),
       lastname: new FormControl(this._varGlobal.setting?.lastname, Validators.required),
-      dateofbirth: new FormControl(this._varGlobal.setting?.dateofbirth, Validators.compose([
+      dateOfBirth: new FormControl(this._varGlobal.setting?.dateOfBirth, Validators.compose([
         Validators.required,
         Validators.minLength(2),
         Validators.minLength(4),
@@ -56,12 +75,14 @@ export class SettingsComponent implements OnInit {
       stat: new FormControl(true, Validators.compose([
         Validators.pattern('true'),
         Validators.requiredTrue
-      ]))
+      ])),
+      screenmode: new FormControl(this._varGlobal.setting?.screenmode, Validators.required),
     });
   }
 
   ionViewDidEnter() {
     this._varGlobal.loadVar();
+
     this.loading.hide();
     this._Update.available.subscribe((event) => {
       // console.log('object update');
@@ -76,7 +97,7 @@ export class SettingsComponent implements OnInit {
     'lastname': [
       { type: 'required', message: 'Le nomn de famille  est obligatoire.' }
     ],
-    'dateofbirth': [
+    'dateOfBirth': [
       { type: 'required', message: 'La date de naissance est obligatoire.' },
       { type: 'pattern', message: 'Merci de rentrer une date de naissance valide' }
     ],
@@ -98,7 +119,7 @@ export class SettingsComponent implements OnInit {
   };
 
   onSubmit(): any {
-    this.loading.show();
+    // this.loading.show();
 
     this._varGlobal.setting = this.validations_form.value;
 
@@ -118,4 +139,23 @@ export class SettingsComponent implements OnInit {
     this.loading.show();
     location.reload();
   }
+
+  radioGroupChange(event) {
+    // console.log("radioGroupChange", event.detail);
+    this.selectedRadioGroup = event.detail;
+  }
+
+  radioFocus() {
+    // console.log("radioFocus");
+  }
+  radioSelect(event) {
+    // console.log("radioSelect", event.detail);
+    this.selectedRadioItem = event.detail;
+  }
+  radioBlur() {
+    // console.log("radioBlur");
+  }
+
+
+
 }
