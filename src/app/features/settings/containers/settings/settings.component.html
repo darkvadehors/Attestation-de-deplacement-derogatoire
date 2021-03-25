@@ -145,8 +145,6 @@
       </ion-card-content>
     </ion-card>
 
-      <div>
-        <div>
           <ion-grid>
             <ion-row>
               <ion-col class="ion-align-self-center" size-md>
@@ -157,12 +155,13 @@
               </ion-col>
             </ion-row>
             <ion-card>
-
-              <ion-item button (click)="revoirIntro()" detail>
+              <ion-col>
+              <ion-button fill="outline" expand="block" class="ion-text-center" (click)="revoirIntro()" detail>
                 <ion-label>
                   Revoir la présentation.
                 </ion-label>
-              </ion-item>
+              </ion-button>
+            </ion-col>
               <ion-row>
                 <ion-col class="ion-align-self-start">
                   <ion-text>Version de L'application {{versionLocal}}</ion-text>
@@ -170,12 +169,11 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-button mode="ios"  fill="outline" color="success" expand="block" (click)="updateIos()" >Forcer la mise à jour</ion-button>
+                  <ion-button fill="outline" color="success" expand="block" (click)="updateIos()" >Forcer la mise à jour</ion-button>
                 </ion-col>
               </ion-row>
             </ion-card>
             </ion-grid>
-          </div>
-      </div>
+
     </form>
-</ion-content>
+  </ion-content>

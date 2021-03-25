@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { IonRouterOutlet, LoadingController, ModalController } from '@ionic/angular';
 import { LoadingService } from 'src/app/service/loading/loading.service';
 import { VariableService } from 'src/app/service/variable/variable.service';
 import { DatePipe } from '@angular/common';
@@ -18,6 +18,7 @@ export class AttestationComponent {
   loading: HTMLIonLoadingElement;
 
   constructor(
+    private _routerOutlet: IonRouterOutlet,
     private _pdfMake: PdfmakeService,
     private _varGlobal: VariableService,
     private _datePipe: DatePipe,
@@ -72,6 +73,7 @@ export class AttestationComponent {
         component: AttestationTapComponent,
         cssClass: 'my-custom-class',
         keyboardClose: true,
+        // presentingElement: this._routerOutlet.nativeEl,
         componentProps: {
           'activityName': activityName,
           'dateOfBirth': dateOfBirth,

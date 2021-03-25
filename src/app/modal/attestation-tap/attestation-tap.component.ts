@@ -11,7 +11,7 @@ import { VariableService } from 'src/app/service/variable/variable.service';
 export class AttestationTapComponent implements OnInit {
   loading: HTMLIonLoadingElement;
   infoScreen: any;
-  qrcodewitdh: number = (window.screen.availWidth);
+  qrcodewitdh: number = (window.screen.availWidth * (90 / 100));
 
   //Qrcode
   qrCodeData: string = null;
@@ -67,7 +67,7 @@ export class AttestationTapComponent implements OnInit {
       ';\nMotifs: ' +
       this.activityName;
 
-    console.log('largeur', window.screen.availWidth);
+    // console.log('largeur', window.screen.availWidth);
 
     this.loadingService.hide();
   }

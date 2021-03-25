@@ -1,19 +1,23 @@
-<section>
-    <header>
-        <ion-buttons slot="start">
-            <ion-button (click)="closeModal()">Fermer</ion-button>
-        </ion-buttons>
-    </header>
-    <content>
-        <qrcode class="qrcodeImg" [width]="(qrcodewitdh)" [qrdata]="qrCodeData" [margin]="1" [elementType]="'img'"></qrcode>
-        <p>
-            Créé le {{toDayFrLong}} à {{timeBackColon}}<br>
-            Nom : {{varGlobal.setting.lastname}}<br>
-            Prénom : {{varGlobal.setting.firstname}}<br>
-            Naissance : {{dateOfBirthFrLong}} à {{varGlobal.setting.cityofbird}}<br>
-            Adresse : {{varGlobal.setting.adress}}<br>{{varGlobal.setting.zipcode}} {{varGlobal.setting.city}}<br>
-            Sortie : {{toDayFrLong}} à {{timeBackColon}}<br>
-            Code motif: {{activityName}}
-        </p>
-    </content>
+<section >
+    <ion-buttons slot="start">
+        <ion-button (click)="closeModal()">Fermer</ion-button>
+    </ion-buttons>
+
+    <div id="group">
+        <div>
+            <qrcode class="qrcodeImg" [width]="(qrcodewitdh)" [qrdata]="qrCodeData" [margin]="1" [elementType]="'img'"></qrcode>
+        </div>
+
+        <div id="informations">
+            <p>
+                Créé le {{toDayFrLong}} à {{timeBackColon}}<br>
+                Nom : {{varGlobal.setting.lastname}}<br>
+                Prénom : {{varGlobal.setting.firstname}}<br>
+                Naissance : {{dateOfBirthFrLong}} à {{varGlobal.setting.cityofbird}}<br>
+                Adresse : {{varGlobal.setting.adress}}<br>{{varGlobal.setting.zipcode}} {{varGlobal.setting.city}}<br>
+                Sortie : {{toDayFrLong}} à {{timeBackColon}}<br>
+                Code motif: {{activityName}}
+            </p>
+        </div>
+    </div>
 </section>
