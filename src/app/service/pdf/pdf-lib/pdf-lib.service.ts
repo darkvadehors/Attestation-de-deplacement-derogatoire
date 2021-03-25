@@ -52,7 +52,7 @@ export class PdfLibService {
 
     // Fetch certificate PDF
     const certificatePdfBytes = await fetch(certificateUrl).then((res) =>
-    res.arrayBuffer(),
+      res.arrayBuffer(),
     );
 
     //Juste rename data in qrCodePdfBytes
@@ -83,7 +83,11 @@ export class PdfLibService {
 
     const pages = pdfDoc.getPages()
     const firstPage = pages[ 0 ]
-    const page2 = pages[ 1 ]
+    if (totalPages > 1) {
+      const page2 = pages[ 1 ]
+    }
+
+    // const page2 = pages[ 1 ]
     const { width, height } = firstPage.getSize()
 
 
@@ -103,9 +107,13 @@ export class PdfLibService {
     // Get the width/height of the American flag PDF scaled down to 30% of its original size
     const qrCodeDims2 = qrCode.scale(1.1);
 
-    let drawText = (text: any, x: number, y: number, size = 11) => {
+    const drawTextPage1 = (text: any, x: number, y: number, size = 11) => {
       this.page.drawText(text, { x, y, size, font })
     }
+    const drawTextPage2 = (text: any, x: number, y: number, size = 11) => {
+      this.page.drawText(text, { x, y, size, font })
+    }
+    // ------------------------------------------- Page CouvreFeux ------------------------------------------------------------------------
     if (activity < 20) {
       this.page = page1
       // Draw the qrcode1 top of the page
@@ -116,13 +124,13 @@ export class PdfLibService {
       });
 
       // Add a blank page to the document
-      const page2 = pdfDoc.addPage();
+      const pageQrCodeCouvreFeux = pdfDoc.addPage();
 
       // Draw the American flag image in the center top of the page
-      page2.drawPage(qrCode, {
+      pageQrCodeCouvreFeux.drawPage(qrCode, {
         ...qrCodeDims2,
-        x: page2.getWidth() - qrCodeDims2.width + 80,
-        y: page2.getHeight() - qrCodeDims2.height - 50,
+        x: pageQrCodeCouvreFeux.getWidth() - qrCodeDims2.width + 80,
+        y: pageQrCodeCouvreFeux.getHeight() - qrCodeDims2.height - 50,
       });
 
       // information de la personne
@@ -130,22 +138,23 @@ export class PdfLibService {
       const adress: string = this._varGlobal.setting.adress + ' ' + this._varGlobal.setting.zipcode + ' ' + this._varGlobal.setting.city;
       const dateOfBirth: string = this._datePipe.transform(this._varGlobal.setting.dateOfBirth, 'dd/MM/yyyy').toString();
 
-      drawText(name, marginLeft1, 704);
-      drawText(dateOfBirth, marginLeft1, 684);
-      drawText(this._varGlobal.setting.cityofbird, 311, 684);
-      drawText(adress, marginLeft1 + 4, 667);
+      drawTextPage1(name, marginLeft1, 704);
+      drawTextPage1(dateOfBirth, marginLeft1, 684);
+      drawTextPage1(this._varGlobal.setting.cityofbird, 311, 684);
+      drawTextPage1(adress, marginLeft1 + 4, 667);
 
-      drawText('Fait à ', 73, 113);
+      drawTextPage1('Fait à ', 73, 113);
       // Ville
-      drawText(this._varGlobal.setting.city, 106, 113);
+      drawTextPage1(this._varGlobal.setting.city, 106, 113);
       // date du jour
-      drawText('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
+      drawTextPage1('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
       // Heure de l'attestation
-      drawText('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
+      drawTextPage1('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
       // mention legal
-      drawText('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
+      drawTextPage1('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
 
     } else {
+    // ------------------------------------------- Page Confinement ------------------------------------------------------------------------
 
       let lastPage = pdfDoc.getPage(totalPages - 1);
       let marginLeft1 = 110;
@@ -162,13 +171,13 @@ export class PdfLibService {
       //   lastPage.drawText(text, { x, y, size, font })
       // }
       // Add a blank page to the document
-      const qrCodePage = pdfDoc.addPage();
+      const qrCodePageConfinement = pdfDoc.addPage();
 
       // Draw the American flag image in the center top of the page
-      qrCodePage.drawPage(qrCode, {
+      qrCodePageConfinement.drawPage(qrCode, {
         ...qrCodeDims2,
-        x: qrCodePage.getWidth() - qrCodeDims2.width + 80,
-        y: qrCodePage.getHeight() - qrCodeDims2.height - 50,
+        x: qrCodePageConfinement.getWidth() - qrCodeDims2.width + 80,
+        y: qrCodePageConfinement.getHeight() - qrCodeDims2.height - 50,
       });
 
       // information de la personne
@@ -176,21 +185,21 @@ export class PdfLibService {
       const adress: string = this._varGlobal.setting.adress + ' ' + this._varGlobal.setting.zipcode + ' ' + this._varGlobal.setting.city;
       const dateOfBirth: string = this._datePipe.transform(this._varGlobal.setting.dateOfBirth, 'dd/MM/yyyy').toString();
 
-      drawText(name, marginLeft1, 516);
-      drawText(dateOfBirth, marginLeft1, 501);
-      drawText(this._varGlobal.setting.cityofbird, 220, 501);
-      drawText(adress, marginLeft1 + 17, 488);
+      drawTextPage2(name, marginLeft1, 516);
+      drawTextPage2(dateOfBirth, marginLeft1, 501);
+      drawTextPage2(this._varGlobal.setting.cityofbird, 220, 501);
+      drawTextPage2(adress, marginLeft1 + 17, 488);
 
       this.page = lastPage;
-      drawText('Fait à ', 73, 113);
+      drawTextPage2('Fait à ', 73, 113);
       // Ville
-      drawText(this._varGlobal.setting.city, 106, 113);
+      drawTextPage2(this._varGlobal.setting.city, 106, 113);
       // date du jour
-      drawText('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
+      drawTextPage2('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
       // Heure de l'attestation
-      drawText('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
+      drawTextPage2('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
       // mention legal
-      drawText('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
+      drawTextPage2('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
 
     }
 
@@ -272,17 +281,13 @@ export class PdfLibService {
     }
     console.log('activity', activity);
     if (activity > 20 && activity <= 23) {
-      this.page = page1;
       marginX = 60;
-      drawText('x', marginX, marginY + y, marginRight2)
+      drawTextPage1('x', marginX, marginY + y, marginRight2)
     } else if (activity > 23) {
-      this.page = page2;
       marginX = 60;
-      drawText('x', marginX, marginY + y, marginRight2)
+      drawTextPage2('x', marginX, marginY + y, marginRight2)
     } else {
-      console.log(page2);
-      this.page = page2;
-      drawText('x', marginX, marginY + y, marginRight2)
+      drawTextPage2('x', marginX, marginY + y, marginRight2)
     }
 
     const pdfBytes = await pdfDoc.save()
