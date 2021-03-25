@@ -279,7 +279,7 @@ export class PdfLibService {
         y = 170;
         break;
     }
-    console.log('activity', activity);
+    // console.log('activity', activity);
     if (activity > 20 && activity <= 23) {
       marginX = 60;
       drawTextPage1('x', marginX, marginY + y, marginRight2)

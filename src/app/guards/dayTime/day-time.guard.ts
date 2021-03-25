@@ -14,13 +14,13 @@ export class DayTimeGuard implements CanActivate {
     const dateheure = new Date()
     const heuredelajournee: any = dateheure.getHours()
 
-    console.log('heuredelajournee', heuredelajournee);
+    // console.log('heuredelajournee', heuredelajournee);
     if (heuredelajournee > 6 || heuredelajournee < 19) { // normale
     // if (heuredelajournee < 6 && heuredelajournee > 19) { // mode test
-      console.log('vrai');
+      // console.log('vrai');
       return true;
     } else {
-      console.log('false');
+      // console.log('false');
       return this.router.createUrlTree(
         [ 'tabs/confinement' ]);
 

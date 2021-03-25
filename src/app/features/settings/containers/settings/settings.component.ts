@@ -48,22 +48,22 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this._varGlobal.loadVar();
 
-    console.log("var", this._varGlobal.setting);
+    // console.log("var", this._varGlobal.setting);
 
     if (this.screenmode == undefined) {
-      console.log("c'est null");
+      // console.log("c'est null");
       this.screenmode = 1;
       // this._varGlobal.setting.screenmode = this.screenMode;
       //
       // console.log("this._varGlobal.setting.screenmode", this._varGlobal.setting.screenmode);
       // this.screenMode = this._varGlobal.setting.screenmode;
-      console.log("this.screen", this.screenmode);
+      // console.log("this.screen", this.screenmode);
     }
 
     this.validations_form = this.formBuilder.group({
       firstname: new FormControl(this._varGlobal.setting?.firstname, Validators.required),
       lastname: new FormControl(this._varGlobal.setting?.lastname, Validators.required),
-      dateOfBirth: new FormControl(this._varGlobal.setting?.dateOfBirth, Validators.compose([
+      dateOfBirth: new FormControl(this._varGlobal.setting?.dateOfBirth || "0", Validators.compose([
         Validators.required,
         Validators.minLength(2),
         Validators.minLength(4),
@@ -79,7 +79,7 @@ export class SettingsComponent implements OnInit {
         Validators.pattern('true'),
         Validators.requiredTrue
       ])),
-      screenmode: new FormControl(this._varGlobal.setting?.screenmode, Validators.required),
+      screenmode: new FormControl(this._varGlobal.setting?.screenmode || 1, Validators.required),
     });
   }
 
