@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { WelcomeComponent } from './containers/welcome/welcome.component';
 import { WelcomeRoutingModule } from './welcome-routing.modules';
-import { AttestationModule } from '../attestation/attestation.modules';
 
 
 @NgModule({

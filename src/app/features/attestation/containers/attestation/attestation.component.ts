@@ -38,15 +38,19 @@ export class AttestationComponent {
 
     // Date du jour
     const dateOptions: any = { year: "numeric", month: "long", day: "2-digit" };
+    // create date of day
     const toDay: Date = new Date();
     let toDayFr: string;
     let toDayFrLong: string;
+    // conver in french format short
     toDayFr = this._datePipe.transform(toDay, "dd/MM/yyyy");
+    // conver in french format long
     toDayFrLong = (toDay.toLocaleDateString("fr-FR", dateOptions));
 
     // Date de naissance
     let dateOfBirth = new Date(this._varGlobal.setting.dateOfBirth);
     let dateOfBirthFrLong: string;
+    // conver in long format 13 mars 2021
     dateOfBirthFrLong = (dateOfBirth.toLocaleDateString("fr-FR", dateOptions));
 
     //Heures
@@ -58,12 +62,15 @@ export class AttestationComponent {
     // let qrCodeData: string = null;
 
     //Heures
+    // format 12h34
     timeBackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 1);
+    //  format 12:34
     timeBackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2);
+    //  format 12-34
     timeBackT = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 3);
 
 
-    // converti le numéro de l'activity en mot
+    // converti le numéro de l'activity en mot 1= travail
     const activityName = this._activityPipe.transform(activity);
 
 

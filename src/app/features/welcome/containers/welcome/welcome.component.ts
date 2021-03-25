@@ -1,6 +1,6 @@
-import { AttestationComponent } from './../../../attestation/containers/attestation/attestation.component';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AttestationComponent } from './../../../attestation/containers/attestation/attestation.component';
 import { LoadingService } from './../../../../service/loading/loading.service';
 import { StorageService } from './../../../../service/storage/storage.service';
 import { version } from './../../../../../../package.json';

@@ -19,7 +19,7 @@ export class ActivityPipe implements PipeTransform {
         activity = 'handicap';
         break;
       case 5:
-        activity = 'convocation';
+        activity = 'judiciaire';
         break;
       case 6:
         activity = 'missions';
@@ -31,16 +31,52 @@ export class ActivityPipe implements PipeTransform {
         activity = 'animaux';
         break;
       case 9:
-        activity = 'courses';
-        break;
-      case 10:
         activity = 'sport';
         break;
+      case 10:
+        activity = 'achats';
+        break;
       case 11:
-        activity = 'rassemblement';
+        activity = 'enfants';
         break;
       case 12:
-        activity = 'demarche';
+        activity = 'culte_culturel';
+        break;
+      case 21:
+        activity = 'travail';
+        break;
+      case 22:
+        activity = 'sante';
+        break;
+      case 23:
+        activity = 'famille';
+        break;
+      case 24:
+        activity = 'handicap';
+        break;
+      case 25:
+        activity = 'judiciaire';
+        break;
+      case 26:
+        activity = 'missions';
+        break;
+      case 27:
+        activity = 'transits';
+        break;
+      case 28:
+        activity = 'animaux';
+        break;
+      case 29:
+        activity = 'sport';
+        break;
+      case 30:
+        activity = 'achats';
+        break;
+      case 31:
+        activity = 'enfants';
+        break;
+      case 32:
+        activity = 'culte_culturel';
         break;
     }
     return activity;

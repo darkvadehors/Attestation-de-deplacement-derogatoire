@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UpdateIosService } from './service/updateIos/update-ios.service';
 import { SwUpdate } from '@angular/service-worker';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
     private _platform: Platform,
     private _update: SwUpdate,
     private _upDateIos: UpdateIosService,
+    private _router: Router,
     public toastController: ToastController,
     public loading: LoadingService,
   ) {
@@ -42,6 +44,7 @@ export class AppComponent implements OnInit {
         // console.log('isactivated');
         // quand l'app est activé on charge la varglobale
         this._varGlobal.loadVar();
+        this._router.navigate([ '' ]);
 
         // on check si les mises à jour sont activé => ServiceWorker
         if (this._update.isEnabled) {

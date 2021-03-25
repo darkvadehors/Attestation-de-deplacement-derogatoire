@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { WelcomeConfinementComponent } from './containers/welcome-confinement/welcome-confinement.component';
 import { WelcomeConfinementRoutingModule } from './welcome-confinement-routing.modules';
-import { AttestationModule } from '../attestation/attestation.modules';
 
 
 @NgModule({
