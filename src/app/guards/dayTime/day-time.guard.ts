@@ -15,8 +15,8 @@ export class DayTimeGuard implements CanActivate {
     const heuredelajournee: any = dateheure.getHours()
 
     console.log('heuredelajournee', heuredelajournee);
-    if (heuredelajournee < 6 && heuredelajournee > 19) { //// confinement
-      // if (heuredelajournee > 6 && heuredelajournee < 19) { // couvre feux
+    if (heuredelajournee > 6 || heuredelajournee < 19) { // normale
+    // if (heuredelajournee < 6 && heuredelajournee > 19) { // mode test
       console.log('vrai');
       return true;
     } else {
