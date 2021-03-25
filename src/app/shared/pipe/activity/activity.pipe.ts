@@ -25,7 +25,7 @@ export class ActivityPipe implements PipeTransform {
         activity = 'missions';
         break;
       case 7:
-        activity = 'transits';
+        activity = 'transit';
         break;
       case 8:
         activity = 'animaux';
@@ -33,50 +33,50 @@ export class ActivityPipe implements PipeTransform {
       case 9:
         activity = 'sport';
         break;
-      case 10:
-        activity = 'achats';
-        break;
-      case 11:
-        activity = 'enfants';
-        break;
-      case 12:
-        activity = 'culte_culturel';
-        break;
+      // case 10:
+      //   activity = 'achats';
+      //   break;
+      // case 11:
+      //   activity = 'enfants';
+      //   break;
+      // case 12:
+      //   activity = 'culte_culturel';
+      //   break;
       case 21:
-        activity = 'travail';
-        break;
-      case 22:
-        activity = 'sante';
-        break;
-      case 23:
-        activity = 'famille';
-        break;
-      case 24:
-        activity = 'handicap';
-        break;
-      case 25:
-        activity = 'judiciaire';
-        break;
-      case 26:
-        activity = 'missions';
-        break;
-      case 27:
-        activity = 'transits';
-        break;
-      case 28:
-        activity = 'animaux';
-        break;
-      case 29:
         activity = 'sport';
         break;
-      case 30:
+      case 22:
         activity = 'achats';
         break;
-      case 31:
+      case 23:
         activity = 'enfants';
         break;
-      case 32:
+      case 24:
         activity = 'culte_culturel';
+        break;
+      case 25:
+        activity = 'demarche';
+        break;
+      case 26:
+        activity = 'travail';
+        break;
+      case 27:
+        activity = 'sante';
+        break;
+      case 28:
+        activity = 'famille';
+        break;
+      case 29:
+        activity = 'handicap';
+        break;
+      case 30:
+        activity = 'judiciaire';
+        break;
+      case 31:
+        activity = 'demenagement';
+        break;
+      case 32:
+        activity = 'transit';
         break;
     }
     return activity;
