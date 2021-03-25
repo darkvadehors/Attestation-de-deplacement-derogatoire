@@ -3,7 +3,7 @@
         height: 100vh;
 
             ion-buttons{
-            margin: 5% 0 5% 0;
+            margin: 5% 0 0 0;
                 ion-button{
                     font-size: 0.9em;
                     color: aliceblue;
@@ -11,28 +11,31 @@
                 }
             }
 
-        #group{
-            display: flex;
-            flex-wrap: nowrap;
-            flex-direction: column;
-            justify-content: flex-start;
-            text-align: center;
+            ion-content{
+                #group{
+                    margin-top: 5%;
+                    display: flex;
+                    flex-wrap: nowrap;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    text-align: center;
 
-            // div.qrcode .qrcodeImg .qrcode{
-            //     margin: auto;
-            //     width:50%;
-            //     max-height: 50%;
-            // }
+                    // div.qrcode .qrcodeImg .qrcode{
+                    //     margin: auto;
+                    //     width:50%;
+                    //     max-height: 50%;
+                    // }
 
-            #informations{
-                margin: auto;
-                color: aliceblue;
-                text-align: center;
-                max-width: 90%;
+                    #informations{
+                        margin: auto;
+                        color: aliceblue;
+                        text-align: center;
+                        max-width: 90%;
 
-                // .qrcodeImg .qrcode img{
+                        // .qrcodeImg .qrcode img{
 
-                // }
+                        // }
+                    }
+                }
             }
-        }
     }
