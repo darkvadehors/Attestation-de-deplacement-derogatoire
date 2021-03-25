@@ -1,27 +1,24 @@
 <title>attestation-couvre-feu-covid-19</title>
+<div class="ion-page">
+<ion-buttons slot="start" *ngIf="(button)"  >
+    <ion-button (click)="closeModal()"><p>Fermer</p></ion-button>
+</ion-buttons>
+<ion-content >
 <ion-header>
     <ion-toolbar>
         <ion-title>
-            <section id="wrapper">
                 <div id="colorTitle">
-                    <h1 id="blue">media.</h1>
-                    <h1>inférieur.</h1>
-                    <h1 id="red">gauv.fr</h1>
+                    <p id="blue">media.</p>
+                    <p>inférieur.</p>
+                    <p id="red">gauv.fr</p>
                 </div>
-            </section>
         </ion-title>
     </ion-toolbar>
-
-    <ion-card>
-
-            <h2>Visible uniquement sur mobile</h2>
-            <p>Merci de revenir avec un mobile</p>
-            <p>l'utilisation de ce service n'est pas valable sur ordinateur.</p>
-    </ion-card>
-
 </ion-header>
 
-<ion-content>
+    <ion-card>
+            <p>Merci de revenir avec un mobile</p>
+    </ion-card>
 
     <ion-card>
         <section>
@@ -81,3 +78,4 @@
     </ion-footer>
     <div>
     </div>
+</div>

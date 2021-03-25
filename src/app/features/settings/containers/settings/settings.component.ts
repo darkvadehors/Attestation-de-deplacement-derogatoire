@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
-import { AlertController, IonRadioGroup } from '@ionic/angular';
+import { AlertController, IonRadioGroup, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { Usersettings } from '../../../../model/usersettings';
 import { StorageService } from '../../../../service/storage/storage.service';
 import { VariableService } from '../../../../service/variable/variable.service';
 import { version } from '../../../../../../package.json'
+import { DesktopComponent } from 'src/app/features/desktop/containers/desktop.component';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -35,11 +36,13 @@ export class SettingsComponent implements OnInit {
     public alertCtl: AlertController,
     public formBuilder: FormBuilder,
     public loading: LoadingService,
+    public modalController: ModalController,
     private _varGlobal: VariableService,
     private _router: Router,
     private _storage: StorageService,
     private _Update: SwUpdate,
-    private _upDateIos: UpdateIosService
+    private _upDateIos: UpdateIosService,
+    private routerOutlet: IonRouterOutlet
   ) { }
 
   ngOnInit(): void {
@@ -162,5 +165,16 @@ export class SettingsComponent implements OnInit {
 
   }
 
+  async disclaimer() {
+    const modal = await this.modalController.create({
+      component: DesktopComponent,
+      cssClass: 'my-custom-class',
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        'button': 1,
+      }
+    });
+    return await modal.present();
+  }
 
 }
