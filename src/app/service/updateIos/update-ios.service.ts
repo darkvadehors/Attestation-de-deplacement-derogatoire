@@ -42,6 +42,7 @@ export class UpdateIosService {
       const toast = await this.toastController.create({ message: 'Un instant, mise à jour...', duration: 3000 })
       toast.present()
         .then(() => this._storageService.saveLocal('version', timestamp, false))// on enregistre la nouvelle version.
+        .then(() => alert(`Mise à jour! vérifier l'onglet réglages`))
         .then(() => location.reload()); // on recharge la page.
     }
   }
