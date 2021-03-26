@@ -8,11 +8,11 @@ import { StorageService } from '../../../../service/storage/storage.service';
     styleUrls: [ './tabs.component.scss' ]
 })
 export class TabsComponent {
-    constructor(private _router: Router, private _storage: StorageService) { }
+    constructor(private _router: Router, private _storageService: StorageService) { }
 
     ionViewWillLoad() {
 
-        if (!this._storage.readLocal('setok')) {
+        if (!this._storageService.readLocal('setok')) {
             this._router.navigate([ 'tabs/settings' ])
         }
     }
