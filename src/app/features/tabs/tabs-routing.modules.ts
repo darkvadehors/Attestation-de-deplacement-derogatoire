@@ -13,14 +13,14 @@ const routes: Routes = [
         component: TabsComponent,
         children: [
             {
-                path: 'welcome',
+                path: 'couvreFeux',
                 loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule),
-                canActivate: [ MobileGuard, SettingsGuard, DayTimeGuard ]
+                canActivate: [ MobileGuard, DayTimeGuard ]
             },
             {
                 path: 'confinement',
                 loadChildren: () => import('../welcome-confinement/welcome-confinement.modules').then(m => m.WelcomeConfinementModule),
-                canActivate: [ MobileGuard, SettingsGuard ]
+                canActivate: [ MobileGuard ]
             },
 
             {
@@ -32,10 +32,9 @@ const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'tabs/welcome',
+        redirectTo: 'tabs/couvreFeux',
         pathMatch: 'full'
     }
-//FIXME verifier prefix ou full
 
 ];
 
