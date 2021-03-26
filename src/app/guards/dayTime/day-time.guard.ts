@@ -6,7 +6,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 })
 export class DayTimeGuard implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private _router: Router) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -15,13 +15,14 @@ export class DayTimeGuard implements CanActivate {
     const heuredelajournee: any = dateheure.getHours()
 
     console.log('heuredelajournee', heuredelajournee);
+
     // if (heuredelajournee > 6 || heuredelajournee < 19) { // couvre feux journée
     if (heuredelajournee < 6 && heuredelajournee > 19) { // Couvre feux soir
       console.log('vrai');
       return true;
     } else {
       console.log('false');
-      return this.router.navigate([ 'tabs/confinement' ]);
+      return this._router.parseUrl('/tabs/confinement');
 
     }
 
