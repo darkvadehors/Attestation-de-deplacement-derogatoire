@@ -41,13 +41,11 @@ export class PdfLibService {
     // certificat choise
     // const certificateUrl = './assets/certificate.33362af4.pdf';
     let certificateUrl: string;
-    const certificateUrlCouvreFeux = './assets/curfew-certificate.40bf5adf.pdf';
-    const certificateUrlConfinement = './assets/quarantine-certificate.1f118cea.pdf';
     // Attribution du bon pdf
     if (activity < 20) {
-      certificateUrl = certificateUrlCouvreFeux;
+      certificateUrl = './assets/pdf/curfew-certificate.40bf5adf.pdf';
     } else {
-      certificateUrl = certificateUrlConfinement;
+      certificateUrl = './assets/pdf/quarantine-certificate.1f118cea.pdf';
     }
 
     // Fetch certificate PDF
@@ -92,8 +90,8 @@ export class PdfLibService {
 
 
     pdfDoc.setTitle(environment.title)
-    let marginLeft1 = 148;
-    let marginX = 73;
+    let marginLeftBig = 148;
+    let marginLeftSmall = 73;
     const marginY = 75;
     const marginRight2 = 12;
 
@@ -107,12 +105,10 @@ export class PdfLibService {
     // Get the width/height of the American flag PDF scaled down to 30% of its original size
     const qrCodeDims2 = qrCode.scale(1.1);
 
-    const drawTextPage1 = (text: any, x: number, y: number, size = 11) => {
+    const drawTextPage = (text: any, x: number, y: number, size = 11) => {
       this.page.drawText(text, { x, y, size, font })
     }
-    const drawTextPage2 = (text: any, x: number, y: number, size = 11) => {
-      this.page.drawText(text, { x, y, size, font })
-    }
+
     // ------------------------------------------- Page CouvreFeux ------------------------------------------------------------------------
     if (activity < 20) {
       this.page = page1
@@ -138,26 +134,26 @@ export class PdfLibService {
       const adress: string = this._varGlobal.setting.adress + ' ' + this._varGlobal.setting.zipcode + ' ' + this._varGlobal.setting.city;
       const dateOfBirth: string = this._datePipe.transform(this._varGlobal.setting.dateOfBirth, 'dd/MM/yyyy').toString();
 
-      drawTextPage1(name, marginLeft1, 704);
-      drawTextPage1(dateOfBirth, marginLeft1, 684);
-      drawTextPage1(this._varGlobal.setting.cityofbird, 311, 684);
-      drawTextPage1(adress, marginLeft1 + 4, 667);
+      drawTextPage(name, marginLeftBig, 704);
+      drawTextPage(dateOfBirth, marginLeftBig, 684);
+      drawTextPage(this._varGlobal.setting.cityofbird, 311, 684);
+      drawTextPage(adress, marginLeftBig + 4, 667);
 
-      drawTextPage1('Fait à ', 73, 113);
+      drawTextPage('Fait à ', 73, 113);
       // Ville
-      drawTextPage1(this._varGlobal.setting.city, 106, 113);
+      drawTextPage(this._varGlobal.setting.city, 106, 113);
       // date du jour
-      drawTextPage1('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
+      drawTextPage('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
       // Heure de l'attestation
-      drawTextPage1('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
+      drawTextPage('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
       // mention legal
-      drawTextPage1('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
+      drawTextPage('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
 
     } else {
     // ------------------------------------------- Page Confinement ------------------------------------------------------------------------
 
       let lastPage = pdfDoc.getPage(totalPages - 1);
-      let marginLeft1 = 110;
+      let marginLeftBig = 110;
       this.page = page1;
 
       // Draw the qrcode1 top of the page
@@ -185,21 +181,21 @@ export class PdfLibService {
       const adress: string = this._varGlobal.setting.adress + ' ' + this._varGlobal.setting.zipcode + ' ' + this._varGlobal.setting.city;
       const dateOfBirth: string = this._datePipe.transform(this._varGlobal.setting.dateOfBirth, 'dd/MM/yyyy').toString();
 
-      drawTextPage2(name, marginLeft1, 516);
-      drawTextPage2(dateOfBirth, marginLeft1, 501);
-      drawTextPage2(this._varGlobal.setting.cityofbird, 220, 501);
-      drawTextPage2(adress, marginLeft1 + 17, 488);
+      drawTextPage(name, marginLeftBig, 516);
+      drawTextPage(dateOfBirth, marginLeftBig, 501);
+      drawTextPage(this._varGlobal.setting.cityofbird, 220, 501);
+      drawTextPage(adress, marginLeftBig + 17, 488);
 
       this.page = lastPage;
-      drawTextPage2('Fait à ', 73, 113);
+      drawTextPage('Fait à ', 73, 113);
       // Ville
-      drawTextPage2(this._varGlobal.setting.city, 106, 113);
+      drawTextPage(this._varGlobal.setting.city, 106, 113);
       // date du jour
-      drawTextPage2('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
+      drawTextPage('Le ' + this._datePipe.transform(this.toDay, "dd/MM/yyyy"), 73, 94);
       // Heure de l'attestation
-      drawTextPage2('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
+      drawTextPage('à ' + this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2), 311, 94);
       // mention legal
-      drawTextPage2('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
+      drawTextPage('(Date et heure de début de sortie à mentionner obligatoirement)', 73, 78);
 
     }
 
@@ -258,7 +254,7 @@ export class PdfLibService {
         y = 650;
         break;
       case 26:
-        y = 552;
+        y = 554;
         break;
       case 27:
         y = 458;
@@ -281,13 +277,14 @@ export class PdfLibService {
     }
     // console.log('activity', activity);
     if (activity > 20 && activity <= 23) {
-      marginX = 60;
-      drawTextPage1('x', marginX, marginY + y, marginRight2)
+      marginLeftSmall = 60;
+      this.page = page1;
+      drawTextPage('x', marginLeftSmall, marginY + y, marginRight2)
     } else if (activity > 23) {
-      marginX = 60;
-      drawTextPage2('x', marginX, marginY + y, marginRight2)
+      marginLeftSmall = 60;
+      drawTextPage('x', marginLeftSmall, marginY + y, marginRight2)
     } else {
-      drawTextPage2('x', marginX, marginY + y, marginRight2)
+      drawTextPage('x', marginLeftSmall, marginY + y, marginRight2)
     }
 
     const pdfBytes = await pdfDoc.save()
