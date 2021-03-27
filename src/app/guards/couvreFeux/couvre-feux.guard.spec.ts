@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DayTimeGuard } from './day-time.guard';
+import { CouvreFeuxGuard } from './couvre-feux.guard';
 
-describe('DayTimeGuard', () => {
-  let guard: DayTimeGuard;
+describe('CouvreFeuxGuard', () => {
+  let guard: CouvreFeuxGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(DayTimeGuard);
+    guard = TestBed.inject(CouvreFeuxGuard);
   });
 
   it('should be created', () => {
