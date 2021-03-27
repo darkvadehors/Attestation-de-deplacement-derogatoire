@@ -12,7 +12,6 @@ import { version } from '../../../../../../package.json';
 })
 export class WelcomeConfinementComponent {
 
-  pdfMake: any;
   public version: string = version;
 
   constructor(
