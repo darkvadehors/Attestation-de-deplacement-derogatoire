@@ -171,7 +171,7 @@ export class SettingsComponent implements OnInit {
       message: 'Vérifier que vous êtes bien <strong>connecté</strong> à internet!!!',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Annuler',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {

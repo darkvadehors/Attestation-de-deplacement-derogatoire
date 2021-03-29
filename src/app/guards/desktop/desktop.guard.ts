@@ -6,11 +6,11 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 })
 export class DesktopGuard implements CanActivate {
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot) {
 
     // console.log('Guard DesktopGuard');
     var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i)
@@ -22,7 +22,8 @@ export class DesktopGuard implements CanActivate {
     } else {
       //Mobile
       // console.log('Guard DesktopGuard false');
-      return false;
+      return this._router.navigateByUrl('');
+      // return false;
     }
   }
 

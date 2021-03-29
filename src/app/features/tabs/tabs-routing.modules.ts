@@ -36,10 +36,10 @@ const routes: Routes = [
             // },
         ]
     },
-    { path: '', redirectTo: 'settings', pathMatch: 'full' },
+    { path: '', redirectTo: '', pathMatch: 'full' },
     {
         path: '**',
-        redirectTo: '/',
+        redirectTo: 'desktop',
         pathMatch: 'full'
     }
 

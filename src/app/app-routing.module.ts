@@ -26,11 +26,11 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./features/tabs/tabs.modules').then(m => m.TabsModule),
     canActivate: [
-      MobileGuard,
+      // MobileGuard,
       IntroGuard
     ]
   },
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'desktop', pathMatch: 'full' },
   { path: '**', component: DesktopComponent }, // Wildcard route for a 404 page
 ];
 

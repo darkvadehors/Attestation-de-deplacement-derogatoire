@@ -18,7 +18,7 @@ export class DesktopComponent implements OnInit {
 
   ngOnInit(): void {
 
-    history.replaceState("", "", "disponible_uniquement_sur_mobile")
+    // history.replaceState("", "", "disponible_uniquement_sur_mobile")
     this.loading.hide();
   }
 

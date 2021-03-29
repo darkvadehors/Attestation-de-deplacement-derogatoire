@@ -10,7 +10,7 @@ export class LoadingService {
   constructor(
     public loadingController: LoadingController
   ) {
-    console.log('isloading ', this.isLoading);
+    // console.log('isloading ', this.isLoading);
   }
 
   async show() {
