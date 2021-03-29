@@ -36,7 +36,7 @@ const routes: Routes = [
             // },
         ]
     },
-    { path: '', redirectTo: '/settings', pathMatch: 'full' },
+    { path: '', redirectTo: 'settings', pathMatch: 'full' },
     {
         path: '**',
         redirectTo: '/',

@@ -123,8 +123,8 @@ export class SlidesComponent implements OnInit {
     this.loading.hide();
   }
   start() {
-    this.loading.show();
+    // this.loading.show();
     this._storage.saveLocal('intro', '1')
-    this._router.navigate([ 'tabs/settings' ]);
+    this._router.navigateByUrl('settings');
   }
 }
