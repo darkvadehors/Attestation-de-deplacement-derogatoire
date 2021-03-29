@@ -52,7 +52,7 @@ export class SettingsComponent implements OnInit {
   constructor(
     public alertCtl: AlertController,
     public formBuilder: FormBuilder,
-    public loading: LoadingService,
+    public loadingService: LoadingService,
     public modalController: ModalController,
     private _varGlobal: VariableService,
     private _router: Router,
@@ -103,13 +103,13 @@ export class SettingsComponent implements OnInit {
   // avant d'entre dans la page
   ionViewDidEnter() {
     // fermeture du loader
-    this.loading.hide();
+    this.loadingService.hide();
     // chargement des variables
     this._varGlobal.loadVar();
 
     // FIXME controler l'utilité de l'update
     // this._Update.available.subscribe((event) => {
-    //   console.log('object update');
+    //   // console.log('object update');
     //   // confirm('Nouvelle version');
     // })
   }
@@ -160,7 +160,7 @@ export class SettingsComponent implements OnInit {
 
   ionViewWillLeave() {
     // avant de sortir de l'onglet affichage du loader
-    this.loading.show();
+    // this.loadingService.show();
   }
 
   async updateIos() {
@@ -181,7 +181,7 @@ export class SettingsComponent implements OnInit {
           text: 'Okay',
           handler: () => {
             // affichage du loader
-            this.loading.show();
+            this.loadingService.show();
             // rechargement de la page pour force la mise a jour
             location.reload();
           }
@@ -195,19 +195,19 @@ export class SettingsComponent implements OnInit {
 
 
   radioGroupChange(event: any) {
-    console.log("radioGroupChange", event.detail);
+    // console.log("radioGroupChange", event.detail);
     this.selectedRadioGroup = event.detail;
   }
 
   radioFocus() {
-    console.log("radioFocus");
+    // console.log("radioFocus");
   }
   radioSelect(event: any) {
-    console.log("radioSelect", event.detail);
+    // console.log("radioSelect", event.detail);
     this.selectedRadioItem = event.detail;
   }
   radioBlur() {
-    console.log("radioBlur");
+    // console.log("radioBlur");
   }
 
   revoirIntro() {

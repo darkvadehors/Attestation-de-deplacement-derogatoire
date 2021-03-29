@@ -35,8 +35,6 @@ export class WelcomeConfinementComponent {
 
   launchAttestation(activity: number) {
 
-    this.loading.show();
-
     this._attestation.attestation(activity);
 
   }

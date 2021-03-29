@@ -12,7 +12,9 @@ export class DesktopComponent implements OnInit {
   // Data passed in by componentProps
   @Input() button: boolean;
 
-  constructor(public loading: LoadingService, public modalController: ModalController) { }
+  constructor(public loading: LoadingService, public modalController: ModalController) {
+    // console.log('Desktop constructeur');
+  }
 
   ngOnInit(): void {
 

@@ -18,20 +18,18 @@ export class CouvreFeuxGuard implements CanActivate {
     const dateheure = new Date()
     const heuredelajournee: any = dateheure.getHours()
 
-    console.log('CouvreFeux heure', heuredelajournee);
+  // console.log('CouvreFeux heure', heuredelajournee);
     if (heuredelajournee < 6 || heuredelajournee > 19) {
-      // this._storageLocal.saveLocal('route', 'couvreFeux', false);
       const data = {
         tabsName: 'couvreFeux',
         iconName: 'moon-outline',
         tabsLabel: 'Couvre Feux',
       }
       this._RouteStatus.setRouteStatus(data);
-      console.log('CouvreFeuxGuard vrai');
+    // console.log('CouvreFeuxGuard vrai');
       return true;
     } else {
-      console.log('CouvreFeuxGuard false');
-      // this._storageLocal.saveLocal('route', 'confinement', false);
+      // console.log('CouvreFeuxGuard false');
       return false;
     }
 

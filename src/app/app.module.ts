@@ -38,6 +38,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     TimeBackPipe,
     AttestationPdfComponent,
     AttestationTapComponent,
+
   ],
   imports: [
     BrowserModule,

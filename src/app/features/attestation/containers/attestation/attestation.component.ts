@@ -102,7 +102,8 @@ export class AttestationComponent {
         timeBackColon,
         timeBackH,
         timeBackT
-      }
+      };
+      this.loadingService.showSansMinuteur();
       this._pdfMake.generatePdf(activity, activityName, data);
     }
     // assign a value

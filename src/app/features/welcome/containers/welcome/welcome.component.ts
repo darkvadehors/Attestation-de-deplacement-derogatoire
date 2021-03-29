@@ -18,8 +18,9 @@ export class WelcomeComponent {
   constructor(
     private _router: Router,
     private _storage: StorageService,
-    public loading: LoadingService,
-    private _attestation: AttestationComponent) { }
+    private _attestation: AttestationComponent,
+    public loadingService: LoadingService
+  ) { }
 
   async ionViewWillEnter() {
 
@@ -30,16 +31,13 @@ export class WelcomeComponent {
   }
 
   ionViewDidEnter() {
-    // Hide loading quand la page est chargé
-    this.loading.hide();
+    // Hide loadingService quand la page est chargé
+    this.loadingService.hide();
   }
 
   launchAttestation(activity: number) {
 
-    this.loading.show();
-
     this._attestation.attestation(activity);
-
   }
 
 }

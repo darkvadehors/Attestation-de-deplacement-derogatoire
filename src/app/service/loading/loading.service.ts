@@ -6,19 +6,54 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LoadingService {
 
-  loading: Promise<HTMLIonLoadingElement>
-
-  constructor(public loadingController: LoadingController) {
-    this.loading = this.loadingController.create({
-      message: 'Patientez....'
-    });
-
+  isLoading: boolean;
+  constructor(
+    public loadingController: LoadingController
+  ) {
+    console.log('isloading ', this.isLoading);
   }
 
   async show() {
-    await (await this.loading).present();
+    this.loadingController.create({
+      message: 'Patienter...',
+      duration: 1000,
+      spinner: 'bubbles'
+    }).then((res) => {
+      if (this.isLoading === true) {
+        res.dismiss().then(() => console.log('abort presenting'));
+      } else {
+        res.present().then(() => {
+          this.isLoading = true;
+        })
+      }
+
+      res.onDidDismiss();
+    });
   }
+
+  async showSansMinuteur() {
+    this.loadingController.create({
+      message: 'Patienter...',
+      spinner: 'bubbles'
+    }).then((res) => {
+      if (this.isLoading === true) {
+        res.dismiss().then(() => console.log('abort presenting'));
+      } else {
+        res.present().then(() => {
+          this.isLoading = true;
+        })
+      }
+
+      res.onDidDismiss();
+    });
+  }
+
   async hide() {
-    await (await this.loading).dismiss();
+    if (this.isLoading) {
+      return await this.loadingController.dismiss()
+        .then(() => {
+          this.isLoading = false;
+        });
+    }
   }
 }

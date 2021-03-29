@@ -11,7 +11,6 @@ export class VariableService {
   setting:Usersettings;
 
   constructor(private _storage: StorageService, private _router: Router) { }
-
   loadVar() {
     if (this._storage.readLocal('ac')) {
       const {
