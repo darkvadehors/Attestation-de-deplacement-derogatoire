@@ -80,7 +80,7 @@ export class SettingsComponent implements OnInit {
     this.validations_form = this.formBuilder.group({
       firstname: new FormControl(this._varGlobal.setting?.firstname, Validators.required),
       lastname: new FormControl(this._varGlobal.setting?.lastname, Validators.required),
-      dateOfBirth: new FormControl(this._varGlobal.setting?.dateOfBirth || "0", Validators.compose([
+      dateOfBirth: new FormControl(this._varGlobal.setting?.dateOfBirth, Validators.compose([
         Validators.required,
         Validators.minLength(2),
         Validators.minLength(4),
@@ -106,12 +106,6 @@ export class SettingsComponent implements OnInit {
     this.loadingService.hide();
     // chargement des variables
     this._varGlobal.loadVar();
-
-    // FIXME controler l'utilité de l'update
-    // this._Update.available.subscribe((event) => {
-    //   // console.log('object update');
-    //   // confirm('Nouvelle version');
-    // })
   }
 
   // messages de validation
