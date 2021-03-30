@@ -1,5 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 import { Usersettings } from '../../model/usersettings';
 import { StorageService } from '../storage/storage.service';
 @Injectable({
@@ -10,35 +9,36 @@ export class VariableService {
 
   setting:Usersettings;
 
-  constructor(private _storage: StorageService, private _router: Router) { }
-
+  constructor(private _storage: StorageService) { }
   loadVar() {
     if (this._storage.readLocal('ac')) {
       const {
         firstname,
         lastname,
-        dateofbirth,
+        dateOfBirth,
         cityofbird,
         adress,
         city,
         zipcode,
         timeback,
+        screenmode,
         lastchoice,
       } = this._storage.readLocal('ac');
 
       this.setting = {
         firstname,
         lastname,
-        dateofbirth,
+        dateOfBirth,
         cityofbird,
         adress,
         city,
         zipcode,
         timeback,
+        screenmode,
         lastchoice,
       };
     } else {
-      this._router.navigate([ 'tabs/settings' ]);
+      // console.log('variable.service pas de key: ac');
     }
   }
 

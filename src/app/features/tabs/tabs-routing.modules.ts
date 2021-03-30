@@ -1,33 +1,36 @@
-import { SettingsGuard } from './../../guards/settings/settings.guard';
-import { MobileGuard } from './../../guards/mobile/mobile.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TabsComponent } from './containers/tabs/tabs.component';
 
+import { TabsComponent } from './containers/tabs/tabs.component';
+import { ConfinementGuard } from './../../guards/confinement/confinement.guard';
+import { CouvreFeuxGuard } from './../../guards/couvreFeux/couvre-feux.guard';
+import { SettingsGuard } from 'src/app/guards/settings/settings.guard';
 
 const routes: Routes = [
     {
-        path: 'tabs', // redirectTo: 'welcome', pathMatch: 'full',
+        // path: '',
+        path: '',
         component: TabsComponent,
         children: [
             {
-                path: 'welcome',
-                loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule),
-                canActivate: [ MobileGuard, SettingsGuard ]
+                path: 'settings',
+                loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule)
             },
             {
-                path: 'settings',
-                loadChildren: () => import('../settings/settings.modules').then(m => m.SettingsModule),
-                canActivate: [ MobileGuard ]
-            }
+                path: 'confinement',
+                loadChildren: () => import('../welcome-confinement/welcome-confinement.modules').then(m => m.WelcomeConfinementModule),
+                canActivate: [ SettingsGuard, ConfinementGuard ]
+            },
+            {
+                path: 'couvreFeux',
+                loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule),
+                canActivate: [ SettingsGuard, CouvreFeuxGuard ]
+            },
         ]
     },
-    {
-        path: '',
-        redirectTo: 'tabs/welcome',
-        pathMatch: 'full'
-    }
-//FIXME verifier prefix ou full
+    { path: '', redirectTo: '', pathMatch: 'full' }, // redirect to `first-component`
+    // { path: '**', redirectTo: 'desktop', pathMatch: 'full' }
+    { path: '**', redirectTo: ' ', pathMatch: 'full' }
 
 ];
 

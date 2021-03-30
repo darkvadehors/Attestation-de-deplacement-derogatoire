@@ -1,6 +1,7 @@
 // ng build --prod --base-href ./
 // ng build --prod --base-href ./ && npm run deploy
 // ng build --prod --common-chunk --named-chunks --optimization --service-worker --source-map --base-href ./
+// ng build --prod --common-chunk --optimization --service-worker --base-href ./
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,17 +22,22 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { VariableService } from './service/variable/variable.service';
 
 //Modal
-import { pdfViewer } from './modal/pdfviewer/pdfviewer'
+import { AttestationPdfComponent } from './modal/attestation-pdf/attestation-pdf.component'
 
 //PDF
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AttestationTapComponent } from './modal/attestation-tap/attestation-tap.component';
 
+//QRCodeModule
+import { QRCodeModule } from 'angularx-qrcode';
 @NgModule({
   declarations: [
     AppComponent,
     ActivityPipe,
     TimeBackPipe,
-    pdfViewer,
+    AttestationPdfComponent,
+    AttestationTapComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
     HttpClientModule,
     PdfViewerModule,
+    QRCodeModule,
   ],
   providers: [
     VariableService,

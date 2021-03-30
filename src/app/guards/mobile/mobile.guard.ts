@@ -10,15 +10,19 @@ export class MobileGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot
+  ) {
 
+    // console.log('Mobile Guard');
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       //Mobile
+      // console.log('Mobil Guard True');
       return true;
     } else {
       //Desktop
-      this._router.navigateByUrl('accueil');
-
+      // console.log('Mobil Guard false');
+      // redirige vers le Desktop en reformatant l'url complete (absolue)
+      return this._router.navigate([ 'desktop' ]);
     }
   }
 

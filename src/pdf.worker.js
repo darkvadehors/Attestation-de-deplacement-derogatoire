@@ -2186,13 +2186,13 @@
 
         function info(msg) {
           if (verbosity >= VerbosityLevel.INFOS) {
-            console.log("Info: ".concat(msg));
+            // console.log("Info: ".concat(msg));
           }
         }
 
         function warn(msg) {
           if (verbosity >= VerbosityLevel.WARNINGS) {
-            console.log("Warning: ".concat(msg));
+            // console.log("Warning: ".concat(msg));
           }
         }
 

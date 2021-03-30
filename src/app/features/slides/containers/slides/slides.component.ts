@@ -123,8 +123,13 @@ export class SlidesComponent implements OnInit {
     this.loading.hide();
   }
   start() {
-    this.loading.show();
+    // this.loading.show();
     this._storage.saveLocal('intro', '1')
-    this._router.navigate([ 'tabs/settings' ]);
+    // ajoute de la key setok à 0 pour valider la première entrée dans configuration
+    if (this._storage.readLocal('setok') != 1) {
+      this._storage.saveLocal('setok', '0');
+    }
+    // console.log('slides.components demarrage -> ', 'settings');
+    this._router.navigateByUrl('settings');
   }
 }

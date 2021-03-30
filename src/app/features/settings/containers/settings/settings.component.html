@@ -5,12 +5,16 @@
 </ion-header>
 
 <ion-content >
-
   <form  [formGroup]="validations_form" (ngSubmit)="onSubmit()">
-    <ion-list-header color="secondary" >Votre identitée</ion-list-header>
-
+<!-- ---------------------------------- Personnel ------------------------------------------------------------------------------ -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle color="secondary">Votre identitée :</ion-card-subtitle>
+        <!-- <ion-card-title>Card Title</ion-card-title> -->
+      </ion-card-header>
+      <ion-card-content>
     <ion-item>
-      <ion-label>Prénom :</ion-label>
+      <ion-label position="floating">Prénom :</ion-label>
       <ion-input formControlName = "firstname" placeholder="Jean"></ion-input>
     </ion-item>
 
@@ -22,9 +26,8 @@
       </ng-container>
     </div>
 
-
       <ion-item>
-        <ion-label>Nom :</ion-label>
+        <ion-label position="floating">Nom :</ion-label>
         <ion-input formControlName = "lastname" placeholder="Martin"></ion-input>
       </ion-item>
       <div class="validation-errors">
@@ -36,19 +39,19 @@
       </div>
 
       <ion-item>
-        <ion-label>Date de naissance :</ion-label>
-        <ion-input formControlName = "dateofbirth"  type="date" placeholder="16/03/2020"></ion-input>
+        <ion-label position="floating">Date de naissance :</ion-label>
+        <ion-input formControlName = "dateOfBirth"  type="date" placeholder="2020-03-16"></ion-input>
       </ion-item>
       <div class="validation-errors">
-        <ng-container *ngFor="let validation of validation_messages.dateofbirth">
-          <div class="error-message" *ngIf="validations_form.get('dateofbirth').hasError(validation.type) && (validations_form.get('dateofbirth').dirty || validations_form.get('dateofbirth').touched)">
+        <ng-container *ngFor="let validation of validation_messages.dateOfBirth">
+          <div class="error-message" *ngIf="validations_form.get('dateOfBirth').hasError(validation.type) && (validations_form.get('dateOfBirth').dirty || validations_form.get('dateOfBirth').touched)">
             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
           </div>
         </ng-container>
       </div>
 
       <ion-item>
-        <ion-label>Lieu de naissance :</ion-label>
+        <ion-label position="floating">Lieu de naissance :</ion-label>
         <ion-input formControlName = "cityofbird" placeholder="Paris"></ion-input>
       </ion-item>
       <div class="validation-errors">
@@ -58,10 +61,17 @@
           </div>
         </ng-container>
       </div>
-
-      <ion-list-header color="secondary">Votre domicile :</ion-list-header>
+    </ion-card-content>
+    </ion-card>
+<!-- ---------------------------------------Domicile------------------------------------------------------------------------- -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle color="secondary">Votre domicile :</ion-card-subtitle>
+        <!-- <ion-card-title>Card Title</ion-card-title> -->
+      </ion-card-header>
+      <ion-card-content>
       <ion-item>
-        <ion-label>Adresse :</ion-label>
+        <ion-label position="floating">Adresse :</ion-label>
         <ion-input formControlName = "adress" placeholder="55 Rue du Faubourg Saint-Honoré"></ion-input>
       </ion-item>
       <div class="validation-errors">
@@ -73,7 +83,7 @@
       </div>
 
       <ion-item>
-        <ion-label>Code Postal :</ion-label>
+        <ion-label position="floating">Code Postal :</ion-label>
         <ion-input maxlength="5" formControlName = "zipcode" type="number" placeholder="75008"></ion-input>
       </ion-item>
       <div class="validation-errors">
@@ -85,7 +95,7 @@
       </div>
 
       <ion-item>
-        <ion-label>Ville :</ion-label>
+        <ion-label position="floating">Ville :</ion-label>
         <ion-input formControlName = "city" placeholder="Paris"></ion-input>
       </ion-item>
       <div class="validation-errors">
@@ -95,10 +105,16 @@
           </div>
         </ng-container>
       </div>
-
-      <ion-list-header color="secondary">Réglages de l'application :</ion-list-header>
+    </ion-card-content>
+  </ion-card>
+<!-- ----------------------------------------Application------------------------------------------------------------------------ -->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle color="secondary">Réglages de l'application :</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
       <ion-item>
-        <ion-label>Décalage en minutes : </ion-label>
+        <ion-label >Décalage en minutes : </ion-label>
         <ion-input maxlength="2" formControlName = "timeback" type="number"  placeHolder="20"></ion-input>
       </ion-item>
       <div class="validation-errors">
@@ -108,9 +124,27 @@
           </div>
         </ng-container>
       </div>
+        <ion-list>
+          <ion-radio-group  formControlName="screenmode" allow-empty-selection="false" value="{{screenmode}}" name="radio-group" (ionChange)="radioGroupChange($event)" #screenModeRadio>
+            <ion-list-header>
+              <ion-label>Mode d'affichage</ion-label>
+            </ion-list-header>
 
-      <div>
-        <div>
+            <ion-item (ionFocus)="radioFocus()" (ionSelect)="radioSelect($event)" (ionBlur)="radioBlur()">
+              <ion-label>TousAntiPv <br>(recomandé, plus rapide,<br> pas besoin d'internet)</ion-label>
+              <ion-radio slot="start" name="screenmode" [value]="1" checked="true" ></ion-radio>
+            </ion-item>
+
+            <ion-item (ionFocus)="radioFocus()" (ionSelect)="radioSelect($event)" (ionBlur)="radioBlur()">
+              <ion-label>Pdf</ion-label>
+              <ion-radio slot="start" name="screenmode" [value]="2"  checked="true" ></ion-radio>
+            </ion-item>
+
+          </ion-radio-group>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
           <ion-grid>
             <ion-row>
               <ion-col class="ion-align-self-center" size-md>
@@ -120,18 +154,31 @@
                 <ion-button class="submit-btn" color="success" type="submit" expand="block" size-md [disabled]="!validations_form.valid">Enregistrer</ion-button>
               </ion-col>
             </ion-row>
-            <ion-row>
-              <ion-col class="ion-align-self-start">
-                <ion-text>Version de L'application {{versionLocal}}</ion-text>
-              </ion-col>
-            </ion-row>
-            <ion-row>
+            <ion-card>
               <ion-col>
-                <ion-button  color="success" expand="block" (click)="updateIos()" >Forcer la mise à jour</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </div>
-      </div>
+              <ion-button fill="outline" expand="block" class="ion-text-center" (click)="revoirIntro()" detail>
+                <ion-label>
+                  Revoir la présentation.
+                </ion-label>
+              </ion-button>
+              <ion-button color="warning" fill="outline" expand="block" class="ion-text-center" (click)="disclaimer()" detail>
+                <ion-label>
+                  Avertissement.
+                </ion-label>
+              </ion-button>
+            </ion-col>
+              <ion-row>
+                <ion-col class="ion-align-self-start">
+                  <ion-text>Version de L'application {{versionLocal}}</ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button fill="outline" color="success" expand="block" (click)="updateIos()" >Forcer la mise à jour</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+            </ion-grid>
+
     </form>
-</ion-content>
+  </ion-content>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { StorageService } from 'src/app/service/storage/storage.service';
 
 @Injectable({
@@ -7,15 +7,17 @@ import { StorageService } from 'src/app/service/storage/storage.service';
 })
 export class SettingsGuard implements CanActivate {
 
-  constructor(private _storage: StorageService) { }
+  constructor(private _storage: StorageService, private _router: Router) { }
   canActivate(
 
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-    if (this._storage.readLocal('setok')) {
+    state: RouterStateSnapshot) {
+    const lsData = this._storage.readLocal('setok');
+    // console.log('data => ', lsData);
+    if (this._storage.readLocal('setok') == 1) {
       return true;
     } else {
-      return false;
+      return this._router.navigate([ 'settings' ])
     }
   }
 

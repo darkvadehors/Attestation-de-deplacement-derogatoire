@@ -2,39 +2,65 @@ h1,h2,p{
     color: aliceblue;
     text-align: center;
 }
-section{
-    text-align: center;
-    #colorTitle{
-        font-size: 4em;
-        justify-content: center;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
 
-        #blue{
-            color: blue;
-        }
-        #red{
-            color: red;
-        }
+#colorTitle{
+    // font-size: 1em;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // margin-top: 44px;
+
+    #blue{
+        color: blue;
     }
+    #red{
+        color: red;
+    }
+}
+ion-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+ion-content{
+    margin-top: 15px;
 
-    p{
-        margin: auto;
-        font-size: 1em;
+    ion-card{
+        margin: 15px auto 15px auto ;
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        img{
+            margin: 20px;
+        }
+        ion-label{
+            text-overflow:ellipsis ;
+        }
+        section{
+            text-align: center;
+            p{
+                margin: auto;
+                font-size: 1em;
+            }
+
+
+        }
     }
 }
 
-ul{
+ion-footer ion-toolbar ul{
     color: rgb(200, 217, 232);
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-    li h2::after {
+    li{
+        list-style:none;
+    }
+    li p::after {
         margin: 10px;
         content: ' ';
-
     }
 }

@@ -1,10 +1,6 @@
+import { VariableService } from 'src/app/service/variable/variable.service';
 import { LoadingService } from './../../../service/loading/loading.service';
-import { Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { VariableService } from '../../variable/variable.service';
-//Pipe
-import { TimeBackPipe } from '../../../shared/pipe/time/timeback.pipe';
-import { ActivityPipe } from '../../../shared/pipe/activity/activity.pipe';
+import { Injectable, OnInit } from '@angular/core';
 //PDF
 import { PdfLibService } from '../pdf-lib/pdf-lib.service';
 import { LoadingController } from '@ionic/angular';
@@ -12,73 +8,40 @@ import { LoadingController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
-export class PdfmakeService {
+export class PdfmakeService implements OnInit {
   pdfMake: any = null;
-  dateofbirth: string = null;
-  toDayFr: string;
-  toDay: Date = new Date();
-  timebackColon: string = null;
-  timebackH: string = null;
-  timebackT: string = null;
   qrCodeData: string = null;
 
   constructor(
-    private _varGlobal: VariableService,
-    private _datepipe: DatePipe,
-    private _timeBackPipe: TimeBackPipe,
-    private _activityPipe: ActivityPipe,
     private _pdflib: PdfLibService,
     public loadingController: LoadingController,
-    public loading: LoadingService
+    public loading: LoadingService,
+    private _varGlobal: VariableService,
   ) { }
 
-  async generatePdf(activity: number) {
-    this.timebackH = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 1);
-    this.timebackColon = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 2);
-    this.timebackT = this._timeBackPipe.transform(this._varGlobal.setting.timeback, 3);
-    this.toDayFr = this._datepipe.transform(this.toDay, "dd/MM/yyyy")
-    this.dateofbirth = this._datepipe.transform(this._varGlobal.setting.dateofbirth, 'dd/MM/yyyy')
-
-    // const loading = await this.loadingController.create({
-    //   message: 'Patientez....',
-    // });
-
-    // await loading.present();
-
-    this.loading.show();
-
-    await this.exportPdf(activity);
-
-    // await loading.dismiss();
-  }
-
-  documentDefinition(qrcode: string): any {
-    return {
-      content: [
-        // colored QR
-        {
-          qr: qrcode
-        },
-      ],
+  async ngOnInit() {
+    if (!this.pdfMake) {
+      const pdfMakeModule = await import('pdfmake/build/pdfmake');
+      const pdfFontsModule = await import('pdfmake/build/vfs_fonts');
+      this.pdfMake = (pdfMakeModule as any).default;
+      this.pdfMake.vfs = (pdfFontsModule as any).default.pdfMake.vfs;
     }
   }
+  async generatePdf(activity: number, activityName: string, attestationData: any) {
 
-  qrCode(activity: number) {
-    // converti le numéro de l'activity en mot
-    const activityName = this._activityPipe.transform(activity);
-    // assign a qrCode
-    return this.qrCodeData =
+    // // assign a qrCode
+    const qrCodeData =
       'Cree le : ' +
-      this.toDayFr +
+      attestationData.toDayFr +
       ' a ' +
-      this.timebackH +
+      attestationData.timeBackH +
       // identification
       ';\nNom : ' +
       this._varGlobal.setting.lastname +
       ';\nPrenom: ' +
       this._varGlobal.setting.firstname +
       ';\nNaissance: ' +
-      this.dateofbirth +
+      attestationData.dateOfBirth +
       ' a ' +
       this._varGlobal.setting.cityofbird +
       // Personnal Adress
@@ -91,18 +54,21 @@ export class PdfmakeService {
       ' ' +
       // Exit time
       ';\nSortie: ' +
-      this.toDayFr +
+      attestationData.toDayFr +
       ' a ' +
-      this.timebackColon +
+      attestationData.timeBackColon +
       ';\nMotifs: ' +
       activityName +
       ';';
-  }
 
-  async exportPdf(activity: number) {
-
-    // const dateFile = this._datepipe.transform(this.toDay, 'yyyy-MM-dd_') + this.timebackT;
-    const documentDefinition = this.documentDefinition(this.qrCode(activity));
+    const docDefinition = {
+      content: [
+        // colored QR
+        {
+          qr: qrCodeData
+        },
+      ],
+    }
 
     if (!this.pdfMake) {
       const pdfMakeModule = await import('pdfmake/build/pdfmake');
@@ -112,9 +78,10 @@ export class PdfmakeService {
     }
 
     // const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition, null, fonts);
-    const pdfDocGenerator = this.pdfMake.createPdf(documentDefinition);
+    const pdfDocGenerator = this.pdfMake.createPdf(docDefinition);
     pdfDocGenerator.getBase64((data: any) => {
       this._pdflib.modifyPdf(data, activity);
     });
+
   }
 }

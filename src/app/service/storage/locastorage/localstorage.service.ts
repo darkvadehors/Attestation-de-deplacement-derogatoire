@@ -33,4 +33,8 @@ export class LocalstorageService {
     }
   }
 
+  delLocalStorage(datakey: string) {
+    localStorage.removeItem(datakey);
+  }
+
 }

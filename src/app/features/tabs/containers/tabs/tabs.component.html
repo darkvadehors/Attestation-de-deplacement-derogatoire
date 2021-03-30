@@ -1,14 +1,23 @@
-
 <ion-tabs  >
-    <ion-tab-bar size="small" slot="bottom">
-      <ion-tab-button tab="welcome">
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Accueil</ion-label>
+  <ion-tab-bar size="small" slot="bottom">
+      <ion-tab-button tab="{{tabsName}}">
+        <ion-icon name="{{iconName}}"></ion-icon>
+        <ion-label> {{tabsLabel}} </ion-label>
       </ion-tab-button>
+    <ion-tab-button tab="settings" >
+      <ion-icon name="settings-outline"></ion-icon>
+      <ion-label>Réglages</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
 
-      <ion-tab-button tab="settings" >
-        <ion-icon name="settings-outline"></ion-icon>
-        <ion-label>Réglages</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+
+  <!-- <div *ngIF="routeStatus$|async as myDataSubscription">
+        <ion-tab-button tab="{{myDataSubscription.tabsName}}">
+          <ion-icon name="{{myDataSubscription.iconName}}"></ion-icon>
+          <ion-label> {{myDataSubscription.tabsLabel}} </ion-label>
+        <ion-tab-button tab="{{(routeStatus$|async).tabsName}}">
+          <ion-icon name="{{(routeStatus$|async).iconName}}"></ion-icon>
+          <ion-label> {{(routeStatus$|async).tabsLabel}} </ion-label>
+        </ion-tab-button>
+      </div> -->
