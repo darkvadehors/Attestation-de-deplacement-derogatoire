@@ -1,5 +1,3 @@
-import { WelcomeComponent } from './features/welcome/containers/welcome/welcome.component';
-import { WelcomeConfinementComponent } from './features/welcome-confinement/containers/welcome-confinement/welcome-confinement.component';
 // ng build --prod --base-href ./
 // ng build --prod --base-href ./ && npm run deploy
 // ng build --prod --common-chunk --named-chunks --optimization --service-worker --source-map --base-href ./

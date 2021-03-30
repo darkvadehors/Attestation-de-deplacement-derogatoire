@@ -23,6 +23,7 @@ export class RouteService {
 
 
   checkTimeRouteStatus() {
+    // console.log('route.service checkTimeRouteStatus');
     // Configuration de l'observable pour les Tabs
     const dateheure = new Date();
     const heuredelajournee: any = dateheure.getHours();

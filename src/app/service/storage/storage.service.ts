@@ -14,10 +14,10 @@ export class StorageService{
   readLocal(datakey: string, crypt?: boolean) {
     return this._ls.readLocalStorage(datakey, crypt);
   }
+
   saveLocal(datakey: string, data: string, crypt?: boolean) {
     this._ls.setLocalStorage(datakey, data, crypt);
   }
-
 
   deleteLocal(datakey: string) {
     this._ls.delLocalStorage(datakey);

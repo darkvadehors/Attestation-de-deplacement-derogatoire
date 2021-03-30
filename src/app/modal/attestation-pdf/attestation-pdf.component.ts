@@ -20,6 +20,7 @@ export class AttestationPdfComponent implements OnInit {
 
     async ngOnInit() { }
 
+    // retour du html pour fermer la modal
     pageRendered(e: CustomEvent) {
         this.loadingService.hide();
     }

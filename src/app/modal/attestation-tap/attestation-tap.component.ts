@@ -72,6 +72,7 @@ export class AttestationTapComponent implements OnInit {
     this.loadingService.hide();
   }
 
+  // retour du html pour fermer la modal
   pageRendered(e: CustomEvent) {
     this.loadingService.hide();
   }

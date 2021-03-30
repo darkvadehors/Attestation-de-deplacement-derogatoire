@@ -83,7 +83,6 @@ export class SettingsComponent implements OnInit {
       dateOfBirth: new FormControl(this._varGlobal.setting?.dateOfBirth, Validators.compose([
         Validators.required,
         Validators.minLength(2),
-        Validators.minLength(4),
       ])),
       cityofbird: new FormControl(this._varGlobal.setting?.cityofbird, Validators.required),
       adress: new FormControl(this._varGlobal.setting?.adress, Validators.required),

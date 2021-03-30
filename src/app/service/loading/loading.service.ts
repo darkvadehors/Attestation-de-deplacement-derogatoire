@@ -13,6 +13,7 @@ export class LoadingService {
     // console.log('isloading ', this.isLoading);
   }
 
+  // loading avec minuteur de 1s
   async show() {
     this.loadingController.create({
       message: 'Patienter...',
@@ -20,7 +21,7 @@ export class LoadingService {
       spinner: 'bubbles'
     }).then((res) => {
       if (this.isLoading === true) {
-        res.dismiss().then(() => console.log('abort presenting'));
+        res.dismiss();
       } else {
         res.present().then(() => {
           this.isLoading = true;
@@ -31,13 +32,14 @@ export class LoadingService {
     });
   }
 
+  //  loading jusqu'a chargement complet
   async showSansMinuteur() {
     this.loadingController.create({
       message: 'Patienter...',
       spinner: 'bubbles'
     }).then((res) => {
       if (this.isLoading === true) {
-        res.dismiss().then(() => console.log('abort presenting'));
+        res.dismiss();
       } else {
         res.present().then(() => {
           this.isLoading = true;
