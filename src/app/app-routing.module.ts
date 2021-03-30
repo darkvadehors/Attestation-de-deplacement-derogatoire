@@ -31,7 +31,7 @@ const routes: Routes = [
     ]
   },
   { path: '', redirectTo: 'desktop', pathMatch: 'full' },
-  { path: '**', component: DesktopComponent }, // Wildcard route for a 404 page
+  { path: '**', component: TabsComponent }, // Wildcard route for a 404 page
 ];
 
 @NgModule({
