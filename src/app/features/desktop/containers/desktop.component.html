@@ -1,8 +1,9 @@
 <title>attestation-couvre-feu-covid-19</title>
 <div class="ion-page">
-<ion-buttons slot="start" *ngIf="(button)"  >
-    <ion-button (click)="closeModal()"><p>Fermer</p></ion-button>
-</ion-buttons>
+    <ion-buttons slot="start" *ngIf="(button)"  >
+        <ion-button (click)="closeModal()"><p>Fermer</p></ion-button>
+        <ion-label *ngIf="(button)" class="ion-text-end"><a href="mailto:daniel@oisg.org">Contact</a></ion-label>
+    </ion-buttons>
 <ion-content >
 <ion-header>
     <ion-toolbar>
@@ -69,9 +70,6 @@
                 </li>
                 <li>
                     <p>Virale</p>
-                </li>
-                <li>
-                    <p><a href="mailto:daniel@oisg.org">Contact</a></p>
                 </li>
             </ul>
         </ion-toolbar>

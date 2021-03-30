@@ -4,8 +4,6 @@ import { IonicModule } from '@ionic/angular';
 import { DesktopComponent } from './containers/desktop.component';
 import { DesktopRoutingModule } from './desktop-routing.modules';
 
-
-
 @NgModule({
     declarations: [ DesktopComponent ],
     imports: [
