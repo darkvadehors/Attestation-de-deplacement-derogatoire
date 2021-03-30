@@ -85,7 +85,6 @@ export class TabsComponent implements OnInit {
 
             // console.log('tabs-Component addlistener');
 
-            //TODO check l'heure et change al vue
             if (isActive) {
                 // console.log('tabs-Component isActive');
 
