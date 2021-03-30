@@ -6,10 +6,10 @@ import { ConfinementGuard } from './../../guards/confinement/confinement.guard';
 import { CouvreFeuxGuard } from './../../guards/couvreFeux/couvre-feux.guard';
 import { SettingsGuard } from 'src/app/guards/settings/settings.guard';
 
-
 const routes: Routes = [
     {
-        path: '', // redirectTo: 'welcome', pathMatch: 'full',
+        // path: '',
+        path: '',
         component: TabsComponent,
         children: [
             {
@@ -26,22 +26,11 @@ const routes: Routes = [
                 loadChildren: () => import('../welcome/welcome.modules').then(m => m.WelcomeModule),
                 canActivate: [ SettingsGuard, CouvreFeuxGuard ]
             },
-
-            // {
-            //     path: '',
-            //     loadChildren: () => import('./../desktop/desktop.modules').then(m => m.DesktopModule),
-            //     canActivate: [
-
-            //     ]
-            // },
         ]
     },
-    { path: '', redirectTo: '', pathMatch: 'full' },
-    {
-        path: '**',
-        redirectTo: 'desktop',
-        pathMatch: 'full'
-    }
+    { path: '', redirectTo: '', pathMatch: 'full' }, // redirect to `first-component`
+    // { path: '**', redirectTo: 'desktop', pathMatch: 'full' }
+    { path: '**', redirectTo: ' ', pathMatch: 'full' }
 
 ];
 

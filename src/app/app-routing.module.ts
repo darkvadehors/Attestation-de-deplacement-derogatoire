@@ -1,4 +1,3 @@
-import { DesktopComponent } from './features/desktop/containers/desktop.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,7 +5,6 @@ import { DesktopGuard } from './guards/desktop/desktop.guard';
 import { MobileGuard } from './guards/mobile/mobile.guard';
 import { IntroGuard } from './guards/intro/intro.guard';
 
-import { TabsComponent } from './features/tabs/containers/tabs/tabs.component';
 const routes: Routes = [
   {
     path: 'desktop',
@@ -16,22 +14,21 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'intro',
-    loadChildren: () => import('./features/slides/slides.modules').then(m => m.SlidesModule),
+    path: '',
+    loadChildren: () => import('./features/tabs/tabs.modules').then(m => m.TabsModule),
     canActivate: [
+      IntroGuard,
       MobileGuard
     ]
   },
   {
-    path: '',
-    loadChildren: () => import('./features/tabs/tabs.modules').then(m => m.TabsModule),
+    path: 'intro',
+    loadChildren: () => import('./features/slides/slides.modules').then(m => m.SlidesModule),
     canActivate: [
-      // MobileGuard,
-      IntroGuard
+      MobileGuard,
     ]
   },
-  { path: '', redirectTo: 'desktop', pathMatch: 'full' },
-  { path: '**', component: TabsComponent }, // Wildcard route for a 404 page
+  { path: '**', redirectTo: ' ', pathMatch: 'full' }, // Wildcard route for a 404 page
 ];
 
 @NgModule({

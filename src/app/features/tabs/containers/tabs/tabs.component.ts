@@ -1,10 +1,8 @@
-import { logging } from 'protractor';
 import { LoadingService } from 'src/app/service/loading/loading.service';
-import { Component, NgZone, OnInit, Pipe } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { Platform, ToastController } from '@ionic/angular';
 import { App } from '@capacitor/core';
 
@@ -59,14 +57,16 @@ export class TabsComponent implements OnInit {
     }
 
     async ngOnInit() {
-        // console.log("tabs-Component");
+        // console.log("tabs.component");
     }
 
     ngAfterContentInit() {
-
-        // console.log('tabs-Component ngAfterContentInit');
-
-        this._router.navigate([ this.tabsName ])
+        // console.log('tabs.component ngAfterContentInit');
+        // renvoie sur la page de d'accueil a chaque démarrage
+        if (this._storageService.readLocal('intro') && this._storageService.readLocal('setok')) {
+            // console.log('tabs.component ngAfterContentInit intro et setok present');
+            this._router.navigate([ this.tabsName ])
+        }
 
     }
 
@@ -75,18 +75,18 @@ export class TabsComponent implements OnInit {
     }
 
     async appInitializer() {
-        // console.log('tabs-Component appInitializer');
+        // console.log('tabs.component appInitializer');
         // quand la platform est prete
         await this._platform.ready();
-        // console.log('tabs-Component _platform.ready');
+        // console.log('tabs.component _platform.ready');
 
         // on check le changement d'état et si isActive
         App.addListener('appStateChange', async ({ isActive }) => {
 
-            // console.log('tabs-Component addlistener');
+            // console.log('tabs.component addlistener');
 
             if (isActive) {
-                // console.log('tabs-Component isActive');
+                // console.log('tabs.component isActive');
 
                 // control si la key intro n'a pas été supprimée depuis le settings.
                 // if (!this._storageService.readLocal('intro')) {
@@ -104,15 +104,15 @@ export class TabsComponent implements OnInit {
                 //   });
                 // }
 
-                // quand l'app est activé on charge la varglobale
+                // quand l'app est activé on recharge la varglobale
                 this._varGlobal.loadVar();
 
                 // check du status
                 if (this._storageService.readLocal('status', false)) {
-                    // console.log('tabs-Component le ls existe', this._storageService.readLocal('status', false));
+                    // console.log('tabs.component le ls existe', this._storageService.readLocal('status', false));
                     if (this._storageService.readLocal('status', false) !== this.tabsName) {
                         this._storageService.saveLocal('status', this.tabsName, false)
-                        // console.log('tabs-Component on charge le component');
+                        // console.log('tabs.component on charge le component');
                         this._ngZone.run(() => {
                             this._router.navigate([ this.tabsName ]);
                         });
@@ -121,14 +121,14 @@ export class TabsComponent implements OnInit {
 
                 // on check si les mises à jour sont activé => ServiceWorker
                 if (this._update.isEnabled) {
-                    // console.log('tabs-Component ServiceWorker isEnabled');
+                    // console.log('tabs.component ServiceWorker isEnabled');
                     // pour android
                     this._update.checkForUpdate().then(async () => {
-                        // console.log('tabs-Component CheckForUpDate');
+                        // console.log('tabs.component CheckForUpDate');
                     });
                     // } else if (/webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) { // Si Apple
                 } else { // Si Apple
-                    // console.log('tabs-Component update IOS');
+                    // console.log('tabs.component update IOS');
                     this._upDateIos.checkUpdateIos();
                 }
             }

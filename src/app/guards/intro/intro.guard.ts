@@ -10,20 +10,18 @@ export class IntroGuard implements CanActivate {
   constructor(private _storage: StorageService, private _router: Router) { }
 
   canActivate(
-    next: ActivatedRouteSnapshot,
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
     // console.log('Guard IntroGuard');
 
     // si la cle intro dans le local Storage est presente on laisse passer
-    if (this._storage.readLocal('intro') && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-
+    if (this._storage.readLocal('intro')) {
       // console.log('Guard IntroGuard true');
       return true;
     } else {
       // console.log('Guard IntroGuard false');
-      return this._router.navigateByUrl('desktop');
-      return false;
+      return this._router.navigate([ 'intro' ]);
     }
   }
 
