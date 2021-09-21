@@ -378,3 +378,4 @@ icons/
 -Travail/
 **/package-lock.json
 deploy.js
+yarn.lock
